@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IP-R&amp;D 관련 취업/기관/교육 정보</title><style>
+:root{
+  --bg: #ffffff;
+  --paper: rgba(255,255,255,0.82);
+  --ink: #0f172a;
+
+  /* 기존 포인트 블루 */
+  --muted: #1E40AF;
+
+  /* ✅ desc 전용: 블루톤이 가미된 블랙(잉크 네이비) */
+  --desc-ink: #25383C;
+
+  --subtle: #64748b;
+  --blue-600:#2563eb;
+  --line: rgba(2, 6, 23, 0.10);
+  --shadow: 0 14px 40px rgba(2, 6, 23, 0.10);
+  --radius: 18px;
+
+  /* ✅ 테이블/배너 톤 (요청: 테이블과 같은 배경색) */
+  --panel-bg: #F5DEB3;   /* wheat */
+  --panel-paper: #FFFFF0;/* ivory */
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial;
+  color: var(--ink); background: var(--bg); min-height:100vh;
+}
+.wrap{ max-width: 1100px; margin: 0 auto; padding: 34px 18px 64px; }
+.header{ margin-bottom: 24px; }
+h1{ margin:0; font-size: 28px; letter-spacing: -0.5px; }
+.section{ margin-top: 20px; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow:hidden; }
+.section-head{ padding: 14px 16px; background: #f8fafc; border-bottom: 1px solid var(--line); }
+.section-head h2{ margin:0; font-size: 16px; }
+.row{ display:grid; grid-template-columns: 44px 1fr auto; gap: 16px; align-items: start; padding: 20px 16px; border-top: 1px solid rgba(2,6,23,0.06); }
+.row:first-child{ border-top: none; }
+.logo{ width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,0.7); }
+.meta{ display:grid; gap:8px; }
+.name{ font-weight: 800; font-size: 15px; color: var(--ink); }
+
+/* ✅ desc 색상 변경 */
+.desc{
+    color: var(--desc-ink) !important;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: keep-all;
+}
+/* 굵은 글씨도 desc 색을 그대로 따라가게 */
+.desc b { color: inherit; font-weight: 800; }
+
+.url{ color: var(--subtle); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 500px; }
+.open{ padding: 8px 16px; border-radius: 999px; background: var(--blue-600); color: white; text-decoration:none; font-size: 12px; font-weight: 700; }
+
+/* ===== R&D system table ===== */
+.rd-table-wrap{
+  padding: 16px;
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--line);
+}
+.rd-table-title{
+  font-weight: 900;
+  font-size: 15px;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.2px;
+}
+.rd-table-hint{
+  color: var(--subtle);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.rd-table-scroll{
+  overflow-x: auto;
+  border: 1px solid rgba(2,6,23,0.10);
+  border-radius: 14px;
+  background: var(--panel-paper);
+}
+.rd-table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 980px;
+}
+.rd-table thead th{
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  text-align: left;
+  font-size: 12px;
+  color: #0f172a;
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(2,6,23,0.10);
+  white-space: nowrap;
+}
+.rd-table tbody td{
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(2,6,23,0.06);
+  vertical-align: top;
+}
+.rd-table tbody tr:hover td{
+  background: rgba(37, 99, 235, 0.04);
+}
+.rd-link{
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  background: rgba(37,99,235,0.10);
+  color: #1e40af;
+  border: 1px solid rgba(37,99,235,0.18);
+}
+.mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  color: #334155;
+}
+
+/* ===== ✅ 취업 섹션 직무 아이콘 그리드 (한 줄 12개 고정) ===== */
+.jobs-bar-wrap{
+  padding: 16px;
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--line);
+}
+.jobs-bar-title{
+  font-weight: 900;
+  font-size: 15px;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.2px;
+}
+.jobs-bar-hint{
+  color: var(--subtle);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+/* ✅ 테이블과 같은 종이(아이보리) 패널 */
+.jobs-grid-panel{
+  border: 1px solid rgba(2,6,23,0.10);
+  border-radius: 14px;
+  background: var(--panel-paper);
+  padding: 14px 10px;
+}
+
+/* ✅ 12개가 한 줄에 딱 들어가게: 12열 고정 그리드 */
+.jobs-grid{
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+}
+
+/* ✅ 아이콘 위 / 텍스트 아래 */
+.job-card{
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(2,6,23,0.08);
+  box-shadow: 0 8px 18px rgba(2,6,23,0.06);
+}
+
+/* ✅ 더 크고 이쁜 원형 아이콘 */
+.job-badge{
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(2,6,23,0.10);
+  color: white;
+  font-size: 26px;
+  line-height: 1;
+  box-shadow: 0 10px 22px rgba(2,6,23,0.14);
+}
+
+/* ✅ 아래 직무명 (한눈에 들어오게 2줄까지만 허용) */
+.job-text{
+  font-size: 12px;
+  font-weight: 900;
+  color: #0f172a;
+  text-align: center;
+  line-height: 1.15;
+  word-break: keep-all;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 28px; /* 2줄 높이 안정 */
+}
+
+/* 작은 화면에서는 어쩔 수 없이 줄바꿈(모바일 고려) */
+@media (max-width: 1200px){
+  .jobs-grid{ grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+@media (max-width: 720px){
+  .jobs-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .job-badge{ width: 52px; height: 52px; font-size: 24px; }
+}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header"><h1>IP-R&amp;D 관련 취업/기관/교육 정보</h1></div>
+    <section class='section'><div class='section-head'><h2>취업 전문 사이트</h2></div><div class="jobs-bar-wrap">
+      <div class="jobs-bar-title">특허 관련 직무</div>
+      <div class="jobs-bar-hint">다양한 특허 관련 직무 - IP-R&D 교육은 특허조사분석 직무와 직접적인 관련이 있음</div>
+      <div class="jobs-grid-panel">
+        <div class="jobs-grid">
+<div class="job-card" title="특허청 심사관">
+              <div class="job-badge" style="background:#2563eb">🧑‍⚖️</div>
+              <div class="job-text">특허청 심사관</div>
+            </div>
+<div class="job-card" title="변리사">
+              <div class="job-badge" style="background:#16a34a">⚖️</div>
+              <div class="job-text">변리사</div>
+            </div>
+<div class="job-card" title="특허 전문위원">
+              <div class="job-badge" style="background:#7c3aed">📊</div>
+              <div class="job-text">특허 전문위원</div>
+            </div>
+<div class="job-card" title="기업체 특허 담당">
+              <div class="job-badge" style="background:#0ea5e9">🏢</div>
+              <div class="job-text">기업체 특허 담당</div>
+            </div>
+<div class="job-card" title="선행기술조사">
+              <div class="job-badge" style="background:#f59e0b">🔎</div>
+              <div class="job-text">선행기술조사</div>
+            </div>
+<div class="job-card" title="특허조사분석">
+              <div class="job-badge" style="background:#ef4444">📈</div>
+              <div class="job-text">특허조사분석</div>
+            </div>
+<div class="job-card" title="명세서/도면">
+              <div class="job-badge" style="background:#14b8a6">📝</div>
+              <div class="job-text">명세서/도면</div>
+            </div>
+<div class="job-card" title="특허번역">
+              <div class="job-badge" style="background:#9333ea">🌐</div>
+              <div class="job-text">특허번역</div>
+            </div>
+<div class="job-card" title="국내/해외 출원관리">
+              <div class="job-badge" style="background:#64748b">📑</div>
+              <div class="job-text">국내/해외 출원관리</div>
+            </div>
+<div class="job-card" title="(국가)사업관리">
+              <div class="job-badge" style="background:#1f2937">🗂️</div>
+              <div class="job-text">(국가)사업관리</div>
+            </div>
+<div class="job-card" title="기술사업화">
+              <div class="job-badge" style="background:#f97316">💡</div>
+              <div class="job-text">기술사업화</div>
+            </div>
+<div class="job-card" title="기술가치평가">
+              <div class="job-badge" style="background:#059669">💰</div>
+              <div class="job-text">기술가치평가</div>
+            </div>
+</div>
+      </div>
+    </div><div class='list'><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.saramin.co.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">사람인 - 특허 검색</div>
+                  <div class="desc">키워드로 특허 관련 채용 검색, 특허분석, 명세사, 선행기술조사원, 관리직, 도면, 번역 등</div>
+                  <div class="url">https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB/</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&utm_source=google&utm_medium=cpc&utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&gad_source=1&gad_campaignid=9567679426&gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB/" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.saramin.co.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">사람인 - 특허(공사·공기업) 검색</div>
+                  <div class="desc">키워드로 특허 관련 공사·공기업 채용 검색</div>
+                  <div class="url">https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB%2F&amp;recruitPage=1&amp;recruitSort=relation&amp;recruitPageCount=40&amp;inner_com_type=public&amp;company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&amp;show_applied=&amp;quick_apply=&amp;except_read=&amp;ai_head_hunting=&amp;mainSearch=y</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&utm_source=google&utm_medium=cpc&utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&gad_source=1&gad_campaignid=9567679426&gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB%2F&recruitPage=1&recruitSort=relation&recruitPageCount=40&inner_com_type=public&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&show_applied=&quick_apply=&except_read=&ai_head_hunting=&mainSearch=y" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.saramin.co.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">사람인 - 특허(대기업) 검색</div>
+                  <div class="desc">키워드로 특허 관련 공사·공기업 채용 검색</div>
+                  <div class="url">https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB%2F&amp;recruitPage=1&amp;recruitSort=relation&amp;recruitPageCount=40&amp;inner_com_type=scale001&amp;company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&amp;show_applied=&amp;quick_apply=&amp;except_read=&amp;ai_head_hunting=&amp;mainSearch=y</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&utm_source=google&utm_medium=cpc&utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&gad_source=1&gad_campaignid=9567679426&gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB%2F&recruitPage=1&recruitSort=relation&recruitPageCount=40&inner_com_type=scale001&company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&show_applied=&quick_apply=&except_read=&ai_head_hunting=&mainSearch=y" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.kpaa.or.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">대한변리사회(KPAA) 사무소 직원 구인게시판</div>
+                  <div class="desc">사무소 직원 구인 게시판</div>
+                  <div class="url">https://www.kpaa.or.kr/kpaa/notification/readJobOfferList.do?clickPage=46&amp;pageCnt=1&amp;job_type=9&amp;job_rank=0&amp;setSearch=0&amp;area_sido=0&amp;searchKeyword=</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.kpaa.or.kr/kpaa/notification/readJobOfferList.do?clickPage=46&pageCnt=1&job_type=9&job_rank=0&setSearch=0&area_sido=0&searchKeyword=" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div></div></section>
+<section class='section'><div class='section-head'><h2>특허·지식재산 공공/유관단체</h2></div><div class='list'><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.kipo.go.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">지식재산처(MOIP)</div>
+                  <div class="desc">지식재산 행정/심사관, 소식알림-알림사항-채용정보</div>
+                  <div class="url">https://www.kipo.go.kr/ko/kpoBultnMgmt.do?menuCd=SCD0201203&amp;sysCd=SCD02&amp;pgmId=BUT0000024</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.kipo.go.kr/ko/kpoBultnMgmt.do?menuCd=SCD0201203&sysCd=SCD02&pgmId=BUT0000024" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=kista.recruiter.co.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">KISTA 한국특허전략개발원</div>
+                  <div class="desc">전문직(과제 전략 수립), 일반직(정부 사업 관리)</div>
+                  <div class="url">https://kista.recruiter.co.kr/career/home</div>
+                </div>
+                <div class="actions"><a class="open" href="https://kista.recruiter.co.kr/career/home" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.kipro.or.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">KIPRO 한국특허기술진흥원</div>
+                  <div class="desc">선행기술조사, 상표/디자인 등</div>
+                  <div class="url">https://www.kipro.or.kr/board/recruitment/list</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.kipro.or.kr/board/recruitment/list" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.kipi.or.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">KIPI 한국특허정보원</div>
+                  <div class="desc">SW개발 및 운영, 특허고객상담</div>
+                  <div class="url">https://www.kipi.or.kr/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_JJJJJJJJJJJJ</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.kipi.or.kr/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_JJJJJJJJJJJJ" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.kipa.org&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">KIPA 한국발명진흥회</div>
+                  <div class="desc">전문(계약)직(박사), 지식재산거래지원, 지식재산 사업화, 발명교육</div>
+                  <div class="url">https://www.kipa.org/kipa/notice/recruit_notice.jsp</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.kipa.org/kipa/notice/recruit_notice.jsp" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=pms.ripc.org&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">RIPC 지역지식재산센터</div>
+                  <div class="desc">컨설턴트, 행정연구원</div>
+                  <div class="url">https://pms.ripc.org/www/portal/notice/boardList.do?boardCategoryCode=BD40003</div>
+                </div>
+                <div class="actions"><a class="open" href="https://pms.ripc.org/www/portal/notice/boardList.do?boardCategoryCode=BD40003" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.kiip.re.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">KIIP 한국지식재산연구원</div>
+                  <div class="desc">전문연구원(석사 이상), 연구관리/행정</div>
+                  <div class="url">https://www.kiip.re.kr/board/notice/list.do?bd_gb=board&amp;bd_cd=1&amp;bd_item=0&amp;po_item_gb=1&amp;po_notice_gb=recruit</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.kiip.re.kr/board/notice/list.do?bd_gb=board&bd_cd=1&bd_item=0&po_item_gb=1&po_notice_gb=recruit" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.koipa.re.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">KOIPA 한국지식재산보호원</div>
+                  <div class="desc">전문(계약)직, 분쟁대응, 부정경쟁행위 단속지원 등</div>
+                  <div class="url">https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000043</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000043" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.inventor.or.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">한국여성발명협회</div>
+                  <div class="desc">여성 발명/네트워크, 사무국 직원</div>
+                  <div class="url">https://www.inventor.or.kr/bbs/board.php?bo_table=notice&amp;sca=&amp;sop=and&amp;sfl=wr_subject&amp;stx=%EC%B1%84%EC%9A%A9&amp;x=0&amp;y=0</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.inventor.or.kr/bbs/board.php?bo_table=notice&sca=&sop=and&sfl=wr_subject&stx=%EC%B1%84%EC%9A%A9&x=0&y=0" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div></div></section>
+<section class='section'><div class='section-head'><h2>IP 교육/행사 정보(무료/유료)</h2></div><div class='list'><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=iipti.moip.go.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">국제지식재산연수원</div>
+                  <div class="desc">공무원/변리사/일반인 IP 교육</div>
+                  <div class="url">https://iipti.moip.go.kr/main.do</div>
+                </div>
+                <div class="actions"><a class="open" href="https://iipti.moip.go.kr/main.do" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=ipacademy.net&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">국가지식재산교육포털(IP-ACADEMY)</div>
+                  <div class="desc">IP 교육 콘텐츠(온라인 무료 교육 다수)</div>
+                  <div class="url">https://ipacademy.net/</div>
+                </div>
+                <div class="actions"><a class="open" href="https://ipacademy.net/" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.valuation.or.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">한국기업·기술가치평가협회</div>
+                  <div class="desc">기업·기술가치평가사(KCVA) 자격 획득, 기술가치평가 교육, 기술사업화 교육 등</div>
+                  <div class="url">https://www.valuation.or.kr/any/education.do</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.valuation.or.kr/any/education.do" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=ceo-korea.org&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">사단법인 한국중소기업발전협회</div>
+                  <div class="desc">중소기업 대상 기업성장전략 세미나, IP투자연계 세미나 등</div>
+                  <div class="url">https://ceo-korea.org/bbs/bbs/?bbs_no=7</div>
+                </div>
+                <div class="actions"><a class="open" href="https://ceo-korea.org/bbs/bbs/?bbs_no=7" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=event-us.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">이벤터스 - 행사·세미나·컨퍼런스 관리 및 홍보 플랫폼</div>
+                  <div class="desc">특허 관련 행사·세미나·컨퍼런스 알림</div>
+                  <div class="url">https://event-us.kr/search?query=%ED%8A%B9%ED%97%88&amp;order=score&amp;date=%EB%AA%A8%EB%93%A0%EB%82%A0&amp;page=1</div>
+                </div>
+                <div class="actions"><a class="open" href="https://event-us.kr/search?query=%ED%8A%B9%ED%97%88&order=score&date=%EB%AA%A8%EB%93%A0%EB%82%A0&page=1" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.google.com&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">구글 검색 - 특허 교육/세미나</div>
+                  <div class="desc">최근 1개월내 특허 교육/세미나 검색</div>
+                  <div class="url">https://www.google.com/search?q=%ED%8A%B9%ED%97%88+%EA%B5%90%EC%9C%A1%2F%EC%84%세%EB%AF%B8%EB%82%98</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.google.com/search?q=%ED%8A%B9%ED%97%88+%EA%B5%90%EC%9C%A1%2F%EC%84%세%EB%AF%B8%EB%82%98" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div></div></section>
+<section class='section'><div class='section-head'><h2>지식재산처 심사기준, 특허분석 보고서, 특허법/판례</h2></div><div class='list'><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.kipo.go.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">지식재산처(MOIP) - 지식재산 심사 기준/매뉴얼</div>
+                  <div class="desc">특허/상표/디자인 심사기준, 가이드라인</div>
+                  <div class="url">https://www.kipo.go.kr/ko/kpoContentView.do?menuCd=SCD0201119</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.kipo.go.kr/ko/kpoContentView.do?menuCd=SCD0201119" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">특허 빅데이터 포털</div>
+                  <div class="desc">12대 국가전략기술 등 특허 빅데이터 분석 보고서</div>
+                  <div class="url">https://biz.kista.re.kr/pbcenter/megatrend/app/public/lg/index</div>
+                </div>
+                <div class="actions"><a class="open" href="https://biz.kista.re.kr/pbcenter/megatrend/app/public/lg/index" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">특허동향 보고서(e특허나라)</div>
+                  <div class="desc">정부/공공기관 대상 특허 동향 분석(현재 2022년 보고서가 최신)</div>
+                  <div class="url">https://biz.kista.re.kr/patentmap/front/common.do?method=main</div>
+                </div>
+                <div class="actions"><a class="open" href="https://biz.kista.re.kr/patentmap/front/common.do?method=main" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.law.go.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">법제처 국가법령정보센터</div>
+                  <div class="desc">특허법, 특허법 시행규칙 등, 특허법 조문 왼쪽에 “판” 클릭시 관련 판례 번호 조회 가능</div>
+                  <div class="url">https://www.law.go.kr/lsSc.do?section=&amp;menuId=1&amp;subMenuId=15&amp;tabMenuId=81&amp;eventGubun=060101&amp;query=%ED%8A%B9%ED%97%88%EB%B2%95#undefined</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.law.go.kr/lsSc.do?section=&menuId=1&subMenuId=15&tabMenuId=81&eventGubun=060101&query=%ED%8A%B9%ED%97%88%EB%B2%95#undefined" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=casenote.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">케이스노트 - 판례 검색</div>
+                  <div class="desc">일반 회원은 회원 가입후 무료 검색·열람 가능</div>
+                  <div class="url">https://casenote.kr/pro/</div>
+                </div>
+                <div class="actions"><a class="open" href="https://casenote.kr/pro/" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.riss.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">한국교육학술정보원 학술연구정보서비스(RISS)</div>
+                  <div class="desc">국내학술논문, 국내학위논문 검색</div>
+                  <div class="url">https://www.riss.kr/index.do</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.riss.kr/index.do" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div></div></section>
+<section class='section'><div class='section-head'><h2>지식재산(IP-R&amp;D 포함) 관련 사업 공고(지식재산 관련 용역비 지원)</h2></div><div class='list'><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">IP-R&amp;D 사업관리시스템 - 기업/연구기관 지원</div>
+                  <div class="desc">특허청 IP-R&D 사업, 표준특허 사업 등 참여기관(기업/연구소) 모집 공고</div>
+                  <div class="url">https://biz.kista.re.kr/ippro/com/iprndMain/selectBusinessAnnounceList.do?bbsType=bs</div>
+                </div>
+                <div class="actions"><a class="open" href="https://biz.kista.re.kr/ippro/com/iprndMain/selectBusinessAnnounceList.do?bbsType=bs" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">IP-R&amp;D 사업관리시스템 - 협력기관(특허사무소) 지원</div>
+                  <div class="desc">특허청 IP-R&D 사업, 표준특허 사업 등 협력기관(특허사무소) 모집 공고</div>
+                  <div class="url">https://biz.kista.re.kr/ippro/com/iprndMain/selectBusinessAnnounceList.do?bbsType=ac</div>
+                </div>
+                <div class="actions"><a class="open" href="https://biz.kista.re.kr/ippro/com/iprndMain/selectBusinessAnnounceList.do?bbsType=ac" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">국가R&amp;D 특허동향 심층분석 사업 - 협력기관(특허사무소)용</div>
+                  <div class="desc">특허청 특허동향 조사 지원, 참여기관은 공모 없음. 과제수행 협력기관으로 지정되고 로그인해야 열람 가능</div>
+                  <div class="url">https://biz.kista.re.kr/ipas/uat/uia/egovLoginUsr.do#</div>
+                </div>
+                <div class="actions"><a class="open" href="https://biz.kista.re.kr/ipas/uat/uia/egovLoginUsr.do#" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=pms.ripc.org&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">지역지식재산센터(RIPC) 사업 공고</div>
+                  <div class="desc">글로벌IP스타기업 육성, IP 나래, IP 디딤돌 등</div>
+                  <div class="url">https://pms.ripc.org/pms/biz/applicant/notice/list.do</div>
+                </div>
+                <div class="actions"><a class="open" href="https://pms.ripc.org/pms/biz/applicant/notice/list.do" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.kipa.org&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">발명진흥회(RIPC) 사업 공고</div>
+                  <div class="desc">특허기반 사업화 R&D 지원사업(IP-C&D), 민관협력 IP 전략지원 등</div>
+                  <div class="url">https://www.kipa.org/kipa/ip001/kw_business_0501.jsp</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.kipa.org/kipa/ip001/kw_business_0501.jsp" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.koipa.re.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">한국지식재산보호원(KOIPA) 사업 공고</div>
+                  <div class="desc">특허/K-브랜드 대응전략 지원, 지재권 보호 컨설팅 등</div>
+                  <div class="url">https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000041</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000041" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.g2b.go.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">나라장터(국가종합전자조달) 사업 공고</div>
+                  <div class="desc">오른쪽 상단 통합검색(돋보기) → 입찰공고 체크 → '특허 분석' 검색</div>
+                  <div class="url">https://www.g2b.go.kr/</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.g2b.go.kr/" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div></div></section>
+<section class='section'><div class='section-head'><h2>국가 R&amp;D 사업, 중소기업 지원 사업 공고</h2></div><div class="rd-table-wrap">
+      <div class="rd-table-title">국가 R&amp;D 사업 정리표</div>
+      <div class="rd-table-hint">부처 → 전담기관 → 공고 링크 → 주요 지원사업 → 대상 기업</div>
+      <div class="rd-table-scroll">
+        <table class="rd-table">
+          <thead>
+            <tr>
+              <th style="width:140px">주무부처</th>
+              <th style="width:220px">연구전담기관</th>
+              <th style="width:140px">링크</th>
+              <th>주요 R&amp;D 지원사업</th>
+              <th>주요 대상 기업</th>
+            </tr>
+          </thead>
+          <tbody>
+<tr>
+              <td class="mono">과학기술정보통신부</td>
+              <td><b>한국연구재단(NRF)</b></td>
+              <td><a class="rd-link" href="https://www.nrf.re.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>기초연구(신진/중견/리더 등)</td>
+              <td>대학, 출연연, 교수창업 초기기업</td>
+            </tr>
+<tr>
+              <td class="mono">과학기술정보통신부</td>
+              <td><b>정보통신기획평가원(IITP)</b></td>
+              <td><a class="rd-link" href="https://www.iitp.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>ICT R&amp;D, AI, 반도체, 디지털혁신</td>
+              <td>ICT 중소·중견기업, AI 스타트업</td>
+            </tr>
+<tr>
+              <td class="mono">산업통상자원부</td>
+              <td><b>한국산업기술평가관리원(KEIT)</b></td>
+              <td><a class="rd-link" href="https://www.keit.re.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>산업핵심기술개발, 소재부품장비</td>
+              <td>제조 중소·중견기업, 대기업 컨소시엄</td>
+            </tr>
+<tr>
+              <td class="mono">산업통상자원부</td>
+              <td><b>한국에너지기술평가원(KETEP)</b></td>
+              <td><a class="rd-link" href="https://www.ketep.re.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>수소·신재생·에너지 기술개발</td>
+              <td>에너지·플랜트 기업, 발전사, 수소 밸류체인 기업</td>
+            </tr>
+<tr>
+              <td class="mono">산업통상자원부</td>
+              <td><b>한국산업기술진흥원(KIAT)</b></td>
+              <td><a class="rd-link" href="https://www.kiat.or.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>기술사업화, 산업·지역혁신</td>
+              <td>기술사업화 기업, 테크 스타트업, 지역혁신기관</td>
+            </tr>
+<tr>
+              <td class="mono">중소벤처기업부</td>
+              <td><b>중소기업기술정보진흥원(TIPA)</b></td>
+              <td><a class="rd-link" href="https://www.smtech.go.kr/front/ifg/no/notice02_intro.do" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>창업성장기술개발(디딤돌), 기술혁신개발, 산학연 Collabo R&amp;D</td>
+              <td>창업 7년 이하, 매출 발생 중소기업, 기술보유 기업</td>
+            </tr>
+<tr>
+              <td class="mono">중소벤처기업부</td>
+              <td><b>TIPS(운영: TIPA)</b></td>
+              <td><a class="rd-link" href="https://www.jointips.or.kr/" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>TIPS, 딥테크 TIPS, 글로벌 TIPS</td>
+              <td>VC/운영사 투자·추천 받은 기술 스타트업(딥테크는 원천/초격차 중심)</td>
+            </tr>
+<tr>
+              <td class="mono">보건복지부</td>
+              <td><b>한국보건산업진흥원(KHIDI)</b></td>
+              <td><a class="rd-link" href="https://www.khidi.or.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>보건의료기술개발, 바이오헬스 R&amp;D</td>
+              <td>바이오벤처, 제약/의료기기 기업, 병원·연구기관 컨소시엄</td>
+            </tr>
+<tr>
+              <td class="mono">국토교통부</td>
+              <td><b>국토교통과학기술진흥원(KAIA)</b></td>
+              <td><a class="rd-link" href="https://www.kaia.re.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>스마트시티, 모빌리티, 국토·교통 R&amp;D</td>
+              <td>건설·모빌리티·공간정보 기업, 지자체·공공기관 컨소시엄</td>
+            </tr>
+<tr>
+              <td class="mono">환경부</td>
+              <td><b>한국환경산업기술원(KEITI)</b></td>
+              <td><a class="rd-link" href="https://www.keiti.re.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>환경기술개발, 탄소/자원순환</td>
+              <td>환경·탄소·ESG 솔루션 기업, 중소·중견기업</td>
+            </tr>
+<tr>
+              <td class="mono">농림축산식품부</td>
+              <td><b>농림식품기술기획평가원(IPET)</b></td>
+              <td><a class="rd-link" href="https://www.ipet.re.kr" target="_blank" rel="noopener noreferrer">바로가기 ↗</a></td>
+              <td>스마트팜, 농식품 R&amp;D</td>
+              <td>농식품기업, 애그테크 스타트업, 생산자단체·연구기관</td>
+            </tr>
+</tbody>
+        </table>
+      </div>
+    </div><div class='list'><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.iris.go.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">범부처통합연구지원시스템(IRIS) 사업공고</div>
+                  <div class="desc">국가R&D 통합 공고</div>
+                  <div class="url">https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituListView.do</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituListView.do" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.smtech.go.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">중소벤처기업부 - 중소기업기술정보진흥원(TIPA)</div>
+                  <div class="desc"><b>창업성장기술개발사업(디딤돌)</b>(창업 7년 이하, 지원규모가 가장 큼, 진입장벽 낮음)
+<b>중소기업 기술혁신개발사업</b>(수출지향형(수출 실적 필요), 글로벌협력형(해외 연구기관과 공동연구), 중소기업유망기술(분야별))
+<b>산학연 Collabo R&D 사업</b>(중소기업 + 대학/연구기관 사업화 R&D 지원)</div>
+                  <div class="url">https://www.smtech.go.kr/front/ifg/no/notice02_intro.do</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.smtech.go.kr/front/ifg/no/notice02_intro.do" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.jointips.or.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">팁스(TIPS) - 중소벤처기업부/중소기업기술정보진흥원(TIPA)</div>
+                  <div class="desc">「창업성장기술개발사업」로, smtech에서 지원 가능
+<b>팁스(TIPS)</b>는 민간투자를 받은 기업 대상이며, R&D 약 5억 내외 수준으로 지원 
+<b>딥테크 팁스(TIPS)</b>는 초격차·원천기술 중심 기업을 대상으로 하며, 최대 약 10억 내외 수준으로 지원</div>
+                  <div class="url">https://www.jointips.or.kr/</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.jointips.or.kr/" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=www.bizinfo.go.kr&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">기업마당 - 중소·중견기업 정부지원사업 통합 공고</div>
+                  <div class="desc">지역별 기업 지원사업 공고 모음</div>
+                  <div class="url">https://www.bizinfo.go.kr/sii/siia/selectSIIA200View.do</div>
+                </div>
+                <div class="actions"><a class="open" href="https://www.bizinfo.go.kr/sii/siia/selectSIIA200View.do" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div><div class="row">
+                <div class="logo"><img src="https://www.google.com/s2/favicons?domain=ipacademy.net&sz=128" width="24" alt=""></div>
+                <div class="meta">
+                  <div class="name">국가지식재산교육포털(IP-ACADEMY)</div>
+                  <div class="desc">IP 교육 콘텐츠(온라인 무료 교육 다수)</div>
+                  <div class="url">https://ipacademy.net/</div>
+                </div>
+                <div class="actions"><a class="open" href="https://ipacademy.net/" target="_blank" rel="noopener noreferrer">열기 ↗</a></div>
+              </div></div></section>
+    <footer style="text-align:center; margin-top:40px; color: #94a3b8; font-size: 12px;">Last updated: 2026-02-24 16:55</footer>
+  </div>
+</body>
+</html>
