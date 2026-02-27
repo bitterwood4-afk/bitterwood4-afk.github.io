@@ -849,7 +849,7 @@
 <h1>IP-R&amp;D 관련 취업/기관/교육 정보</h1>
 <div class="header-actions">
           <button class="feedback-btn" id="feedbackBtn" type="button">✉️ 수정 및 개선 요구</button>
-          <span class="visit-badge" title="이 브라우저(기기)에서의 방문 횟수"><span class="visit-label">방문</span> <span id="visitCount">0</span></span>
+          <span class="visit-badge" title="전체 방문자(전 세계 공용) 누적 카운트"><span class="visit-label">방문</span> <span id="visitCount">-</span></span>
         </div>
 </div>
 </div>
@@ -1757,10 +1757,10 @@
       const el = document.getElementById('visitCount');
       if(!el) return;
 
-      const namespace = "iprnd_portal";
-      const key = "total_visits";
+      const namespace = "bitterwood4-afk-github-io";
+      const key = "iprnd_portal_total_visits";
 
-      fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+      fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`, { cache: "no-store" })
         .then(res => res.json())
         .then(data => {
           el.textContent = data.value;
@@ -1770,27 +1770,6 @@
         });
     })();
   </script>
-
-  <script>
-    // ===== ✅ 방문 횟수 표시 (이 브라우저/기기 기준) =====
-    (function(){
-      const el = document.getElementById('visitCount');
-      if(!el) return;
-
-      const KEY = 'iprnd_visit_count_v1';
-      let n = 0;
-      try{
-        n = parseInt(localStorage.getItem(KEY) || '0', 10);
-        if(!Number.isFinite(n) || n < 0) n = 0;
-        n += 1;
-        localStorage.setItem(KEY, String(n));
-      }catch(e){
-        // localStorage가 막힌 환경이면 1회로 표시
-        n = 1;
-      }
-      el.textContent = String(n);
-    })();
-  </script>
-
+  
 </body>
 </html>
