@@ -805,6 +805,41 @@
       .feedback-btn{ width: fit-content; }
     }
 
+
+    /* ===== ✅ 헤더 액션(버튼 + 방문 카운터) ===== */
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .visit-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(2,6,23,0.12);
+      background: rgba(255,255,255,0.75);
+      color: var(--ink);
+      font-weight:900;
+      font-size:12px;
+      box-shadow: 0 10px 28px rgba(2, 6, 23, 0.08);
+      white-space:nowrap;
+      user-select:none;
+    }
+    .visit-badge #visitCount{
+      display:inline-block;
+      min-width: 18px;
+      text-align:right;
+      font-variant-numeric: tabular-nums;
+    }
+    .visit-label{
+      color: var(--subtle);
+      font-weight:950;
+    }
+
 </style>
 </head>
 <body>
@@ -812,7 +847,10 @@
 <div class="header">
 <div class="header-top">
 <h1>IP-R&amp;D 관련 취업/기관/교육 정보</h1>
-<button class="feedback-btn" id="feedbackBtn" type="button">✉️ 수정 및 개선 요구</button>
+<div class="header-actions">
+          <button class="feedback-btn" id="feedbackBtn" type="button">✉️ 수정 및 개선 요구</button>
+          <span class="visit-badge" title="이 브라우저(기기)에서의 방문 횟수"><span class="visit-label">방문</span> <span id="visitCount">0</span></span>
+        </div>
 </div>
 </div>
 <!-- ✅ 피드백(수정/개선 요구) 모달 -->
@@ -1712,5 +1750,27 @@
       filter();
     })();
   </script>
+
+  <script>
+    // ===== ✅ 방문 횟수 표시 (이 브라우저/기기 기준) =====
+    (function(){
+      const el = document.getElementById('visitCount');
+      if(!el) return;
+
+      const KEY = 'iprnd_visit_count_v1';
+      let n = 0;
+      try{
+        n = parseInt(localStorage.getItem(KEY) || '0', 10);
+        if(!Number.isFinite(n) || n < 0) n = 0;
+        n += 1;
+        localStorage.setItem(KEY, String(n));
+      }catch(e){
+        // localStorage가 막힌 환경이면 1회로 표시
+        n = 1;
+      }
+      el.textContent = String(n);
+    })();
+  </script>
+
 </body>
 </html>
