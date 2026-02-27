@@ -1752,6 +1752,26 @@
   </script>
 
   <script>
+    // ===== 전체 방문자 수 (전 세계 공용 카운트) =====
+    (function(){
+      const el = document.getElementById('visitCount');
+      if(!el) return;
+
+      const namespace = "iprnd_portal";
+      const key = "total_visits";
+
+      fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+        .then(res => res.json())
+        .then(data => {
+          el.textContent = data.value;
+        })
+        .catch(() => {
+          el.textContent = "–";
+        });
+    })();
+  </script>
+
+  <script>
     // ===== ✅ 방문 횟수 표시 (이 브라우저/기기 기준) =====
     (function(){
       const el = document.getElementById('visitCount');
