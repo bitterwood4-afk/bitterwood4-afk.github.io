@@ -1752,28 +1752,28 @@
   </script>
 
   <script>
-  // ===== 전체 방문자 수 (전 세계 공용 카운트) =====
-  (function(){
-    const el = document.getElementById('visitCount');
-    if(!el) return;
+    // ===== 전체 방문자 수 (전 세계 공용 카운트) =====
+    (function(){
+      const el = document.getElementById('visitCount');
+      if(!el) return;
 
-    const namespace = "bitterwood4-afk-github-io";
-    const key = "iprnd_portal_total_visits";
+      // ⚠️ 네임스페이스가 없어서 "키"를 아주 유니크하게!
+      // 예: 도메인 + 페이지명 조합 추천
+      const key = "bitterwood4-afk-github-io_iprnd_portal_total_visits";
 
-    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-      .then(res => {
-        if(!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
-      .then(data => {
-        el.textContent = data.value ?? 0;
-      })
-      .catch(err => {
-        console.error("Count API error:", err);
-        el.textContent = "0";
-      });
-  })();
-</script>
-  
+      fetch(`https://countapi.mileshilliard.com/api/v1/hit/${encodeURIComponent(key)}`, { cache: "no-store" })
+        .then(r => {
+          if(!r.ok) throw new Error("network");
+          return r.json();
+        })
+        .then(data => {
+          el.textContent = data.value ?? "0";
+        })
+        .catch(err => {
+          console.error("visit counter error:", err);
+          el.textContent = "0";
+        });
+    })();
+  </script>
 </body>
 </html>
