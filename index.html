@@ -1752,24 +1752,28 @@
   </script>
 
   <script>
-    // ===== 전체 방문자 수 (전 세계 공용 카운트) =====
-    (function(){
-      const el = document.getElementById('visitCount');
-      if(!el) return;
+  // ===== 전체 방문자 수 (전 세계 공용 카운트) =====
+  (function(){
+    const el = document.getElementById('visitCount');
+    if(!el) return;
 
-      const namespace = "bitterwood4-afk-github-io";
-      const key = "iprnd_portal_total_visits";
+    const namespace = "bitterwood4-afk-github-io";
+    const key = "iprnd_portal_total_visits";
 
-      fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(namespace)}/${encodeURIComponent(key)}`, { cache: "no-store" })
-        .then(res => res.json())
-        .then(data => {
-          el.textContent = data.value;
-        })
-        .catch(() => {
-          el.textContent = "–";
-        });
-    })();
-  </script>
+    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+      .then(res => {
+        if(!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then(data => {
+        el.textContent = data.value ?? 0;
+      })
+      .catch(err => {
+        console.error("Count API error:", err);
+        el.textContent = "0";
+      });
+  })();
+</script>
   
 </body>
 </html>
