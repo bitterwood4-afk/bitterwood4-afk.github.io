@@ -32,15 +32,15 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.18), rgba(255,255,255,.18)),
-    url("./files/white_computer.jpg");
+
+  /* 남는 여백은 흰색으로 */
+  background-color:#fff;
+
+  /* 이미지 1장 */
+  background-image: url("./files/white_computer.jpg");
   background-repeat:no-repeat;
   background-position:center;
-  background-size:cover;
-
-  /* ✅ 퍼져보이는 느낌 줄이기: 아주 약한 선명도 보정 */
-  filter: saturate(.95) contrast(.98);
+  background-size: contain;  /* ✅ 핵심: 잘리지 않음 */
 
   z-index:-1;
 }
