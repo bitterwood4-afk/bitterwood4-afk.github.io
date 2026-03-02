@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BITTERWOOD의 특허 스터디 카페</title>
+
+<style>
+/* ✅ NanumSquare 폰트 직접 등록 */
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('./NANUMSQUAREB.OTF') format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'NanumSquareExtra';
+  src: url('./NANUMSQUAREEB.OTF') format('opentype');
+  font-weight: 800;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ✅ 배경 */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(rgba(255,255,255,.08), rgba(255,255,255,.08)),
+    url("./다운로드.jpg") center/cover no-repeat;
+  z-index:-1;
+}
+
+.wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:80px 30px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+/* ✅ 타이틀 */
+.title{
+  font-family: 'NanumSquareExtra', 'NanumSquare', sans-serif;
+  font-size: clamp(48px, 7vw, 110px);
+  font-weight:800;
+  letter-spacing:-2px;
+  line-height:1.05;
+
+  color: rgba(120,120,120,.35);   /* 더 흐리게 */
+  text-shadow: 0 10px 40px rgba(0,0,0,.08);
+
+  margin-bottom:100px; /* 🔥 링크와 충분히 간격 */
+}
+
+/* ✅ 메뉴 */
+.menu{
+  width:min(500px, 100%);
+  display:flex;
+  flex-direction:column;
+  gap:22px;  /* 🔥 링크끼리 간격 증가 */
+}
+
+.menu a{
+  font-family:'NanumSquare', sans-serif;
+  font-weight:700;
+  font-size:20px;
+
+  text-decoration:none;
+  color: rgba(20,20,20,.9);
+  border-bottom:2px solid rgba(0,0,0,.25);
+  padding:8px 0;
+
+  transition: all .2s ease;
+}
+
+.menu a:hover{
+  transform:translateX(4px);
+  border-bottom-color: rgba(0,0,0,.55);
+}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="title">
+    BITTERWOOD의<br>
+    특허 스터디 카페
+  </div>
+
+  <nav class="menu">
+    <a href="../index.html">IP-R&D 관련 취업/교육/사업 정보</a>
+    <a href="./study/index.html">ooo</a>
+    <a href="./jobs/index.html">ooo</a>
+  </nav>
+
+</div>
+</body>
+</html>
