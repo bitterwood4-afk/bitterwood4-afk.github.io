@@ -32,10 +32,16 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:
-    linear-gradient(rgba(255,255,255,.08), rgba(255,255,255,.08)),
-    url("./files/white_computer.jpg") center/contain no-repeat;
-    background-color:#f4f4f4;
+  background-image:
+    linear-gradient(rgba(255,255,255,.18), rgba(255,255,255,.18)),
+    url("./files/white_computer.jpg");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+
+  /* ✅ 퍼져보이는 느낌 줄이기: 아주 약한 선명도 보정 */
+  filter: saturate(.95) contrast(.98);
+
   z-index:-1;
 }
 
