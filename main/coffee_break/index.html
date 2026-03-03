@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>커피 브레이크 (잡담)</title>
+
+  <style>
+    :root{
+      --bg: #eef1ea;
+      --paper: rgba(255,255,255,.86);
+      --ink: #111;
+      --muted: rgba(0,0,0,.55);
+      --line: rgba(0,0,0,.14);
+      --shadow: 0 18px 50px rgba(0,0,0,.14);
+      --radius: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+      color:var(--ink);
+      background: var(--bg);
+    }
+
+    /* 배경(은은한) */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-40px;
+      background:
+        radial-gradient(1200px 600px at 20% 15%, rgba(255,255,255,.7), transparent 60%),
+        radial-gradient(900px 500px at 80% 10%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(1000px 800px at 70% 90%, rgba(0,0,0,.06), transparent 60%);
+      filter: blur(0px);
+      pointer-events:none;
+    }
+
+    /* 중앙 패널 */
+    .panel{
+      position:relative;
+      width:min(1100px, 100%);
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      backdrop-filter: blur(10px);
+    }
+
+    .topbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:flex-end;
+      justify-content:space-between;
+      border-bottom:1px solid var(--line);
+      padding-bottom:14px;
+      margin-bottom:16px;
+    }
+
+    .title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .title h1{
+      margin:0;
+      font-size: clamp(20px, 3vw, 30px);
+      letter-spacing:-0.02em;
+    }
+    .title p{
+      margin:0;
+      font-size: 13px;
+      color:var(--muted);
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    button{
+      appearance:none;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius: 12px;
+      padding:10px 12px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    button:hover{ transform: translateY(-1px); }
+    button:active{ transform: translateY(0px); }
+
+    .danger{
+      background: #fff;
+    }
+
+    /* 입력 폼 */
+    .form{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      margin-bottom:16px;
+    }
+    @media (min-width: 780px){
+      .form{
+        grid-template-columns: 220px 1fr;
+        align-items:start;
+      }
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    label{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:700;
+    }
+    input, textarea{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 12px;
+      font-size:14px;
+      outline:none;
+      background:#fff;
+    }
+    textarea{
+      min-height: 110px;
+      resize: vertical;
+      line-height:1.5;
+    }
+    .submitRow{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:flex-end;
+      margin-top:6px;
+    }
+
+    /* 포스트잇 그리드 */
+    .grid{
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    @media (min-width: 520px){
+      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    .note{
+      position:relative;
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      border: 1px solid rgba(0,0,0,.10);
+      box-shadow: 0 14px 30px rgba(0,0,0,.10);
+      background: #fff8b5;
+      transform: rotate(var(--r, 0deg));
+    }
+    .note::before{
+      content:"";
+      position:absolute;
+      top:10px;
+      right:14px;
+      width:44px;
+      height:18px;
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 999px;
+      transform: rotate(-10deg);
+    }
+
+    .meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+      font-size: 12px;
+      color: rgba(0,0,0,.62);
+      font-weight:800;
+    }
+    .nick{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      min-width:0;
+    }
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background: rgba(0,0,0,.25);
+      flex:0 0 auto;
+    }
+    .nick span{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .content{
+      white-space:pre-wrap;
+      word-break:break-word;
+      line-height:1.55;
+      font-size: 14px;
+      font-weight:700;
+      color:#111;
+      min-height: 56px;
+    }
+
+    .noteActions{
+      display:flex;
+      justify-content:flex-end;
+      gap:6px;
+      margin-top:10px;
+    }
+    .mini{
+      padding:8px 10px;
+      border-radius: 12px;
+      font-weight:900;
+      font-size:12px;
+      background: rgba(255,255,255,.6);
+    }
+
+    .empty{
+      border:1px dashed var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--muted);
+      font-weight:800;
+      background: rgba(255,255,255,.55);
+    }
+
+    .hint{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    a.back{
+      color: inherit;
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,0,0,.25);
+      font-weight:900;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero">
+    <div class="panel">
+      <div class="topbar">
+        <div class="title">
+          <h1>☕ 커피 브레이크 (잡담)</h1>
+          <p>닉네임 + 내용 입력 → 자동으로 오늘 시간 저장 → 포스트잇처럼 차곡차곡 저장됩니다 (내 브라우저 기준).</p>
+        </div>
+        <div class="actions">
+          <button id="exportBtn" title="내 글들을 JSON 파일로 저장">내보내기</button>
+          <button id="importBtn" title="JSON 파일로 가져오기">가져오기</button>
+          <button class="danger" id="clearBtn" title="이 브라우저에 저장된 글 전체 삭제">전체삭제</button>
+        </div>
+      </div>
+
+      <div class="form">
+        <div class="field">
+          <label for="nickname">닉네임</label>
+          <input id="nickname" maxlength="24" placeholder="예) BITTERWOOD" />
+          <div class="hint">
+            ✔ 닉네임은 자동 저장됩니다.<br/>
+            ✔ “공유 게시판(모든 방문자 공통)”을 원하면 서버/DB가 필요해요.
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="message">내용</label>
+          <textarea id="message" maxlength="800" placeholder="커피 한 잔 하면서…"></textarea>
+          <div class="submitRow">
+            <button id="addBtn">포스트잇 붙이기</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="list" class="grid"></div>
+
+      <div class="hint">
+        ↩ 메인으로 돌아가려면, 메인 페이지에서 <b>12. 커피 브레이크(잡담)</b> 링크를
+        <code>/coffee_break/</code> 로 연결하면 됩니다.
+      </div>
+
+      <!-- 숨김 파일 인풋 -->
+      <input id="fileInput" type="file" accept="application/json" style="display:none;" />
+    </div>
+  </div>
+
+<script>
+  const STORAGE_KEY = "coffee_break_posts_v1";
+  const NICK_KEY = "coffee_break_nick_v1";
+
+  const elNick = document.getElementById("nickname");
+  const elMsg = document.getElementById("message");
+  const elList = document.getElementById("list");
+
+  const addBtn = document.getElementById("addBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const exportBtn = document.getElementById("exportBtn");
+  const importBtn = document.getElementById("importBtn");
+  const fileInput = document.getElementById("fileInput");
+
+  function nowKST(){
+    // 브라우저의 로컬 시간 기준 (한국이면 KST로 보임)
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,"0");
+    const dd = String(d.getDate()).padStart(2,"0");
+    const hh = String(d.getHours()).padStart(2,"0");
+    const mi = String(d.getMinutes()).padStart(2,"0");
+    return `${yyyy}.${mm}.${dd} ${hh}:${mi}`;
+  }
+
+  function loadPosts(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function savePosts(posts){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+    }[m]));
+  }
+
+  function render(){
+    const posts = loadPosts();
+    elList.innerHTML = "";
+
+    if(!posts.length){
+      const empty = document.createElement("div");
+      empty.className = "empty";
+      empty.textContent = "아직 포스트잇이 없어요. 첫 글을 남겨보세요 :)";
+      elList.appendChild(empty);
+      return;
+    }
+
+    posts
+      .slice()              // 복사
+      .sort((a,b)=> b.id - a.id) // 최신이 위
+      .forEach(p => {
+        const card = document.createElement("div");
+        card.className = "note";
+
+        // 살짝 랜덤 회전(고정값)
+        card.style.setProperty("--r", (p.rot ?? 0) + "deg");
+        card.style.background = p.bg ?? "#fff8b5";
+
+        card.innerHTML = `
+          <div class="meta">
+            <div class="nick"><span class="dot"></span><span>${escapeHtml(p.nick)}</span></div>
+            <div>${escapeHtml(p.time)}</div>
+          </div>
+          <div class="content">${escapeHtml(p.msg)}</div>
+          <div class="noteActions">
+            <button class="mini" data-act="del" data-id="${p.id}">삭제</button>
+          </div>
+        `;
+
+        elList.appendChild(card);
+      });
+  }
+
+  function randomBg(){
+    // 포스트잇 느낌 색 5종
+    const colors = ["#fff8b5", "#c9f7d6", "#cfe7ff", "#ffd7e1", "#ffe9c7"];
+    return colors[Math.floor(Math.random()*colors.length)];
+  }
+
+  function randomRot(){
+    // -2.5 ~ +2.5도 사이
+    const r = (Math.random()*5 - 2.5);
+    return Math.round(r*10)/10;
+  }
+
+  function addPost(){
+    const nick = (elNick.value || "").trim();
+    const msg = (elMsg.value || "").trim();
+
+    if(!nick){
+      alert("닉네임을 입력해줘!");
+      elNick.focus();
+      return;
+    }
+    if(!msg){
+      alert("내용을 입력해줘!");
+      elMsg.focus();
+      return;
+    }
+
+    // 닉네임 저장
+    localStorage.setItem(NICK_KEY, nick);
+
+    const posts = loadPosts();
+    const post = {
+      id: Date.now(),       // 정렬/식별
+      nick,
+      msg,
+      time: nowKST(),
+      bg: randomBg(),
+      rot: randomRot()
+    };
+    posts.push(post);
+    savePosts(posts);
+
+    elMsg.value = "";
+    render();
+  }
+
+  // 삭제(개별)
+  elList.addEventListener("click", (e)=>{
+    const btn = e.target.closest("button[data-act='del']");
+    if(!btn) return;
+    const id = Number(btn.dataset.id);
+    const posts = loadPosts().filter(p => p.id !== id);
+    savePosts(posts);
+    render();
+  });
+
+  // 전체삭제
+  clearBtn.addEventListener("click", ()=>{
+    const ok = confirm("이 브라우저에 저장된 포스트잇을 전부 삭제할까요?");
+    if(!ok) return;
+    localStorage.removeItem(STORAGE_KEY);
+    render();
+  });
+
+  // 내보내기(JSON)
+  exportBtn.addEventListener("click", ()=>{
+    const posts = loadPosts();
+    const blob = new Blob([JSON.stringify(posts, null, 2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "coffee_break_posts.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(a.href);
+  });
+
+  // 가져오기(JSON)
+  importBtn.addEventListener("click", ()=>{
+    fileInput.value = "";
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", async ()=>{
+    const f = fileInput.files && fileInput.files[0];
+    if(!f) return;
+    try{
+      const text = await f.text();
+      const data = JSON.parse(text);
+      if(!Array.isArray(data)) throw new Error("형식 오류");
+      // 기존 글과 합치기(중복 id는 덮어쓰기)
+      const cur = loadPosts();
+      const map = new Map(cur.map(p => [p.id, p]));
+      data.forEach(p => {
+        if(p && typeof p.id === "number") map.set(p.id, p);
+      });
+      savePosts(Array.from(map.values()));
+      render();
+      alert("가져오기 완료!");
+    }catch(e){
+      alert("가져오기 실패: JSON 형식이 올바른지 확인해줘.");
+    }
+  });
+
+  // 엔터로 등록(모바일/PC 편의)
+  elMsg.addEventListener("keydown", (e)=>{
+    if((e.ctrlKey || e.metaKey) && e.key === "Enter"){
+      addPost();
+    }
+  });
+
+  addBtn.addEventListener("click", addPost);
+
+  // 초기 닉네임 불러오기
+  const savedNick = localStorage.getItem(NICK_KEY);
+  if(savedNick) elNick.value = savedNick;
+
+  render();
+</script>
+</body>
+</html>
