@@ -33,25 +33,19 @@ body{
   font-family:'NanumSquare', sans-serif;
 }
 
-/* =========================
-   ✅ 중앙 프레임 (배경이 깔리는 영역)
-   - 패널을 "가운데" 놓기 위해 중앙정렬
-========================= */
+/* ========================= */
 .wrap{
   max-width:1200px;
   margin:0 auto;
   min-height:100vh;
   padding:48px 0;
-
   position:relative;
   overflow:hidden;
-
   display:flex;
-  align-items:center;      /* ✅ 세로 가운데 느낌 */
-  justify-content:center;  /* ✅ 가로 가운데 */
+  align-items:center;
+  justify-content:center;
 }
 
-/* ✅ 배경은 wrap 안에만 */
 .wrap::before{
   content:"";
   position:absolute;
@@ -65,40 +59,49 @@ body{
   z-index:-1;
 }
 
-/* =========================
-   ✅ 하얀 패널 (글자/메뉴가 들어가는 안전영역)
-   - 너무 위/아래 치우치지 않게 크기 잡기
-========================= */
 .panel{
   width:100%;
-  /* 너무 길게 늘어지지 않도록 적당히 */
   min-height: 74vh;
-
   background: var(--panel);
   border:1px solid rgba(0,0,0,.10);
   border-radius:18px;
   box-shadow: 0 18px 55px rgba(0,0,0,.14);
-
   padding: 64px 56px 56px;
 }
 
 /* =========================
-   ✅ 타이틀 (조금 더 작게)
+   ✅ 타이틀 + 버튼 래퍼 추가
 ========================= */
+.title-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+/* 기존 타이틀 유지 */
 .title{
-  font-size: clamp(34px, 4.0vw, 66px);  /* ✅ 기존보다 다운 */
+  font-size: clamp(34px, 4.0vw, 66px);
   font-weight:700;
   letter-spacing:-2px;
   line-height:1.05;
-
   color: rgba(120,120,120,.32);
   text-shadow: 0 10px 40px rgba(0,0,0,.06);
+  margin: 0 0 42px;
+}
 
-  margin: 0 0 42px; /* ✅ 제목-목차 간격 */
+/* 문의하기 버튼 추가 */
+.contact-btn{
+  padding:12px 18px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.16);
+  background: rgba(255,255,255,.85);
+  color:#111;
+  font-weight:700;
+  cursor:pointer;
 }
 
 /* =========================
-   ✅ 메뉴: 2열 그리드
+   ✅ 메뉴 기존 유지
 ========================= */
 .menu{
   width:100%;
@@ -106,23 +109,19 @@ body{
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 54px;
   row-gap: 16px;
-
-  margin-top: 150px;   /* ✅ 목차 아래로 내림 */
+  margin-top: 150px;
 }
 
 .menu a{
   display:flex;
   align-items:baseline;
   gap:10px;
-
-  font-size:18px;          /* ✅ 메뉴 글자 작게 */
+  font-size:18px;
   font-weight:700;
   text-decoration:none;
-
   color:var(--ink);
   border-bottom:2px solid var(--line);
   padding:10px 0;
-
   transition: transform .22s ease, border-color .22s ease, opacity .22s ease;
 }
 
@@ -131,7 +130,6 @@ body{
   border-bottom-color: rgba(0,0,0,.48);
 }
 
-/* 번호 정렬 */
 .menu a .n{
   display:inline-block;
   width: 32px;
@@ -140,46 +138,67 @@ body{
 }
 
 /* =========================
-   ✅ 태블릿 이하
+   🔥 index039.html의 메일 모달 그대로 추가
 ========================= */
-@media (max-width: 900px){
-  .panel{
-    min-height: auto;
-    padding: 52px 28px 34px;
-  }
-  .menu{
-    grid-template-columns: 1fr; /* ✅ 1열 */
-    column-gap: 0;
-    row-gap: 14px;
-  }
-  .menu a{
-    font-size:16px;
-    padding:9px 0;
-  }
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
 }
 
-/* =========================
-   ✅ 스마트폰(작은 화면) 최적화
-========================= */
-@media (max-width: 480px){
-  .wrap{ padding:26px 14px; }
-  .panel{
-    padding: 40px 18px 22px;
-    border-radius:16px;
-  }
-  .title{
-    font-size: clamp(28px, 8vw, 44px);
-    margin: 0 0 26px;
-    letter-spacing:-1.5px;
-  }
-  .menu a{
-    font-size:15px;
-    gap:8px;
-  }
-  .menu a .n{
-    width: 28px;
-    flex-basis: 28px;
-  }
+.modal.active{ display:flex; }
+
+.modal-box{
+  width:92%;
+  max-width:520px;
+  background:#fff;
+  border-radius:14px;
+  padding:24px;
+}
+
+.modal-box h3{
+  margin-top:0;
+}
+
+.modal-box input,
+.modal-box textarea{
+  width:100%;
+  padding:10px;
+  margin-bottom:12px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  font-family:inherit;
+}
+
+.modal-box textarea{
+  min-height:120px;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.modal-actions button{
+  padding:10px 16px;
+  border-radius:8px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn-cancel{
+  background:#eee;
+}
+
+.btn-submit{
+  background:#3b5bdb;
+  color:#fff;
 }
 </style>
 </head>
@@ -188,11 +207,16 @@ body{
   <div class="wrap">
     <main class="panel">
 
-      <div class="title">
-        BITTERWOOD의<br>
-        특허 스터디 카페
+      <!-- 🔥 타이틀 + 버튼 -->
+      <div class="title-row">
+        <div class="title">
+          BITTERWOOD의<br>
+          특허 스터디 카페
+        </div>
+        <button class="contact-btn" onclick="openModal()">✉️ 문의하기</button>
       </div>
 
+      <!-- 기존 메뉴 그대로 -->
       <nav class="menu">
         <a href="../index.html"><span class="n">1.</span><span>IP-R&amp;D 관련 취업/교육/사업 정보</span></a>
         <a href="./study/index.html"><span class="n">2.</span><span>특허 조사·검색 연습</span></a>
@@ -207,11 +231,44 @@ body{
         <a href="./pages/09.html"><span class="n">9.</span><span>000</span></a>
 
         <a href="./pages/10.html"><span class="n">10.</span><span>000</span></a>
-        <a href="./pages/11.html"><span class="n">11.</span><span>신기술 산책 (중학생용) </span></a>
+        <a href="./pages/11.html"><span class="n">11.</span><span>신기술 산책 (중학생용)</span></a>
         <a href="./pages/12.html"><span class="n">12.</span><span>커피 브레이크 (잡담)</span></a>
       </nav>
 
     </main>
   </div>
+
+<!-- 🔥 메일 모달 -->
+<div class="modal" id="contactModal">
+  <div class="modal-box">
+    <h3>수정 및 개선 요구</h3>
+    <form action="https://formspree.io/f/여기에039의코드" method="POST">
+      <label>연락 가능한 이메일 (선택)</label>
+      <input type="email" name="email" placeholder="답변이 필요하면 이메일을 남겨주세요 (선택)">
+      <label>내용</label>
+      <textarea name="message" required placeholder="어떤 점을 수정/추가하면 좋을지 구체적으로 적어주세요."></textarea>
+      <div class="modal-actions">
+        <button type="button" class="btn-cancel" onclick="closeModal()">취소</button>
+        <button type="submit" class="btn-submit">보내기</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function openModal(){
+  document.getElementById('contactModal').classList.add('active');
+}
+function closeModal(){
+  document.getElementById('contactModal').classList.remove('active');
+}
+window.onclick=function(e){
+  const modal=document.getElementById('contactModal');
+  if(e.target===modal){
+    modal.classList.remove('active');
+  }
+}
+</script>
+
 </body>
 </html>
