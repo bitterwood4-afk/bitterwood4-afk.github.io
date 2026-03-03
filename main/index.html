@@ -76,6 +76,7 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
+  gap:16px;                 /* ✅ 좁은 화면에서 간격 */
 }
 
 /* 기존 타이틀 유지 */
@@ -98,6 +99,7 @@ body{
   color:#111;
   font-weight:700;
   cursor:pointer;
+  white-space:nowrap;        /* ✅ 버튼 글자 줄바꿈 방지 */
 }
 
 /* =========================
@@ -123,6 +125,7 @@ body{
   border-bottom:2px solid var(--line);
   padding:10px 0;
   transition: transform .22s ease, border-color .22s ease, opacity .22s ease;
+  min-width:0;              /* ✅ 텍스트 줄바꿈/넘침 안정 */
 }
 
 .menu a:hover{
@@ -137,6 +140,12 @@ body{
   color: rgba(0,0,0,.50);
 }
 
+/* ✅ 메뉴 텍스트가 길 때 예쁘게 줄바꿈되도록 */
+.menu a span:last-child{
+  min-width:0;
+  word-break: keep-all;
+}
+
 /* =========================
    🔥 index039.html의 메일 모달 그대로 추가
 ========================= */
@@ -148,6 +157,7 @@ body{
   align-items:center;
   justify-content:center;
   z-index:999;
+  padding: 18px;            /* ✅ 모바일에서 모달 가장자리 여백 */
 }
 
 .modal.active{ display:flex; }
@@ -182,6 +192,7 @@ body{
   display:flex;
   justify-content:flex-end;
   gap:10px;
+  flex-wrap:wrap;           /* ✅ 아주 좁은 화면에서 버튼 줄바꿈 허용 */
 }
 
 .modal-actions button{
@@ -199,6 +210,85 @@ body{
 .btn-submit{
   background:#3b5bdb;
   color:#fff;
+}
+
+/* =========================
+   ✅ ✅ 모바일/태블릿 반응형 (핵심)
+   - 타이틀이 4줄로 밀리지 않게: 버튼을 아래로 내림
+   - 메뉴는 모바일에서 1열로 변경 (3개씩 깨지는 문제 해결)
+========================= */
+@media (max-width: 900px){
+  .panel{
+    min-height:auto;
+    padding: 52px 28px 34px;
+  }
+
+  /* ✅ 타이틀 + 버튼을 세로 배치로 변경 */
+  .title-row{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  /* ✅ 타이틀 줄바꿈/크기 안정 */
+  .title{
+    font-size: clamp(28px, 7vw, 44px);
+    letter-spacing:-1.6px;
+    margin: 0 0 18px;
+  }
+
+  /* ✅ 메뉴: 1열로 */
+  .menu{
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 14px;
+    margin-top: 22px;     /* ✅ 모바일에서는 너무 아래로 밀지 않기 */
+  }
+
+  .menu a{
+    font-size:16px;
+    padding:9px 0;
+  }
+}
+
+/* =========================
+   ✅ 아주 작은 스마트폰(480px 이하)
+========================= */
+@media (max-width: 480px){
+  .wrap{ padding:26px 14px; }
+
+  .panel{
+    padding: 40px 18px 22px;
+    border-radius:16px;
+  }
+
+  .title{
+    font-size: clamp(26px, 8vw, 38px);
+    letter-spacing:-1.4px;
+    line-height:1.08;
+    margin: 0 0 14px;
+  }
+
+  .contact-btn{
+    width:100%;            /* ✅ 버튼을 한 줄 꽉 채워서 깔끔 */
+    text-align:center;
+    padding: 12px 14px;
+  }
+
+  .menu a{
+    font-size:15px;
+    gap:8px;
+  }
+
+  .menu a .n{
+    width: 28px;
+    flex-basis: 28px;
+  }
+
+  .modal-box{
+    width:100%;
+    max-width:520px;
+    padding:18px;
+  }
 }
 </style>
 </head>
