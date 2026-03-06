@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>BITTERWOOD's COFFEE BREAK</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --bg:#e9ece6;
@@ -21,7 +37,7 @@
   body{
     margin:0;
     min-height:100vh;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+    font-family: "Hi Melody", "Noto Sans KR", system-ui, -apple-system, sans-serif;
     color:var(--ink);
     background:var(--bg);
     overflow-x:hidden;
@@ -87,6 +103,7 @@
     pointer-events:none;
   }
   .banner-title{
+    font-family: "Gowun Dodum", "Noto Sans KR", system-ui, sans-serif;
     position:absolute;
     left:24px;
     bottom:18px;
@@ -101,7 +118,7 @@
   .banner-sub{
     display:block;
     margin-top:8px;
-    font-size:12px;
+    font-size:13px;
     letter-spacing:.12em;
     opacity:.9;
     font-weight:900;
@@ -109,9 +126,9 @@
 
   /* ===== 포스트잇 ===== */
   .grid{
-    margin-top:18px;
+    margin-top: 30px;
     display:grid;
-    gap:14px;
+    gap: 40px;
     grid-template-columns:repeat(1, minmax(0,1fr));
   }
   @media (min-width:560px){ .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
@@ -120,7 +137,7 @@
   .note{
     position:relative;
     border-radius:20px;
-    padding:14px 14px 12px;
+    padding: 18px 18px 16px;
     border:1px solid rgba(0,0,0,.10);
     box-shadow:var(--shadow2);
     transform: rotate(var(--r, 0deg));
@@ -149,7 +166,7 @@
     justify-content:space-between;
     gap:10px;
     margin-bottom:8px;
-    font-size:12px;
+    font-size:13px;
     color: rgba(0,0,0,.62);
     font-weight:900;
   }
@@ -166,11 +183,12 @@
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
   .content{
+    font-family: "Jua", "Noto Sans KR", sans-serif;
     white-space:pre-wrap;
     word-break:break-word;
-    line-height:1.55;
-    font-size:14.5px;
-    font-weight:760;
+    line-height:1.7;
+    font-size:17px;
+    font-weight:400;
     color:#0b1220;
     min-height:56px;
   }
@@ -196,14 +214,15 @@
     background: rgba(255,255,255,.62);
     border:1px solid rgba(0,0,0,.12);
     font-size:12px;
-    font-weight:950;
+    font-weight:700;
     text-decoration:none;
     color:var(--ink);
-    max-width:240px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    transition: background .15s ease, transform .15s ease;
+    width:100%;
+    word-break:break-word;
+    max-width:100%;
+    white-space:normal; transition: background .15s ease, transform .15s ease;
+  
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
   }
   .note-file:hover{
     background: rgba(255,255,255,.82);
@@ -251,7 +270,21 @@
   @media (max-width:520px){
     .panel{ padding:16px; }
     .banner{ height:210px; border-radius:18px; }
-    .banner-title{ left:18px; bottom:14px; }
+    .banner-title{
+    font-family: "Gowun Dodum", "Noto Sans KR", system-ui, sans-serif;
+    position:absolute;
+    left:24px;
+    bottom:18px;
+    color:#fff;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:clamp(20px, 2.6vw, 38px);
+    text-shadow: 0 10px 28px rgba(0,0,0,.50);
+    line-height:1.1;
+  }
+    .grid{ gap: 40px; }
+    .content{ font-size:17px; }
   }
 </style>
 </head>
@@ -288,60 +321,40 @@
     {
       nick: "BITTERWOOD",
       time: "2026.03.06",
-      msg: "지식재산처에서 '25년 발행한 발행물입니다. 특허 분석 가이드라인과 품질관리 매뉴얼입니다. 유용한 자료인 것 같아요^^",
+      msg: "지식재산처에서 '25년 말에 발행한 발행물입니다. 특허 분석 가이드라인과 품질관리 매뉴얼입니다. \n유용한 자료인 것 같아요^^. \n\n클릭하면 PDF 뷰어로 넘어갑니다.",
       rot: -0.8,
       attachments: [
         {
-          name: "지식재산권 전략적 조사·분석 가이드라인.pdf",
+          name: "파일1. 전략적 조사·분석 가이드라인",
           type: "application/pdf",
           url: "https://drive.google.com/file/d/1k13EqCaoPtn7dhtSVRVEe4EBXZeseVIe/view"
+        },
+        {
+          name: "파일2. 전략적 조사ㆍ분석 품질관리 매뉴얼",
+          type: "application/pdf",
+          url: "https://drive.google.com/file/d/1MYLOX2NZk0YviMBln6rNIo0NVhj6wKmS/view"
         }
+
       ]
     },
     {
       nick: "BITTERWOOD",
-      time: "2026.03.05 12:11",
-      msg: "📎 첨부 샘플(문서)\nfiles 폴더에 PDF 올리고 링크만 연결하면 돼.",
+      time: "2026.03.06",
+      msg: "2월28일 토요일에 한국특허법학회 공개세미나 처음 가봤어요. '25년 주요 판례 4건에 대한 전문가님들의 고견을 청취할 수 있어서 너무 멋진 시간이었습니다.^^ \n\n 이미지를 본 후에는 우측 상단의 X를 눌러주셔야 여기로 돌아옵니다.",
+      rot: -1.3,
+      attachments: [
+        { name: "2026-03-06_13-26.jpg", type: "image/jpeg", url: "https://drive.google.com/thumbnail?id=16xngBIziVJO5qUs8FchgOT_vkjTJ-rpr&sz=w1200" },
+        { name: "2026-03-06 _3-28.jpg", type: "image/jpeg", url: "https://drive.google.com/thumbnail?id=1DFa7J-Z7-atU2elkmJ0v_yQkAak04L51&sz=w1200"},
+        { name: "2026-03-06_13-29.jpg", type: "image/jpeg", url: "https://drive.google.com/thumbnail?id=1aECAY9NolbjYqXfJumUvOFKLRoeCT7d4&sz=w1200" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.06",
+      msg: "일하면서 가끔 이렇게 이벤트를 올릴 수 있으면 좋을 것 같아서 만들어봤어요.❤️",
       rot: 1.2,
-      attachments: [
-        { name: "sample.pdf", type: "application/pdf", url: "files/sample.pdf" }
-      ]
-    },
-    {
-      nick: "BITTERWOOD",
-      time: "2026.03.05 12:12",
-      msg: "🖼️ 첨부 샘플(이미지)\n이미지는 카드에 미리보기로 나오고 클릭하면 크게 보여줘.",
-      rot: -0.3,
-      attachments: [
-        { name: "sample_photo.jpg", type: "image/jpeg", url: "files/sample_photo.jpg" }
-      ]
-    },
-    {
-      nick: "BITTERWOOD",
-      time: "2026.03.05 12:13",
-      msg: "📎 첨부 여러 개도 가능\n(PDF + 이미지 같이 넣기)",
-      rot: 0.6,
-      attachments: [
-        { name: "menu.pdf", type: "application/pdf", url: "files/menu.pdf" },
-        { name: "cafe.jpg", type: "image/jpeg", url: "files/cafe.jpg" }
-      ]
-    },
-    {
-      nick: "BITTERWOOD",
-      time: "2026.03.05 12:14",
-      msg: "압축파일/한글/워드도 링크로 표시돼.\n(파일은 repo에 올려두기만 하면 됨)",
-      rot: -1.0,
-      attachments: [
-        { name: "자료.zip", type: "application/zip", url: "files/data.zip" }
-      ]
-    },
-    {
-      nick: "BITTERWOOD",
-      time: "2026.03.05 12:15",
-      msg: "마지막 샘플.\n색상은 로딩할 때마다 랜덤으로 배정돼.",
-      rot: 0.2,
       attachments: []
-    }
+    },
   ];
 
   // ✅ 랜덤 컬러 팔레트 (포스트잇 배경)
