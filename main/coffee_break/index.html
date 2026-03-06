@@ -1,202 +1,417 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BITTERWOOD's Coffee Break</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BITTERWOOD's COFFEE BREAK</title>
 
 <style>
+  :root{
+    --bg:#e9ece6;
+    --paper:rgba(255,255,255,.88);
+    --ink:#0f172a;
+    --muted:rgba(15,23,42,.55);
+    --line:rgba(15,23,42,.14);
+    --shadow:0 18px 60px rgba(0,0,0,.16);
+    --shadow2:0 10px 28px rgba(0,0,0,.14);
+    --radius:26px;
+  }
 
-/* ==============================
-기본 설정
-============================== */
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    overflow-x:hidden;
+  }
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
-}
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:-80px;
+    background:
+      radial-gradient(1200px 700px at 20% 12%, rgba(255,255,255,.78), transparent 60%),
+      radial-gradient(900px 600px at 82% 10%, rgba(255,255,255,.62), transparent 60%),
+      radial-gradient(1100px 900px at 72% 92%, rgba(2, 6, 23, .07), transparent 65%),
+      linear-gradient(180deg, rgba(255,255,255,.12), transparent 55%);
+    pointer-events:none;
+  }
 
-body{
-background:#e9e9e9;
-font-family: 'NanumSquare', sans-serif;
-display:flex;
-justify-content:center;
-padding:30px 15px;
-}
+  .panel{
+    position:relative;
+    width:min(1140px, 100%);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px;
+    backdrop-filter: blur(12px);
+  }
 
-/* ==============================
-메인 프레임
-============================== */
+  /* ===== 배너 ("https://bitterwood4-afk.github.io/main/files/cappucino.png") ===== */
+  .banner{
+    position:relative;
+    width:100%;
+    height:260px;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,.18);
 
-.wrap{
-width:100%;
-max-width:1200px;
-}
+    background-image:url("https://bitterwood4-afk.github.io/main/files/cappucino.png");
+    background-size:cover;
+    background-position:left center;
+    background-repeat:no-repeat;
+  }
+  /* 텍스트 가독성용 오버레이 */
+  .banner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+      90deg,
+      rgba(0,0,0,.46) 0%,
+      rgba(0,0,0,.18) 45%,
+      rgba(0,0,0,0) 72%
+    );
+    pointer-events:none;
+  }
+  .banner-title{
+    position:absolute;
+    left:24px;
+    bottom:18px;
+    color:#fff;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:clamp(20px, 2.6vw, 38px);
+    text-shadow: 0 10px 28px rgba(0,0,0,.50);
+    line-height:1.1;
+  }
+  .banner-sub{
+    display:block;
+    margin-top:8px;
+    font-size:12px;
+    letter-spacing:.12em;
+    opacity:.9;
+    font-weight:900;
+  }
 
-.panel{
-background:rgba(255,255,255,0.88);
-border-radius:24px;
-padding:18px;
-box-shadow:0 15px 40px rgba(0,0,0,.15);
-}
+  /* ===== 포스트잇 ===== */
+  .grid{
+    margin-top:18px;
+    display:grid;
+    gap:14px;
+    grid-template-columns:repeat(1, minmax(0,1fr));
+  }
+  @media (min-width:560px){ .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (min-width:940px){ .grid{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
 
-/* ==============================
-카페 배너
-============================== */
+  .note{
+    position:relative;
+    border-radius:20px;
+    padding:14px 14px 12px;
+    border:1px solid rgba(0,0,0,.10);
+    box-shadow:var(--shadow2);
+    transform: rotate(var(--r, 0deg));
+    transition: transform .18s ease, box-shadow .18s ease;
+    overflow:hidden;
+  }
+  .note:hover{
+    transform: rotate(var(--r, 0deg)) translateY(-3px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.18);
+  }
+  .tape{
+    position:absolute;
+    top:10px;
+    right:12px;
+    width:54px;
+    height:20px;
+    border-radius:999px;
+    background: rgba(255,255,255,.48);
+    border:1px solid rgba(0,0,0,.08);
+    transform: rotate(-12deg);
+  }
 
-.banner{
+  .meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:8px;
+    font-size:12px;
+    color: rgba(0,0,0,.62);
+    font-weight:900;
+  }
+  .nick{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    min-width:0;
+  }
+  .dot{
+    width:10px;height:10px;border-radius:999px;background:rgba(0,0,0,.25);flex:0 0 auto;
+  }
+  .nick span{
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .content{
+    white-space:pre-wrap;
+    word-break:break-word;
+    line-height:1.55;
+    font-size:14.5px;
+    font-weight:760;
+    color:#0b1220;
+    min-height:56px;
+  }
 
-height:240px;
-border-radius:20px;
+  /* ===== 첨부 ===== */
+  .note-attachments{ margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; }
+  .note-img{
+    width:100%;
+    max-height:230px;
+    object-fit:cover;
+    border-radius:14px;
+    border:1px solid rgba(0,0,0,.10);
+    display:block;
+    cursor:pointer;
+    box-shadow: 0 10px 24px rgba(0,0,0,.10);
+  }
+  .note-file{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 10px;
+    border-radius:12px;
+    background: rgba(255,255,255,.62);
+    border:1px solid rgba(0,0,0,.12);
+    font-size:12px;
+    font-weight:950;
+    text-decoration:none;
+    color:var(--ink);
+    max-width:240px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .note-file:hover{
+    background: rgba(255,255,255,.82);
+    transform: translateY(-1px);
+  }
 
-background-image:url("../files/cappucino.png");
-background-size:cover;
-background-position:left center;
-background-repeat:no-repeat;
+  /* ===== 라이트박스 ===== */
+  .lb{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.84);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .lb.show{ display:flex; }
+  .lb img{
+    max-width:100%;
+    max-height:90vh;
+    border-radius:16px;
+    box-shadow:0 22px 70px rgba(0,0,0,.48);
+    object-fit:contain;
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .lb-close{
+    position:absolute;
+    top:16px; right:20px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.22);
+    color:#fff;
+    font-size:28px;
+    border-radius:999px;
+    width:46px; height:46px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+  }
+  .lb-close:hover{ background:rgba(255,255,255,.25); }
 
-display:flex;
-align-items:center;
-
-padding-left:60px;
-
-position:relative;
-overflow:hidden;
-
-}
-
-/* 배너 위 은은한 그라데이션 */
-
-.banner::before{
-
-content:"";
-position:absolute;
-inset:0;
-
-background:linear-gradient(
-90deg,
-rgba(0,0,0,.45) 0%,
-rgba(0,0,0,.15) 40%,
-rgba(0,0,0,0) 70%
-);
-
-}
-
-/* ==============================
-배너 타이틀
-============================== */
-
-.banner-title{
-
-position:relative;
-color:white;
-
-font-size:44px;
-font-weight:800;
-
-letter-spacing:2px;
-
-text-shadow:
-0 4px 20px rgba(0,0,0,.5);
-
-}
-
-/* ==============================
-포스트잇 영역
-============================== */
-
-.notes{
-
-margin-top:30px;
-
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-gap:20px;
-
-}
-
-/* ==============================
-포스트잇
-============================== */
-
-.note{
-
-padding:20px;
-border-radius:12px;
-
-box-shadow:
-0 8px 18px rgba(0,0,0,.12);
-
-min-height:140px;
-
-font-size:15px;
-line-height:1.6;
-
-transform:rotate(-1deg);
-
-}
-
-.note:nth-child(2){transform:rotate(1deg)}
-.note:nth-child(3){transform:rotate(-2deg)}
-.note:nth-child(4){transform:rotate(1deg)}
-.note:nth-child(5){transform:rotate(-1deg)}
-.note:nth-child(6){transform:rotate(2deg)}
-
-.yellow{background:#fff7b1}
-.pink{background:#ffd6e7}
-.blue{background:#d9f1ff}
-.green{background:#dbffd9}
-.orange{background:#ffe3c8}
-.purple{background:#f1dcff}
-
+  @media (max-width:520px){
+    .panel{ padding:16px; }
+    .banner{ height:210px; border-radius:18px; }
+    .banner-title{ left:18px; bottom:14px; }
+  }
 </style>
 </head>
 
 <body>
+  <div class="hero">
+    <div class="panel">
+      <!-- ✅ 배너: files/cappucino.png -->
+      <div class="banner">
+        <div class="banner-title">
+          BITTERWOOD's COFFEE BREAK
+          <span class="banner-sub">cappuccino · ang-butter</span>
+        </div>
+      </div>
 
-<div class="wrap">
+      <!-- ✅ 포스트잇 -->
+      <div id="list" class="grid"></div>
+    </div>
+  </div>
 
-<div class="panel">
+  <!-- 라이트박스 -->
+  <div class="lb" id="lb">
+    <button class="lb-close" id="lbClose" aria-label="닫기">×</button>
+    <img src="" id="lbImg" alt="첨부 이미지" />
+  </div>
 
-<div class="banner">
+<script>
+  // ===========================
+  // ✅ 샘플 6개 (첨부 포함)
+  // - 이미지: files/ 아래에 업로드 (예: files/sample_photo.jpg)
+  // - 문서:  files/ 아래에 업로드 (예: files/sample.pdf)
+  // ===========================
+  const POSTS = [
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.06",
+      msg: "지식재산처에서 '25년 발행한 발행물입니다. 특허 분석 가이드라인과 품질관리 매뉴얼입니다. 유용한 자료인 것 같아요^^",
+      rot: -0.8,
+      attachments: [
+        {
+          name: "지식재산권 전략적 조사·분석 가이드라인.pdf",
+          type: "application/pdf",
+          url: "https://drive.google.com/file/d/1k13EqCaoPtn7dhtSVRVEe4EBXZeseVIe/view"
+        }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:11",
+      msg: "📎 첨부 샘플(문서)\nfiles 폴더에 PDF 올리고 링크만 연결하면 돼.",
+      rot: 1.2,
+      attachments: [
+        { name: "sample.pdf", type: "application/pdf", url: "files/sample.pdf" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:12",
+      msg: "🖼️ 첨부 샘플(이미지)\n이미지는 카드에 미리보기로 나오고 클릭하면 크게 보여줘.",
+      rot: -0.3,
+      attachments: [
+        { name: "sample_photo.jpg", type: "image/jpeg", url: "files/sample_photo.jpg" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:13",
+      msg: "📎 첨부 여러 개도 가능\n(PDF + 이미지 같이 넣기)",
+      rot: 0.6,
+      attachments: [
+        { name: "menu.pdf", type: "application/pdf", url: "files/menu.pdf" },
+        { name: "cafe.jpg", type: "image/jpeg", url: "files/cafe.jpg" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:14",
+      msg: "압축파일/한글/워드도 링크로 표시돼.\n(파일은 repo에 올려두기만 하면 됨)",
+      rot: -1.0,
+      attachments: [
+        { name: "자료.zip", type: "application/zip", url: "files/data.zip" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:15",
+      msg: "마지막 샘플.\n색상은 로딩할 때마다 랜덤으로 배정돼.",
+      rot: 0.2,
+      attachments: []
+    }
+  ];
 
-<div class="banner-title">
-BITTERWOOD's COFFEE BREAK
-</div>
+  // ✅ 랜덤 컬러 팔레트 (포스트잇 배경)
+  const COLORS = ["#fff8b5","#c9f7d6","#cfe7ff","#ffd7e1","#ffe9c7","#e9d5ff","#d9f99d","#fde68a"];
 
-</div>
+  const elList = document.getElementById("list");
+  const lb = document.getElementById("lb");
+  const lbImg = document.getElementById("lbImg");
+  const lbClose = document.getElementById("lbClose");
 
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+    }[m]));
+  }
+  function isImage(type){ return /^image\//.test(type || ""); }
+  function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-<div class="notes">
+  function render(){
+    elList.innerHTML = "";
 
-<div class="note yellow">
-특허 전략 관련 좋은 자료 공유합니다.
-</div>
+    POSTS.forEach((p, idx)=>{
+      const card = document.createElement("div");
+      card.className = "note";
+      card.style.setProperty("--r", (p.rot ?? 0) + "deg");
+      card.style.background = p.bg || pick(COLORS);
 
-<div class="note pink">
-오늘 커피 브레이크 타임 ☕
-</div>
+      const atts = Array.isArray(p.attachments) ? p.attachments : [];
+      let attHtml = "";
+      if(atts.length){
+        attHtml = '<div class="note-attachments">';
+        atts.forEach((att, aidx)=>{
+          if(isImage(att.type)){
+            attHtml += `<img class="note-img" src="${att.url}"
+              alt="${escapeHtml(att.name || "image")}"
+              data-post="${idx}" data-att="${aidx}"
+              title="클릭하면 크게 보기" />`;
+          } else {
+            attHtml += `<a class="note-file" href="${att.url}" download
+              title="클릭하면 다운로드">📄 ${escapeHtml(att.name || "file")}</a>`;
+          }
+        });
+        attHtml += '</div>';
+      }
 
-<div class="note blue">
-AI + 특허 분석 아이디어 정리중
-</div>
+      card.innerHTML = `
+        <div class="tape" aria-hidden="true"></div>
+        <div class="meta">
+          <div class="nick"><span class="dot"></span><span>${escapeHtml(p.nick || "익명")}</span></div>
+          <div>${escapeHtml(p.time || "")}</div>
+        </div>
+        <div class="content">${escapeHtml(p.msg || "")}</div>
+        ${attHtml}
+      `;
+      elList.appendChild(card);
+    });
+  }
 
-<div class="note green">
-좋은 논문 있으면 공유 부탁
-</div>
+  render();
 
-<div class="note orange">
-오늘 회의자료 업로드
-</div>
-
-<div class="note purple">
-점심 뭐먹지…
-</div>
-
-</div>
-
-</div>
-</div>
-
+  // 라이트박스 (이미지 클릭)
+  elList.addEventListener("click", (e)=>{
+    const img = e.target.closest("img.note-img");
+    if(!img) return;
+    lbImg.src = img.src;
+    lb.classList.add("show");
+  });
+  lbClose.addEventListener("click", ()=> lb.classList.remove("show"));
+  lb.addEventListener("click", e=>{ if(e.target===lb) lb.classList.remove("show"); });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape") lb.classList.remove("show"); });
+</script>
 </body>
 </html>
