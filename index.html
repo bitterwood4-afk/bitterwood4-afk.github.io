@@ -1,1993 +1,411 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>IP-R&amp;D 관련 취업/교육/사업 정보</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BITTERWOOD's COFFEE BREAK</title>
+
 <style>
-    :root {
-      --bg: #ffffff;
-      --paper: rgba(255, 255, 255, 0.82);
-      --ink: #0f172a;
-
-      /* 기존 포인트 블루 */
-      --muted: #1E40AF;
-
-      /* ✅ desc 전용: 블루톤이 가미된 블랙(잉크 네이비) */
-      --desc-ink: #25383C;
-
-      --subtle: #64748b;
-      --blue-600: #2563eb;
-      --line: rgba(2, 6, 23, 0.10);
-      --shadow: 0 14px 40px rgba(2, 6, 23, 0.10);
-      --radius: 18px;
-
-      /* ✅ 테이블/배너 톤 (요청: 테이블과 같은 배경색) */
-      --panel-bg: #F5DEB3;
-      /* wheat */
-      --panel-paper: #FFFFF0;
-      /* ivory */
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial;
-      color: var(--ink);
-      background: var(--bg);
-      min-height: 100vh;
-    }
-
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 34px 18px 64px;
-    }
-
-    .header {
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: -0.5px;
-    }
-
-    .keywords {
-      margin: 8px 0 0;
-      /* h1 아래 간격 */
-      font-size: 12px;
-      /* 작은 글씨 */
-      color: var(--subtle);
-      /* 현재 팔레트 톤 */
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
-
-    .section {
-      margin-top: 20px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .section-head {
-      padding: 14px 16px;
-      background: #f8fafc;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .section-head h2 {
-      margin: 0;
-      font-size: 16px;
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: 44px 1fr auto;
-      gap: 16px;
-      align-items: start;
-      padding: 20px 16px;
-      border-top: 1px solid rgba(2, 6, 23, 0.06);
-    }
-
-    .row:first-child {
-      border-top: none;
-    }
-
-    .logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.7);
-    }
-
-    .meta {
-      display: grid;
-      gap: 8px;
-    }
-
-
-    /* ===== ✅ (공공/유관단체) 카드 라벨 + 요약 ===== */
-    .tag-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(37, 99, 235, 0.18);
-      background: rgba(37, 99, 235, 0.10);
-      color: #1e40af;
-      font-size: 11px;
-      font-weight: 900;
-      width: fit-content;
-    }
-
-    .summary {
-      color: var(--subtle);
-      font-size: 12px;
-      font-weight: 800;
-      line-height: 1.45;
-      word-break: keep-all;
-    }
-
-    .name {
-      font-weight: 800;
-      font-size: 15px;
-      color: var(--ink);
-    }
-
-    /* ✅ desc 색상 변경 */
-    .desc {
-      color: var(--desc-ink) !important;
-      font-size: 14px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-break: keep-all;
-    }
-
-    /* 굵은 글씨도 desc 색을 그대로 따라가게 */
-    .desc b {
-      color: inherit;
-      font-weight: 800;
-    }
-
-    .url {
-      color: var(--subtle);
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 500px;
-    }
-
-    .open {
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: var(--blue-600);
-      color: white;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    /* ===== R&D system table ===== */
-    .rd-table-wrap {
-      padding: 16px;
-      background: var(--panel-bg);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .rd-table-title {
-      font-weight: 900;
-      font-size: 15px;
-      margin: 0 0 6px 0;
-      letter-spacing: -0.2px;
-    }
-
-    .rd-table-hint {
-      color: var(--subtle);
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-
-    .rd-table-scroll {
-      overflow-x: auto;
-      border: 1px solid rgba(2, 6, 23, 0.10);
-      border-radius: 14px;
-      background: var(--panel-paper);
-    }
-
-    .rd-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      min-width: 980px;
-    }
-
-    .rd-table thead th {
-      position: sticky;
-      top: 0;
-      background: #f8fafc;
-      text-align: left;
-      font-size: 12px;
-      color: #0f172a;
-      padding: 12px 12px;
-      border-bottom: 1px solid rgba(2, 6, 23, 0.10);
-      white-space: nowrap;
-    }
-
-    .rd-table tbody td {
-      font-size: 13px;
-      line-height: 1.5;
-      padding: 12px 12px;
-      border-bottom: 1px solid rgba(2, 6, 23, 0.06);
-      vertical-align: top;
-    }
-
-    .rd-table tbody tr:hover td {
-      background: rgba(37, 99, 235, 0.04);
-    }
-
-    .rd-link {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 800;
-      background: rgba(37, 99, 235, 0.10);
-      color: #1e40af;
-      border: 1px solid rgba(37, 99, 235, 0.18);
-    }
-
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      color: #334155;
-    }
-
-    /* ===== ✅ 취업 섹션 직무 아이콘 그리드 (한 줄 12개 고정) ===== */
-    .jobs-bar-wrap {
-      padding: 16px;
-      background: var(--panel-bg);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .jobs-bar-title {
-      font-weight: 900;
-      font-size: 15px;
-      margin: 0 0 6px 0;
-      letter-spacing: -0.2px;
-    }
-
-    .jobs-bar-hint {
-      color: var(--subtle);
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-
-    /* ✅ 테이블과 같은 종이(아이보리) 패널 */
-    .jobs-grid-panel {
-      border: 1px solid rgba(2, 6, 23, 0.10);
-      border-radius: 14px;
-      background: var(--panel-paper);
-      padding: 14px 10px;
-    }
-
-    /* ✅ 12개가 한 줄에 딱 들어가게: 12열 고정 그리드 */
-    .jobs-grid {
-      display: grid;
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: 10px;
-      align-items: start;
-    }
-
-    /* ✅ 아이콘 위 / 텍스트 아래 */
-    .job-card {
-      display: grid;
-      justify-items: center;
-      gap: 8px;
-      padding: 8px 4px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid rgba(2, 6, 23, 0.08);
-      box-shadow: 0 8px 18px rgba(2, 6, 23, 0.06);
-    }
-
-    /* ✅ 더 크고 이쁜 원형 아이콘 */
-    .job-badge {
-      width: 54px;
-      height: 54px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(2, 6, 23, 0.10);
-      color: white;
-      font-size: 26px;
-      line-height: 1;
-      box-shadow: 0 10px 22px rgba(2, 6, 23, 0.14);
-    }
-
-    /* ✅ 아래 직무명 (한눈에 들어오게 2줄까지만 허용) */
-    .job-text {
-      font-size: 12px;
-      font-weight: 900;
-      color: #0f172a;
-      text-align: center;
-      line-height: 1.15;
-      word-break: keep-all;
-
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      min-height: 28px;
-      /* 2줄 높이 안정 */
-    }
-
-    /* 작은 화면에서는 어쩔 수 없이 줄바꿈(모바일 고려) */
-    @media (max-width: 1200px) {
-      .jobs-grid {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 720px) {
-      .jobs-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .job-badge {
-        width: 52px;
-        height: 52px;
-        font-size: 24px;
-      }
-    }
-
-    /* ===== 검색창 (추가) ===== */
-    .search-wrap {
-      margin: 10px 0 18px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      box-shadow: 0 10px 28px rgba(2, 6, 23, 0.08);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 12px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .search-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(2, 6, 23, 0.12);
-      outline: none;
-      font-size: 14px;
-    }
-
-    .search-input:focus {
-      border-color: rgba(37, 99, 235, 0.45);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
-    }
-
-    .search-clear {
-      padding: 11px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(2, 6, 23, 0.12);
-      background: #fff;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .search-hint {
-      font-size: 12px;
-      color: var(--subtle);
-    }
-
-    .section-tags {
-      margin: 6px 0 0;
-      font-size: 12px;
-      color: var(--subtle);
-      font-weight: 800;
-      letter-spacing: 0.2px;
-    }
-
-    .section-desc {
-      margin: 8px 0 0;
-      font-size: 13px;
-      color: var(--desc-ink);
-      font-weight: 800;
-      line-height: 1.5;
-      word-break: keep-all;
-    }
-
-    /* ===== ✅ (공공/유관단체) 요약 아이콘 그리드 ===== */
-    .quick-grid {
-      margin-top: 14px;
-      padding: 16px;
-      border-radius: 18px;
-      background: var(--panel-bg);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    /* ✅ 한 줄 고정 + 카드 폭 자동 축소(가로 스크롤 없이 한 화면에) */
-    
-    .quick-grid-inner{
-      display:flex;
-      flex-wrap:wrap;   /* ✅ 항상 줄바꿈 허용 */
-      gap:12px;
-    }
-    
-    .quick-grid-inner::-webkit-scrollbar{ height: 8px; }
-    .quick-grid-inner::-webkit-scrollbar-thumb{ background: rgba(2,6,23,0.18); border-radius: 999px; }
-    .quick-grid-inner::-webkit-scrollbar-track{ background: rgba(2,6,23,0.06); border-radius: 999px; }
-
-    /* ✅ 모바일에서는 '자동 줄바꿈'으로 깨짐 방지 */
-    @media (max-width: 900px){
-      .quick-grid-inner{
-        flex-wrap: wrap;          /* 줄바꿈 허용 */
-        overflow-x: visible;      /* 스크롤 대신 그리드처럼 보이게 */
-      }
-      
-    .quick-card{
-      flex:1 1 calc(16.666% - 12px); /* 기본 6개 */
-      min-width:160px;
-    }
-    
-    }
-    @media (max-width: 720px){
-      .quick-card{
-        flex: 1 1 calc(50% - 12px);
-      }
-    }
-    @media (max-width: 420px){
-      .quick-card{
-        flex: 1 1 100%;
-      }
-    }
-.quick-card{
-      flex: 1 1 0;
-      min-width: 0;
-
-      display: grid;
-      justify-items: center;
-      align-content: start;
-      gap: 10px;
-      padding: 14px 10px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(2, 6, 23, 0.10);
-      text-decoration: none;
-      color: inherit;
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-}
-
-    .quick-card:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(2, 6, 23, 0.10);
-      border-color: rgba(37, 99, 235, 0.22);
-    }
-    .quick-ico{
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid rgba(2, 6, 23, 0.10);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-    }
-
-    .quick-ico img{
-      width: 32px;
-      height: 32px;
-    }
-
-    .quick-meta{
-      min-width: 0;
-      width: 100%;
-      display: grid;
-      gap: 6px;
-      justify-items: center;
-      text-align: center;
-    }
-
-    .quick-title{
-      font-weight: 950;
-      font-size: 12.5px;
-      letter-spacing: -0.2px;
-      line-height: 1.2;
-      color: var(--ink);
-
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      word-break: keep-all;
-      min-height: 30px;
-    }
-
-    .quick-sub{
-      font-size: 11.5px;
-      color: var(--subtle);
-      font-weight: 850;
-      line-height: 1.35;
-
-      /* ✅ 설명 전체 표시 */
-      display: block;
-      overflow: visible;
-      word-break: keep-all;
-      white-space: normal;
-    }
-
-    /* ✅ quick-grid 내부를 아이보리 패널로 (직무 카드 섹션과 톤 통일) */
-    .quick-grid-panel{
-      border: 1px solid rgba(2, 6, 23, 0.10);
-      border-radius: 14px;
-      background: var(--panel-paper);
-      padding: 14px 12px;
-    }
-
-
-  
-    /* ===== ✅ 공공/유관단체 요약 섹션 (직무 섹션과 동일 톤) ===== */
-    .quick-summary-wrap{
-      padding: 16px;
-      background: var(--panel-bg);
-      border-bottom: 1px solid var(--line);
-    }
-    .quick-summary-title{
-      font-weight: 900;
-      font-size: 15px;
-      margin: 0 0 6px 0;
-      letter-spacing: -0.2px;
-    }
-    .quick-summary-hint{
-      color: var(--subtle);
-      font-size: 12px;
-      margin-bottom: 12px;
-      font-weight: 800;
-    }
-
-
-  
-    /* =====================
-       ✅ 모바일 반응형 추가
-       ===================== */
-    @media (max-width:1200px){
-      .quick-card{ flex:1 1 calc(25% - 12px); } /* 4개 */
-    }
-    @media (max-width:900px){
-      .quick-card{ flex:1 1 calc(33.333% - 12px); } /* 3개 */
-    }
-    @media (max-width:600px){
-      .quick-card{ flex:1 1 calc(50% - 12px); } /* 2개 */
-    }
-    @media (max-width:420px){
-      .quick-card{ flex:1 1 100%; } /* 1개 */
-    }
-
-
-    /* =========================================================
-       ✅ 공공/유관단체 요약(quick-summary-wrap) - 모바일에서 '직무 카드'처럼 보이게
-       - 720px 이하: 3열 그리드(직무 카드와 동일)
-       - 매우 작은 화면: 2열
-       ========================================================= */
-    @media (max-width: 720px){
-      .quick-summary-wrap .jobs-grid-panel{ padding: 12px 10px; }
-      .quick-summary-wrap .quick-grid-inner{
-        display: grid !important;
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        gap: 10px !important;
-      }
-
-      .quick-summary-wrap .quick-card{
-        display: grid !important;
-        justify-items: center !important;
-        align-content: start !important;
-        gap: 8px !important;
-        padding: 10px 6px !important;
-        border-radius: 14px !important;
-        background: rgba(255,255,255,0.55) !important;
-        border: 1px solid rgba(2, 6, 23, 0.08) !important;
-        box-shadow: 0 8px 18px rgba(2, 6, 23, 0.06) !important;
-      }
-
-      /* 원형 배지 느낌 */
-      .quick-summary-wrap .quick-ico{
-        width: 54px !important;
-        height: 54px !important;
-        border-radius: 999px !important;
-        box-shadow: 0 10px 22px rgba(2, 6, 23, 0.14) !important;
-      }
-      .quick-summary-wrap .quick-ico img{
-        width: 28px !important;
-        height: 28px !important;
-      }
-
-      .quick-summary-wrap .quick-title{
-        font-size: 12px !important;
-        min-height: 28px !important;
-        -webkit-line-clamp: 2 !important;
-      }
-
-      /* 설명은 너무 길면 2줄까지만 */
-      .quick-summary-wrap .quick-sub{
-        font-size: 11px !important;
-        line-height: 1.3 !important;
-
-        display: -webkit-box !important;
-        -webkit-line-clamp: 2 !important;
-        -webkit-box-orient: vertical !important;
-        overflow: hidden !important;
-        min-height: 28px !important;
-      }
-    }
-
-    @media (max-width: 420px){
-      .quick-summary-wrap .quick-grid-inner{
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-      }
-      .quick-summary-wrap .quick-ico{
-        width: 52px !important;
-        height: 52px !important;
-      }
-    }
-
-
-    /* ===== ✅ 헤더 타이틀 + 피드백 버튼 ===== */
-    .header-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .feedback-btn{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(2,6,23,0.12);
-      background:#fff;
-      color:var(--ink);
-      font-weight:900;
-      font-size:12px;
-      cursor:pointer;
-      box-shadow: 0 10px 28px rgba(2, 6, 23, 0.08);
-      user-select:none;
-      white-space:nowrap;
-    }
-    .feedback-btn:hover{
-      border-color: rgba(37, 99, 235, 0.35);
-      box-shadow: 0 12px 30px rgba(2, 6, 23, 0.10);
-      transform: translateY(-1px);
-    }
-
-    /* ===== ✅ 피드백 모달 ===== */
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(2,6,23,0.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      z-index:9999;
-    }
-    .modal-backdrop.show{ display:flex; }
-
-    .modal{
-      width:min(720px, 100%);
-      background:rgba(255,255,255,0.96);
-      border:1px solid rgba(2,6,23,0.14);
-      border-radius:18px;
-      box-shadow: 0 18px 60px rgba(2,6,23,0.25);
-      overflow:hidden;
-    }
-    .modal-head{
-      padding:14px 16px;
-      background:#f8fafc;
-      border-bottom:1px solid rgba(2,6,23,0.10);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .modal-title{
-      font-weight:950;
-      font-size:14px;
-      letter-spacing:-0.2px;
-      margin:0;
-    }
-    .modal-close{
-      border:none;
-      background:transparent;
-      font-size:20px;
-      line-height:1;
-      cursor:pointer;
-      padding:6px 8px;
-      border-radius:10px;
-      color:#0f172a;
-    }
-    .modal-close:hover{ background:rgba(2,6,23,0.06); }
-
-    .modal-body{
-      padding:14px 16px 16px;
-      display:grid;
-      gap:10px;
-    }
-    .modal-hint{
-      color:var(--subtle);
-      font-size:12px;
-      font-weight:800;
-      line-height:1.45;
-    }
-    .field{
-      display:grid;
-      gap:6px;
-    }
-    .label{
-      font-size:12px;
-      font-weight:900;
-      color:#0f172a;
-    }
-    .input, .textarea{
-      width:100%;
-      border-radius:14px;
-      border:1px solid rgba(2,6,23,0.12);
-      background:#fff;
-      padding:12px 12px;
-      font-size:14px;
-      outline:none;
-    }
-    .textarea{ min-height:140px; resize:vertical; }
-    .input:focus, .textarea:focus{
-      border-color: rgba(37, 99, 235, 0.45);
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
-    }
-    .modal-actions{
-      display:flex;
-      justify-content:flex-end;
-      gap:10px;
-      margin-top:6px;
-    }
-    .btn{
-      padding:10px 14px;
-      border-radius:14px;
-      border:1px solid rgba(2,6,23,0.12);
-      background:#fff;
-      font-weight:900;
-      cursor:pointer;
-    }
-    .btn-primary{
-      background: var(--blue-600);
-      color:#fff;
-      border-color: rgba(37,99,235,0.45);
-    }
-    .btn:disabled{ opacity:0.6; cursor:not-allowed; }
-
-    .toast{
-      display:none;
-      margin-top:6px;
-      padding:10px 12px;
-      border-radius:14px;
-      background: rgba(22,163,74,0.10);
-      border: 1px solid rgba(22,163,74,0.25);
-      color:#065f46;
-      font-weight:900;
-      font-size:12px;
-    }
-    .toast.show{ display:block; }
-
-    /* 모바일: 버튼이 아래로 내려가도 예쁘게 */
-    @media (max-width: 520px){
-      .header-top{ align-items:flex-start; flex-direction:column; }
-      .feedback-btn{ width: fit-content; }
-    }
-
-
-    /* ===== ✅ 헤더 액션(버튼 + 방문 카운터) ===== */
-    .header-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .visit-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(2,6,23,0.12);
-      background: rgba(255,255,255,0.75);
-      color: var(--ink);
-      font-weight:900;
-      font-size:12px;
-      box-shadow: 0 10px 28px rgba(2, 6, 23, 0.08);
-      white-space:nowrap;
-      user-select:none;
-    }
-    .visit-badge #visitCount{
-      display:inline-block;
-      min-width: 18px;
-      text-align:right;
-      font-variant-numeric: tabular-nums;
-    }
-    .visit-label{
-      color: var(--subtle);
-      font-weight:950;
-    }
-
-/* ✅ "더 많은 정보"를 버튼처럼 (feedback-btn과 동일 톤) */
-.more-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid rgba(2,6,23,0.15);
-
-  background:#F5DEB3;      /* ✅ 베이지 (wheat) */
-  color:#000000;           /* ✅ 글자 검정 */
-
-  font-weight:900;
-  font-size:12px;
-  cursor:pointer;
-  box-shadow: 0 6px 16px rgba(2, 6, 23, 0.08);
-  user-select:none;
-  white-space:nowrap;
-  text-decoration:none;
-  line-height:1;
-}
-
-.more-btn:hover{
-  background:#EED9A0;      /* ✅ 살짝 진한 베이지 */
-  border-color:rgba(0,0,0,0.25);
-  transform: translateY(-1px);
-}
-
-.more-btn:active{
-  transform: translateY(0);
-}
-
-.more-btn:hover{
-  border-color: rgba(37, 99, 235, 0.35);
-  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.10);
-  transform: translateY(-1px);
-}
-
-.more-btn:active{
-  transform: translateY(0px);
-}
-
-/* 키보드 접근성(탭 포커스) */
-.more-btn:focus-visible{
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12), 0 10px 28px rgba(2, 6, 23, 0.08);
-  border-color: rgba(37, 99, 235, 0.45);
-}
-
+  :root{
+    --bg:#e9ece6;
+    --paper:rgba(255,255,255,.88);
+    --ink:#0f172a;
+    --muted:rgba(15,23,42,.55);
+    --line:rgba(15,23,42,.14);
+    --shadow:0 18px 60px rgba(0,0,0,.16);
+    --shadow2:0 10px 28px rgba(0,0,0,.14);
+    --radius:26px;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    overflow-x:hidden;
+  }
+
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:-80px;
+    background:
+      radial-gradient(1200px 700px at 20% 12%, rgba(255,255,255,.78), transparent 60%),
+      radial-gradient(900px 600px at 82% 10%, rgba(255,255,255,.62), transparent 60%),
+      radial-gradient(1100px 900px at 72% 92%, rgba(2, 6, 23, .07), transparent 65%),
+      linear-gradient(180deg, rgba(255,255,255,.12), transparent 55%);
+    pointer-events:none;
+  }
+
+  .panel{
+    position:relative;
+    width:min(1140px, 100%);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px;
+    backdrop-filter: blur(12px);
+  }
+
+  /* ===== 배너 ("https://bitterwood4-afk.github.io/main/files/cappucino.png") ===== */
+  .banner{
+    position:relative;
+    width:100%;
+    height:260px;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,.18);
+
+    background-image:url("https://bitterwood4-afk.github.io/main/files/cappucino.png");
+    background-size:cover;
+    background-position:left center;
+    background-repeat:no-repeat;
+  }
+  /* 텍스트 가독성용 오버레이 */
+  .banner::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+      90deg,
+      rgba(0,0,0,.46) 0%,
+      rgba(0,0,0,.18) 45%,
+      rgba(0,0,0,0) 72%
+    );
+    pointer-events:none;
+  }
+  .banner-title{
+    position:absolute;
+    left:24px;
+    bottom:18px;
+    color:#fff;
+    font-weight:900;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:clamp(20px, 2.6vw, 38px);
+    text-shadow: 0 10px 28px rgba(0,0,0,.50);
+    line-height:1.1;
+  }
+  .banner-sub{
+    display:block;
+    margin-top:8px;
+    font-size:12px;
+    letter-spacing:.12em;
+    opacity:.9;
+    font-weight:900;
+  }
+
+  /* ===== 포스트잇 ===== */
+  .grid{
+    margin-top:18px;
+    display:grid;
+    gap:14px;
+    grid-template-columns:repeat(1, minmax(0,1fr));
+  }
+  @media (min-width:560px){ .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (min-width:940px){ .grid{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+  .note{
+    position:relative;
+    border-radius:20px;
+    padding:14px 14px 12px;
+    border:1px solid rgba(0,0,0,.10);
+    box-shadow:var(--shadow2);
+    transform: rotate(var(--r, 0deg));
+    transition: transform .18s ease, box-shadow .18s ease;
+    overflow:hidden;
+  }
+  .note:hover{
+    transform: rotate(var(--r, 0deg)) translateY(-3px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.18);
+  }
+  .tape{
+    position:absolute;
+    top:10px;
+    right:12px;
+    width:54px;
+    height:20px;
+    border-radius:999px;
+    background: rgba(255,255,255,.48);
+    border:1px solid rgba(0,0,0,.08);
+    transform: rotate(-12deg);
+  }
+
+  .meta{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:8px;
+    font-size:12px;
+    color: rgba(0,0,0,.62);
+    font-weight:900;
+  }
+  .nick{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    min-width:0;
+  }
+  .dot{
+    width:10px;height:10px;border-radius:999px;background:rgba(0,0,0,.25);flex:0 0 auto;
+  }
+  .nick span{
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .content{
+    white-space:pre-wrap;
+    word-break:break-word;
+    line-height:1.55;
+    font-size:14.5px;
+    font-weight:760;
+    color:#0b1220;
+    min-height:56px;
+  }
+
+  /* ===== 첨부 ===== */
+  .note-attachments{ margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; }
+  .note-img{
+    width:100%;
+    max-height:230px;
+    object-fit:cover;
+    border-radius:14px;
+    border:1px solid rgba(0,0,0,.10);
+    display:block;
+    cursor:pointer;
+    box-shadow: 0 10px 24px rgba(0,0,0,.10);
+  }
+  .note-file{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 10px;
+    border-radius:12px;
+    background: rgba(255,255,255,.62);
+    border:1px solid rgba(0,0,0,.12);
+    font-size:12px;
+    font-weight:950;
+    text-decoration:none;
+    color:var(--ink);
+    max-width:240px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .note-file:hover{
+    background: rgba(255,255,255,.82);
+    transform: translateY(-1px);
+  }
+
+  /* ===== 라이트박스 ===== */
+  .lb{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.84);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .lb.show{ display:flex; }
+  .lb img{
+    max-width:100%;
+    max-height:90vh;
+    border-radius:16px;
+    box-shadow:0 22px 70px rgba(0,0,0,.48);
+    object-fit:contain;
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .lb-close{
+    position:absolute;
+    top:16px; right:20px;
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.22);
+    color:#fff;
+    font-size:28px;
+    border-radius:999px;
+    width:46px; height:46px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+  }
+  .lb-close:hover{ background:rgba(255,255,255,.25); }
+
+  @media (max-width:520px){
+    .panel{ padding:16px; }
+    .banner{ height:210px; border-radius:18px; }
+    .banner-title{ left:18px; bottom:14px; }
+  }
 </style>
 </head>
+
 <body>
-<div class="wrap">
-<div class="header">
-<div class="header-top">
-<h1>IP-R&amp;D 관련 취업/교육/사업 정보</h1>
-<div class="header-actions">
-          <button class="feedback-btn" id="feedbackBtn" type="button">✉️ 수정 및 개선 요구</button>
-          <span class="visit-badge" title="전체 방문자(전 세계 공용) 누적 카운트"><span class="visit-label">방문</span> <span id="visitCount">-</span></span>
-          <a class="more-btn" href="https://bitterwood4-afk.github.io/main/index.html" target="_blank" rel="noopener noreferrer">ℹ️ 더 많은 정보 보기</a>
+  <div class="hero">
+    <div class="panel">
+      <!-- ✅ 배너: files/cappucino.png -->
+      <div class="banner">
+        <div class="banner-title">
+          BITTERWOOD's COFFEE BREAK
+          <span class="banner-sub">cappuccino · ang-butter</span>
         </div>
-</div>
-</div>
-<!-- ✅ 피드백(수정/개선 요구) 모달 -->
-<div aria-hidden="true" class="modal-backdrop" id="feedbackModal">
-<div aria-labelledby="feedbackTitle" aria-modal="true" class="modal" role="dialog">
-<div class="modal-head">
-<h3 class="modal-title" id="feedbackTitle">수정 및 개선 요구</h3>
-<button aria-label="닫기" class="modal-close" id="feedbackClose" type="button">×</button>
-</div>
-<div class="modal-body">
-<div class="modal-hint">
-            아래에 내용을 적어 보내주시면, 운영자 메일로 전달됩니다.<br/>
-            (※ 이 페이지에는 운영자 이메일 주소가 표시되지 않습니다.)
-          </div>
-<form id="feedbackForm">
-<div class="field">
-<div class="label">연락 가능한 이메일 (선택)</div>
-<input autocomplete="email" class="input" name="reply_to" placeholder="답변이 필요하면 이메일을 남겨주세요 (선택)" type="email"/>
-</div>
+      </div>
 
-<div class="field">
-<div class="label">내용</div>
-<textarea class="textarea" name="message" placeholder="어떤 점을 수정/추가하면 좋을지 구체적으로 적어주세요." required=""></textarea>
-</div>
-<div class="modal-actions">
-<button class="btn" id="feedbackCancel" type="button">취소</button>
-<button class="btn btn-primary" id="feedbackSend" type="submit">보내기</button>
-</div>
-<div class="toast" id="feedbackToast">✅ 전송 완료! 감사합니다.</div>
-</form>
-<!--
-            ✅ 설정 방법(중요)
-            1) 아래 JS의 FORMSPREE_ENDPOINT를 본인의 Formspree 엔드포인트로 교체하면,
-               작성 내용이 "본인 이메일"로 전달됩니다. (페이지 소스에 이메일이 노출되지 않음)
-            2) Formspree를 쓰기 싫으면, JS의 useMailtoFallback=true 로 바꾸면
-               기본 메일앱(mailto)로 전송됩니다. (단, 환경에 따라 사용자 메일앱이 열립니다)
-          -->
-</div>
-</div>
-</div>
-<!-- ✅ 검색창 (추가) -->
-<div class="search-wrap">
-<div class="search-row">
-<input aria-label="검색" class="search-input" id="q" placeholder="검색: 섹션/기관/사이트/직무/설명/URL (예: 취업, 변리사, TIPS …)" type="search">
-<button class="search-clear" id="clearBtn" type="button">초기화</button>
-</input></div>
-<div class="search-hint">입력 즉시 필터링됩니다. (ESC: 초기화)</div>
-</div>
-<section class="section">
-<div class="section-head">
-<h2>취업 전문 사이트 특허 분야 구인 공고</h2>
-<p class="section-tags">#채용 #구인 #구직 #일자리 #직업 #특허 #특허분석 #선행기술조사 #명세서 #번역</p>
-</div>
-<div class="jobs-bar-wrap">
-<div class="jobs-bar-title">특허 관련 직무</div>
-<div class="jobs-bar-hint">다양한 특허 관련 직무 - IP-R&amp;D 교육은 특허조사분석 직무와 직접적인 관련이 있음</div>
-<div class="jobs-grid-panel">
-<div class="jobs-grid">
-<div class="job-card" title="지식재산처 심사관">
-<div class="job-badge" style="background:#2563eb">🧑‍⚖</div>
-<div class="job-text">특허청 심사관</div>
-</div>
-<div class="job-card" title="변리사">
-<div class="job-badge" style="background:#16a34a">⚖</div>
-<div class="job-text">변리사</div>
-</div>
-<div class="job-card" title="특허 전문위원">
-<div class="job-badge" style="background:#7c3aed">📊</div>
-<div class="job-text">특허 전문위원</div>
-</div>
-<div class="job-card" title="기업체 특허 담당">
-<div class="job-badge" style="background:#0ea5e9">🏢</div>
-<div class="job-text">기업체 특허 담당</div>
-</div>
-<div class="job-card" title="선행기술조사">
-<div class="job-badge" style="background:#f59e0b">🔎</div>
-<div class="job-text">선행기술조사</div>
-</div>
-<div class="job-card" title="특허조사분석">
-<div class="job-badge" style="background:#ef4444">📈</div>
-<div class="job-text">특허조사분석</div>
-</div>
-<div class="job-card" title="명세서/도면">
-<div class="job-badge" style="background:#14b8a6">📝</div>
-<div class="job-text">명세서/도면</div>
-</div>
-<div class="job-card" title="특허번역">
-<div class="job-badge" style="background:#9333ea">🌐</div>
-<div class="job-text">특허번역</div>
-</div>
-<div class="job-card" title="국내/해외 출원관리">
-<div class="job-badge" style="background:#64748b">📑</div>
-<div class="job-text">국내/해외 출원관리</div>
-</div>
-<div class="job-card" title="(국가)사업관리">
-<div class="job-badge" style="background:#1f2937">🗂</div>
-<div class="job-text">(국가)사업관리</div>
-</div>
-<div class="job-card" title="기술사업화">
-<div class="job-badge" style="background:#f97316">💡</div>
-<div class="job-text">기술사업화</div>
-</div>
-<div class="job-card" title="기술가치평가">
-<div class="job-badge" style="background:#059669">💰</div>
-<div class="job-text">기술가치평가</div>
-</div>
-</div>
-</div>
-</div>
-<div class="list">
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.saramin.co.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">사람인 - 특허 검색</div>
-<div class="desc">키워드로 특허 관련 채용 검색, 특허분석, 명세사, 선행기술조사원, 관리직, 도면, 번역 등</div>
-<div class="url">
-              https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB/
-            </div>
-</div>
-<div class="actions"><a class="open" href="https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB/" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.saramin.co.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">사람인 - 특허(공사·공기업) 검색</div>
-<div class="desc">키워드로 특허 관련 공사·공기업 채용 검색</div>
-<div class="url">
-              https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB%2F&amp;recruitPage=1&amp;recruitSort=relation&amp;recruitPageCount=40&amp;inner_com_type=public&amp;company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&amp;show_applied=&amp;quick_apply=&amp;except_read=&amp;ai_head_hunting=&amp;mainSearch=y
-            </div>
-</div>
-<div class="actions"><a class="open" href="https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB%2F&amp;recruitPage=1&amp;recruitSort=relation&amp;recruitPageCount=40&amp;inner_com_type=public&amp;company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&amp;show_applied=&amp;quick_apply=&amp;except_read=&amp;ai_head_hunting=&amp;mainSearch=y" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.saramin.co.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">사람인 - 특허(대기업) 검색</div>
-<div class="desc">키워드로 특허 관련 공사·공기업 채용 검색</div>
-<div class="url">
-              https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB%2F&amp;recruitPage=1&amp;recruitSort=relation&amp;recruitPageCount=40&amp;inner_com_type=scale001&amp;company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&amp;show_applied=&amp;quick_apply=&amp;except_read=&amp;ai_head_hunting=&amp;mainSearch=y
-            </div>
-</div>
-<div class="actions"><a class="open" href="https://www.saramin.co.kr/zf_user/search?searchword=%ED%8A%B9%ED%97%88&amp;utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=sa.%EC%82%AC%EB%9E%8C%EC%9D%B8pc&amp;utm_content=%EC%97%85%EC%A7%81%EC%A2%85_%EA%B8%B0%ED%9A%8D%2F%EC%A0%84%EB%9E%B5&amp;utm_term=%ED%8A%B9%ED%97%88%EC%B1%84%EC%9A%A9&amp;gad_source=1&amp;gad_campaignid=9567679426&amp;gbraid=0AAAAAD1ZcsnucaYuu0eUgCuHAkqmGn6bC&amp;gclid=Cj0KCQiA7-rMBhCFARIsAKnLKtBfhvMZNi9CHjBnGpsGkJ68R96S5Ysqe0bgJZdt2iAqfqwjoGCM30kaAg9FEALw_wcB%2F&amp;recruitPage=1&amp;recruitSort=relation&amp;recruitPageCount=40&amp;inner_com_type=scale001&amp;company_cd=0%2C1%2C2%2C3%2C4%2C5%2C6%2C7%2C9%2C10&amp;show_applied=&amp;quick_apply=&amp;except_read=&amp;ai_head_hunting=&amp;mainSearch=y" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kpaa.or.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">대한변리사회(KPAA) 사무소 직원 구인게시판</div>
-<div class="desc">사무소 직원 구인 게시판</div>
-<div class="url">
-              https://www.kpaa.or.kr/kpaa/notification/readJobOfferList.do?clickPage=46&amp;pageCnt=1&amp;job_type=9&amp;job_rank=0&amp;setSearch=0&amp;area_sido=0&amp;searchKeyword=
-            </div>
-</div>
-<div class="actions"><a class="open" href="https://www.kpaa.or.kr/kpaa/notification/readJobOfferList.do?clickPage=46&amp;pageCnt=1&amp;job_type=9&amp;job_rank=0&amp;setSearch=0&amp;area_sido=0&amp;searchKeyword=" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-</div>
-</section>
-<section class="section">
-<div class="section-head">
-<h2>특허·지식재산 공공/유관단체 구인 공고</h2>
-<p class="section-desc">특허·지식재산 분야 공공기관/유관단체 채용 공고를 한곳에 모았습니다. (심사·행정·IP전략·사업관리 등)</p>
-<p class="section-tags">#채용 #구인 #구직 #일자리 #직업 #공공기관 #국가기관 #정부</p>
-</div>
-<div class="quick-summary-wrap">
-<div class="quick-summary-title">특허·지식재산 공공/유관단체 구인 정보 요약</div>
-<div class="quick-summary-hint">주요 공공기관·유관단체 채용 공고 바로가기</div>
-<div class="jobs-grid-panel">
-<div class="quick-grid-inner">
-<a class="quick-card" href="https://www.kipo.go.kr/ko/kpoBultnMgmt.do?menuCd=SCD0201203&amp;sysCd=SCD02&amp;pgmId=BUT0000024" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="MOIP" src="https://www.google.com/s2/favicons?domain=www.kipo.go.kr&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">지식재산처(MOIP)</span>
-<span class="quick-sub">지식재산 행정 / 심사관 채용</span>
-</span>
-</a>
-<a class="quick-card" href="https://kista.recruiter.co.kr/career/home" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="KISTA" src="https://www.google.com/s2/favicons?domain=kista.recruiter.co.kr&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">한국특허전략<br/>개발원(KISTA)</span>
-<span class="quick-sub">전문직(과제 수행), 일반직(사업 관리)</span>
-</span>
-</a>
-<a class="quick-card" href="https://www.kipro.or.kr/board/recruitment/list" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="KIPRO" src="https://www.google.com/s2/favicons?domain=www.kipro.or.kr&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">한국특허기술<br/>진흥원(KIPRO)</span>
-<span class="quick-sub">선행기술조사, 상표/디자인 등</span>
-</span>
-</a>
-<a class="quick-card" href="https://www.kipi.or.kr/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_JJJJJJJJJJJ" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="KIPI" src="https://www.google.com/s2/favicons?domain=www.kipi.or.kr&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">한국특허정보원(KIPI)</span>
-<span class="quick-sub">SW개발 및 운영, 특허고객상담</span>
-</span>
-</a>
-<a class="quick-card" href="https://www.kipa.org/kipa/notice/recruit_notice.jsp" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="KIPA" src="https://www.google.com/s2/favicons?domain=www.kipa.org&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">한국발명진흥회(KIPA)</span>
-<span class="quick-sub">전문계약직(박사), 지식재산거래지원, 사업화, 발명교육</span>
-</span>
-</a>
-<a class="quick-card" href="https://pms.ripc.org/www/portal/notice/boardList.do?boardCategoryCode=BD40003" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="RIPC" src="https://www.google.com/s2/favicons?domain=pms.ripc.org&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">지역지식재산센터(RIPC)</span>
-<span class="quick-sub">컨설턴트, 행정연구원</span>
-</span>
-</a>
-<a class="quick-card" href="https://www.kiip.re.kr/board/notice/list.do?bd_gb=board&amp;bd_cd=1&amp;bd_item=0&amp;po_item=0" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="KIIP" src="https://www.google.com/s2/favicons?domain=www.kiip.re.kr&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">한국지식재산<br/>연구원(KIIP)</span>
-<span class="quick-sub">전문연구원(석사 이상), 연구관리/행정</span>
-</span>
-</a>
-<a class="quick-card" href="https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000043" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="KOIPA" src="https://www.google.com/s2/favicons?domain=www.koipa.re.kr&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">한국지식재산<br/>보호원(KOIPA)</span>
-<span class="quick-sub">전문계약직, 분쟁대응, 부정경쟁행위 단속지원 등</span>
-</span>
-</a>
-<a class="quick-card" href="https://www.inventor.or.kr/bbs/board.php?bo_table=notice&amp;sca=&amp;sop=and&amp;sfl=wr_subject" rel="noopener" target="_blank">
-<span class="quick-ico"><img alt="여성발명협회" src="https://www.google.com/s2/favicons?domain=www.inventor.or.kr&amp;sz=128"/></span>
-<span class="quick-meta">
-<span class="quick-title">한국여성발명<br/>협회</span>
-<span class="quick-sub">여성 발명/네트워크, 사무국 직원</span>
-</span>
-</a>
-</div>
-</div>
-</div>
-<div class="list">
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kipo.go.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="tag-pill">특허 관련 직무</div>
-<div class="name">지식재산처(MOIP)</div>
-<div class="summary">지식재산 행정 / 심사관 채용 공고 모음</div>
-<div class="desc">소식알림 → 알림사항 → 채용정보</div>
-<div class="url">
-              https://www.kipo.go.kr/ko/kpoBultnMgmt.do?menuCd=SCD0201203&amp;sysCd=SCD02&amp;pgmId=BUT0000024</div>
-</div>
-<div class="actions"><a class="open" href="https://www.kipo.go.kr/ko/kpoBultnMgmt.do?menuCd=SCD0201203&amp;sysCd=SCD02&amp;pgmId=BUT0000024" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=kista.recruiter.co.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">KISTA 한국특허전략개발원</div>
-<div class="desc">전문직(과제 전략 수립), 일반직(정부 사업 관리)</div>
-<div class="url">https://kista.recruiter.co.kr/career/home</div>
-</div>
-<div class="actions"><a class="open" href="https://kista.recruiter.co.kr/career/home" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kipro.or.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">KIPRO 한국특허기술진흥원</div>
-<div class="desc">선행기술조사, 상표/디자인 등</div>
-<div class="url">https://www.kipro.or.kr/board/recruitment/list</div>
-</div>
-<div class="actions"><a class="open" href="https://www.kipro.or.kr/board/recruitment/list" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kipi.or.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">KIPI 한국특허정보원</div>
-<div class="desc">SW개발 및 운영, 특허고객상담</div>
-<div class="url">https://www.kipi.or.kr/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_JJJJJJJJJJJJ</div>
-</div>
-<div class="actions"><a class="open" href="https://www.kipi.or.kr/cop/bbs/selectBoardList.do?bbsId=BBSMSTR_JJJJJJJJJJJJ" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kipa.org&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">KIPA 한국발명진흥회</div>
-<div class="desc">전문(계약)직(박사), 지식재산거래지원, 지식재산 사업화, 발명교육</div>
-<div class="url">https://www.kipa.org/kipa/notice/recruit_notice.jsp</div>
-</div>
-<div class="actions"><a class="open" href="https://www.kipa.org/kipa/notice/recruit_notice.jsp" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=pms.ripc.org&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">RIPC 지역지식재산센터</div>
-<div class="desc">컨설턴트, 행정연구원</div>
-<div class="url">https://pms.ripc.org/www/portal/notice/boardList.do?boardCategoryCode=BD40003</div>
-</div>
-<div class="actions"><a class="open" href="https://pms.ripc.org/www/portal/notice/boardList.do?boardCategoryCode=BD40003" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kiip.re.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">KIIP 한국지식재산연구원</div>
-<div class="desc">전문연구원(석사 이상), 연구관리/행정</div>
-<div class="url">
-              https://www.kiip.re.kr/board/notice/list.do?bd_gb=board&amp;bd_cd=1&amp;bd_item=0&amp;po_item_gb=1&amp;po_notice_gb=recruit
-            </div>
-</div>
-<div class="actions"><a class="open" href="https://www.kiip.re.kr/board/notice/list.do?bd_gb=board&amp;bd_cd=1&amp;bd_item=0&amp;po_item_gb=1&amp;po_notice_gb=recruit" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.koipa.re.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">KOIPA 한국지식재산보호원</div>
-<div class="desc">전문(계약)직, 분쟁대응, 부정경쟁행위 단속지원 등</div>
-<div class="url">https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000043</div>
-</div>
-<div class="actions"><a class="open" href="https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000043" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.inventor.or.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">한국여성발명협회</div>
-<div class="desc">여성 발명/네트워크, 사무국 직원</div>
-<div class="url">
-              https://www.inventor.or.kr/bbs/board.php?bo_table=notice&amp;sca=&amp;sop=and&amp;sfl=wr_subject&amp;stx=%EC%B1%84%EC%9A%A9&amp;x=0&amp;y=0
-            </div>
-</div>
-<div class="actions"><a class="open" href="https://www.inventor.or.kr/bbs/board.php?bo_table=notice&amp;sca=&amp;sop=and&amp;sfl=wr_subject&amp;stx=%EC%B1%84%EC%9A%A9&amp;x=0&amp;y=0" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-</div>
-</section>
-<section class="section">
-<div class="section-head">
-<h2>IP 교육/행사 정보(무료/유료)</h2>
-<p class="section-tags">#교육 #행사 #자격 #세미나 #컨퍼런스</p>
-</div>
-<div class="list">
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=iipti.moip.go.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">국제지식재산연수원(유료)</div>
-<div class="desc">공무원/변리사/일반인 IP 교육</div>
-<div class="url">https://iipti.moip.go.kr/main.do</div>
-</div>
-<div class="actions"><a class="open" href="https://iipti.moip.go.kr/main.do" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=ipacademy.net&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">국가지식재산교육포털(IP-ACADEMY)(무료/온라인 다수, 유료)</div>
-<div class="desc">IP 교육 콘텐츠(온라인 무료 교육 다수)</div>
-<div class="url">https://www.ipacademy.net/main.do</div>
-</div>
-<div class="actions"><a class="open" href="https://ipacademy.net/" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.valuation.or.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">한국기업·기술가치평가협회(유료)</div>
-<div class="desc">기업·기술가치평가사(KCVA) 자격 획득, 기술가치평가 교육, 기술사업화 교육 등</div>
-<div class="url">https://www.valuation.or.kr/any/education.do</div>
-</div>
-<div class="actions"><a class="open" href="https://www.valuation.or.kr/any/education.do" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=ceo-korea.org&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">사단법인 한국중소기업발전협회(무료/유료)</div>
-<div class="desc">중소기업 대상 기업성장전략 세미나, IP투자연계 세미나 등</div>
-<div class="url">https://ceo-korea.org/bbs/bbs/?bbs_no=7</div>
-</div>
-<div class="actions"><a class="open" href="https://ceo-korea.org/bbs/bbs/?bbs_no=7" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=event-us.kr&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">이벤터스 - 행사·세미나·컨퍼런스 관리 및 홍보 플랫폼(무료/유료)</div>
-<div class="desc">특허 관련 행사·세미나·컨퍼런스 알림</div>
-<div class="url">
-              https://event-us.kr/search?query=%ED%8A%B9%ED%97%88&amp;order=score&amp;date=%EB%AA%A8%EB%93%A0%EB%82%A0&amp;page=1
-            </div>
-</div>
-<div class="actions"><a class="open" href="https://event-us.kr/search?query=%ED%8A%B9%ED%97%88&amp;order=score&amp;date=%EB%AA%A8%EB%93%A0%EB%82%A0&amp;page=1" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.google.com&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">구글 검색 - 특허 교육/세미나</div>
-<div class="desc">최근 1개월내 특허 교육/세미나 검색</div>
-<div class="url">https://www.google.com/search?q=특허+교육+세미나&amp;tbs=qdr:m</div>
-</div>
-<div class="actions"><a class="open" href="https://www.google.com/search?q=특허+교육+세미나&amp;tbs=qdr:m&amp;ie=UTF-8&amp;oe=UTF-8" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-</div>
-</section>
-<section class="section">
-<div class="section-head">
-<h2>지식재산처 심사기준, 특허분석 보고서, 특허법/판례</h2>
-<p class="section-tags">#특허심사기준 #분석보고서 #전략보고서 #동향보고서 #특허법 #판례 #공부</p>
-</div>
-<div class="list">
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kipo.go.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">지식재산처(MOIP) - 지식재산 심사 기준/매뉴얼</div>
-<div class="desc">특허/상표/디자인 심사기준, 가이드라인</div>
-<div class="url">https://www.kipo.go.kr/ko/kpoContentView.do?menuCd=SCD0201119</div>
-</div>
-<div class="actions"><a class="open" href="https://www.kipo.go.kr/ko/kpoContentView.do?menuCd=SCD0201119" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">특허 빅데이터 포털</div>
-<div class="desc">12대 국가전략기술 등 특허 빅데이터 분석 보고서</div>
-<div class="url">https://biz.kista.re.kr/pbcenter/megatrend/app/public/lg/index</div>
-</div>
-<div class="actions"><a class="open" href="https://biz.kista.re.kr/pbcenter/megatrend/app/public/lg/index" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">특허동향 보고서(e특허나라)</div>
-<div class="desc">정부/공공기관 대상 특허 동향 분석(현재 2022년 보고서가 최신)</div>
-<div class="url">https://biz.kista.re.kr/patentmap/front/common.do?method=main</div>
-</div>
-<div class="actions"><a class="open" href="https://biz.kista.re.kr/patentmap/front/common.do?method=main" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.law.go.kr&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">법제처 국가법령정보센터</div>
-<div class="desc">특허법, 특허법 시행규칙 등, 특허법 조문 왼쪽에 “판” 클릭시 관련 판례 번호 조회 가능</div>
-<div class="url">
-              https://www.law.go.kr/lsSc.do?section=&amp;menuId=1&amp;subMenuId=15&amp;tabMenuId=81&amp;eventGubun=060101&amp;query=%ED%8A%B9%ED%97%88%EB%B2%95#undefined
-            </div>
-</div>
-<div class="actions"><a class="open" href="https://www.law.go.kr/lsSc.do?section=&amp;menuId=1&amp;subMenuId=15&amp;tabMenuId=81&amp;eventGubun=060101&amp;query=%ED%8A%B9%ED%97%88%EB%B2%95#undefined" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=casenote.kr&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">케이스노트 - 판례 검색</div>
-<div class="desc">일반 회원은 회원 가입후 무료 검색·열람 가능</div>
-<div class="url">https://casenote.kr/pro/</div>
-</div>
-<div class="actions"><a class="open" href="https://casenote.kr/pro/" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.riss.kr&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">한국교육학술정보원 학술연구정보서비스(RISS)</div>
-<div class="desc">국내학술논문, 국내학위논문 검색</div>
-<div class="url">https://www.riss.kr/index.do</div>
-</div>
-<div class="actions"><a class="open" href="https://www.riss.kr/index.do" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-</div>
-</section>
-<section class="section">
-<div class="section-head">
-<h2>지식재산(IP-R&amp;D 포함) 관련 사업 공고(지식재산 관련 용역비 지원)</h2>
-<p class="section-tags">#특허 #지식재산 #IP-R&amp;D #사업공고 #입찰 #용역 #정부사업 #국가사업</p>
-</div>
-<div class="list">
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">IP-R&amp;D 사업관리시스템 - 기업/연구기관, 협력기관(특허사무소) 지원</div>
-<div class="desc"><b>지재권 연계 연구개발 전략지원(IP-R&amp;D 사업)</b>(일반, 소부장, 공공분야, 특허·디자인 융합 4개 분야, 3개월/5개월 고객 밀착형 IP 전략 지원)
-<b>표준특허 창출지원 사업</b>(국제표준 획득 목적의 IP 전략 지원)</div>
-<div class="url">https://biz.kista.re.kr/ippro/com/iprndMain/selectBusinessAnnounceList.do?bbsType=bs</div>
-</div>
-<div class="actions"><a class="open" href="https://biz.kista.re.kr/ippro/com/iprndMain/selectBusinessAnnounceList.do?bbsType=bs" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=biz.kista.re.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">국가R&amp;D 특허동향 심층분석 사업 - 협력기관(특허사무소)용</div>
-<div class="desc"><b>국가R&amp;D 특허동향 심층분석 사업</b>(연구개발(R&amp;D) 기획단계에서 특허동향 제공, 과제수행 협력기관으로 지정되고 로그인해야 열람 가능)</div>
-<div class="url">https://biz.kista.re.kr/ipas/uat/uia/egovLoginUsr.do#</div>
-</div>
-<div class="actions"><a class="open" href="https://biz.kista.re.kr/ipas/uat/uia/egovLoginUsr.do#" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=pms.ripc.org&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">지역지식재산센터(RIPC) 사업 공고</div>
-<div class="desc"><b>글로벌 IP스타기업 육성(IP기반 해외진출 사업)</b>(지역별 수출 유망 중소기업 대상, 3년간 지재권 종합지원, 해외 출원/OA/등록, 특허홍보영상, 디자인, 브랜드 등 다양)
-<b>IP 디딤돌</b>(지역내 예비창업자 대상 특허출원비까지 지원)
-<b>IP 나래</b>(창업 후 7년 이내/신산업분야 창업 10년 이내 중소기업 대상, 총 8회 컨설팅 제공, IP전략 등)</div>
-<div class="url">https://pms.ripc.org/pms/biz/applicant/notice/list.do</div>
-</div>
-<div class="actions"><a class="open" href="https://pms.ripc.org/pms/biz/applicant/notice/list.do" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kipa.org&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">발명진흥회(RIPC) 사업 공고</div>
-<div class="desc"><b>IP투자(사업화/보증/담보대출) 연계 지식재산평가지원</b>(신청일 당시 등록된 특허권/상표권 평가, 평가비 지원)
-<b>특허기반 사업화 R&amp;D 지원사업(舊 IP-C&amp;D 사업)</b>(기업의 기술적 문제해결, 제품개발, 인증·양산, 판로지원, IP장벽 구축 등)
-<b>우수특허기반 혁신제품 지정사업</b>(최근 5년 이내 IP-R&amp;D, IP-C&amp;D사업을 통한 개발 제품 대상, 공공조달 연계 활성화 및 판로 구축 지원)</div>
-<div class="url">https://www.kipa.org/kipa/ip001/kw_business_0501.jsp</div>
-</div>
-<div class="actions"><a class="open" href="https://www.kipa.org/kipa/ip001/kw_business_0501.jsp" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.koipa.re.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">한국지식재산보호원(KOIPA) 사업 공고</div>
-<div class="desc"><b>특허(K-브랜드)분쟁 대응전략</b>(세계 주요 수출국 대상, 특허침해분석(FTO 분석, (해외기업 분쟁 대상)경고장 대응, 소송 방어, 라이선스 협상 전략 등))</div>
-<div class="url">https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000041</div>
-</div>
-<div class="actions"><a class="open" href="https://www.koipa.re.kr/home/board/brdList.do?menu_cd=000041" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.g2b.go.kr&amp;sz=128" width="24"/>
-</div>
-<div class="meta">
-<div class="name">나라장터(국가종합전자조달) 사업 공고</div>
-<div class="desc">오른쪽 상단 통합검색(돋보기) → 입찰공고 체크 → '특허 분석' 검색</div>
-<div class="url">https://www.g2b.go.kr/</div>
-</div>
-<div class="actions"><a class="open" href="https://www.g2b.go.kr/" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-</div>
-</section>
-<section class="section">
-<div class="section-head">
-<h2>국가 R&amp;D 사업, 중소기업 지원 사업 공고</h2>
-<p class="section-tags">#국가R&amp;D #국가연구개발 #사업화 #부처R&amp;D사업 #R&amp;D전담기관
-        </p>
-</div>
-<div class="rd-table-wrap">
-<div class="rd-table-title">주요 국가 R&amp;D 사업 정리표</div>
-<div class="rd-table-hint">부처 → 전담기관 → 공고 링크 → 주요 지원사업 → 대상 기업</div>
-<div class="rd-table-scroll">
-<table class="rd-table">
-<thead>
-<tr>
-<th style="width:140px">주무부처</th>
-<th style="width:220px">연구전담기관</th>
-<th style="width:140px">링크</th>
-<th>주요 R&amp;D 지원사업</th>
-<th>주요 대상 기업</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="mono">과학기술정보통신부</td>
-<td><b>한국연구재단(NRF)</b></td>
-<td><a class="rd-link" href="https://www.nrf.re.kr" rel="noopener noreferrer" target="_blank">바로가기 ↗</a>
-</td>
-<td>기초연구(신진/중견/리더 등)</td>
-<td>대학, 출연연, 교수창업 초기기업</td>
-</tr>
-<tr>
-<td class="mono">과학기술정보통신부</td>
-<td><b>정보통신기획평가원(IITP)</b></td>
-<td><a class="rd-link" href="https://www.iitp.kr" rel="noopener noreferrer" target="_blank">바로가기 ↗</a>
-</td>
-<td>ICT R&amp;D, AI, 반도체, 디지털혁신</td>
-<td>ICT 중소·중견기업, AI 스타트업</td>
-</tr>
-<tr>
-<td class="mono">산업통상자원부</td>
-<td><b>한국산업기술평가관리원(KEIT)</b></td>
-<td><a class="rd-link" href="https://www.keit.re.kr" rel="noopener noreferrer" target="_blank">바로가기
-                    ↗</a></td>
-<td>산업핵심기술개발, 소재부품장비</td>
-<td>제조 중소·중견기업, 대기업 컨소시엄</td>
-</tr>
-<tr>
-<td class="mono">산업통상자원부</td>
-<td><b>한국에너지기술평가원(KETEP)</b></td>
-<td><a class="rd-link" href="https://www.ketep.re.kr" rel="noopener noreferrer" target="_blank">바로가기
-                    ↗</a></td>
-<td>수소·신재생·에너지 기술개발</td>
-<td>에너지·플랜트 기업, 발전사, 수소 밸류체인 기업</td>
-</tr>
-<tr>
-<td class="mono">산업통상자원부</td>
-<td><b>한국산업기술진흥원(KIAT)</b></td>
-<td><a class="rd-link" href="https://www.kiat.or.kr" rel="noopener noreferrer" target="_blank">바로가기
-                    ↗</a></td>
-<td>기술사업화, 산업·지역혁신</td>
-<td>기술사업화 기업, 테크 스타트업, 지역혁신기관</td>
-</tr>
-<tr>
-<td class="mono">중소벤처기업부</td>
-<td><b>중소기업기술정보진흥원(TIPA)</b></td>
-<td><a class="rd-link" href="https://www.smtech.go.kr/front/ifg/no/notice02_intro.do" rel="noopener noreferrer" target="_blank">바로가기 ↗</a></td>
-<td>창업성장기술개발(디딤돌), 기술혁신개발, 산학연 Collabo R&amp;D</td>
-<td>창업 7년 이하, 매출 발생 중소기업, 기술보유 기업</td>
-</tr>
-<tr>
-<td class="mono">중소벤처기업부</td>
-<td><b>TIPS(운영: TIPA)</b></td>
-<td><a class="rd-link" href="https://www.jointips.or.kr/" rel="noopener noreferrer" target="_blank">바로가기
-                    ↗</a></td>
-<td>TIPS, 딥테크 TIPS, 글로벌 TIPS</td>
-<td>VC/운영사 투자·추천 받은 기술 스타트업(딥테크는 원천/초격차 중심)</td>
-</tr>
-<tr>
-<td class="mono">보건복지부</td>
-<td><b>한국보건산업진흥원(KHIDI)</b></td>
-<td><a class="rd-link" href="https://www.khidi.or.kr" rel="noopener noreferrer" target="_blank">바로가기
-                    ↗</a></td>
-<td>보건의료기술개발, 바이오헬스 R&amp;D</td>
-<td>바이오벤처, 제약/의료기기 기업, 병원·연구기관 컨소시엄</td>
-</tr>
-<tr>
-<td class="mono">국토교통부</td>
-<td><b>국토교통과학기술진흥원(KAIA)</b></td>
-<td><a class="rd-link" href="https://www.kaia.re.kr" rel="noopener noreferrer" target="_blank">바로가기
-                    ↗</a></td>
-<td>스마트시티, 모빌리티, 국토·교통 R&amp;D</td>
-<td>건설·모빌리티·공간정보 기업, 지자체·공공기관 컨소시엄</td>
-</tr>
-<tr>
-<td class="mono">환경부</td>
-<td><b>한국환경산업기술원(KEITI)</b></td>
-<td><a class="rd-link" href="https://www.keiti.re.kr" rel="noopener noreferrer" target="_blank">바로가기
-                    ↗</a></td>
-<td>환경기술개발, 탄소/자원순환</td>
-<td>환경·탄소·ESG 솔루션 기업, 중소·중견기업</td>
-</tr>
-<tr>
-<td class="mono">농림축산식품부</td>
-<td><b>농림식품기술기획평가원(IPET)</b></td>
-<td><a class="rd-link" href="https://www.ipet.re.kr" rel="noopener noreferrer" target="_blank">바로가기
-                    ↗</a></td>
-<td>스마트팜, 농식품 R&amp;D</td>
-<td>농식품기업, 애그테크 스타트업, 생산자단체·연구기관</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="list">
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.iris.go.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">범부처통합연구지원시스템(IRIS) 사업공고</div>
-<div class="desc">국가R&amp;D 통합 공고</div>
-<div class="url">https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituListView.do</div>
-</div>
-<div class="actions"><a class="open" href="https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituListView.do" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.smtech.go.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">중소벤처기업부 - 중소기업기술정보진흥원(TIPA)</div>
-<div class="desc"><b>창업성장기술개발사업(디딤돌)</b>(창업 7년 이하, 지원규모가 가장 큼, 진입장벽 낮음)
-<b>중소기업 기술혁신개발사업</b>(수출지향형(수출 실적 필요), 글로벌협력형(해외 연구기관과 공동연구), 중소기업유망기술(분야별))
-<b>산학연 Collabo R&amp;D 사업</b>(중소기업 + 대학/연구기관 사업화 R&amp;D 지원)</div>
-<div class="url">https://www.smtech.go.kr/front/ifg/no/notice02_intro.do</div>
-</div>
-<div class="actions"><a class="open" href="https://www.smtech.go.kr/front/ifg/no/notice02_intro.do" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.jointips.or.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">팁스(TIPS) - 중소벤처기업부/중소기업기술정보진흥원(TIPA)</div>
-<div class="desc">「창업성장기술개발사업」로, smtech에서 지원 가능
-<b>팁스(TIPS)</b>는 민간투자를 받은 기업 대상이며, R&amp;D 약 5억 내외 수준으로 지원
-<b>딥테크 팁스(TIPS)</b>는 초격차·원천기술 중심 기업을 대상으로 하며, 최대 약 10억 내외 수준으로 지원</div>
-<div class="url">https://www.jointips.or.kr/</div>
-</div>
-<div class="actions"><a class="open" href="https://www.jointips.or.kr/" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.kiat.or.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">산업통상자원부 - 한국산업기술진흥원(KIAT)</div>
-    <div class="desc">글로벌 협력·기업 성장·사업화 연계를 중심으로 산업생태계 확산형 R&D를 지원하는 전문기관
-<b>산업기술국제협력사업(국제공동R&amp;D)</b>는 국내 기업·대학·연구기관을 대상으로 해외 우수기관과 국제공동R&amp;D를 연 2~10억원 내외, 3년 이내 규모로 지원
-<b>월드클래스플러스프로젝트지원</b>은 (사업별 상이) 초격차·원천기술 중심 기업의 성장 R&amp;D를 지원
-<b>중견중소기업 상생형 혁신도약사업</b>은 중견기업(주관)+중소기업 2개 이상 컨소시엄으로 미래 신산업 전략분야 R&amp;D를 3년, 연 13억원 내외로 지원
-<b>첨단산업공급망단 사업</b>은 반도체·이차전지·디스플레이·바이오 등 전략산업 소부장 기술개발·실증 지원
-<b>기술성과활용촉진(R&amp;D)</b>은 중견·중소기업 및 공공연구기관 대상 기술이전·사업화 촉진 지원
-<b>스케일업 기술사업화 프로그램(R&amp;D)</b>은 비상장 제조업 중소기업 대상 BM기획 및 투자연계 R&amp;D를 과제당 최대 5억원 규모로 지원
-<b>CVC투자연계 대·중견·중소기업 협력(R&amp;D)</b>은 CVC 투자를 받은 중소·중견기업 대상 전략산업 R&amp;D를 과제당 최대 10억원 규모로 지원</div>
-  <div class="url">
-  <a href="https://www.kiat.or.kr/" target="_blank">KIAT 홈페이지</a> |
-  <a href="https://itech.keit.re.kr/" target="_blank">ITECH(산업부 R&D 사업 공고)</a> |
-  <a href="https://www.k-pass.kr/" target="_blank">국제협력 플랫폼(K-PASS)</a>
-  </div>
-  </div>
-
-  <div class="actions">
-    <a class="open" href="https://www.kiat.or.kr/" rel="noopener noreferrer" target="_blank">열기 ↗</a>
-  </div>
-</div>
-
-<div class="row">
-  <div class="logo">
-    <img alt="" src="https://www.google.com/s2/favicons?domain=www.keit.re.kr&amp;sz=128" width="24"/>
-  </div>
-
-  <div class="meta">
-    <div class="name">산업통상자원부 - 한국산업기술기획평가원(KEIT)</div>
-
-    <div class="desc">전략산업 제조기업을 대상으로 산업현장 적용이 가능한 중·대형 기술개발 R&D를 지원하는 산업기술혁신 전문기관
-<b>지역특화 산업기술개발사업</b>은 지역 전략산업 중심 중소기업 주관 가능하며, 2~3년간 연 2~5억원 수준으로 지원 (비교적 경쟁 부담 낮음)
-<b>산업디지털전환(DX) 기술개발사업</b>은 제조 중소기업 대상 스마트제조·AI·산업데이터 기술개발을 2~3년간 연 2~6억원 지원 (중소기업 단독 주관 가능성 높음)
-<b>산업융합·신산업 창출 기술개발사업</b>은 기존 제조기술과 AI·로봇·데이터를 융합하는 중소기업 대상이며, 2~3년간 연 3~7억원 지원
-<b>산업기술 실증·파일럿 기반 구축사업</b>은 기술 상용화 전 단계의 실증·테스트베드 중심 사업으로 중소기업 참여 가능하며, 2~3년간 연 2~7억원 지원
-<b>소재·부품·장비(소부장) 기술개발사업</b>은 제조 중소·중견기업 주관 가능하며, 3~4년간 연 3~10억원(총 10~40억원 수준) 지원 (기술력 있는 기업에 유리)
-<b>탄소중립 산업기술혁신사업</b>은 수소·에너지효율·저탄소 공정기술 등 환경·에너지 분야 중소기업 참여 가능하며, 3~5년간 연 3~8억원 지원
-<b>전략산업 초격차 기술개발사업</b>은 반도체·미래차·로봇·바이오 등 전략산업 분야에서 중소기업 참여 가능하나, 3~5년간 연 5~15억원 규모로 경쟁 강도가 높은 편</div>
-
-  <div class="url">
-  <a href="https://www.keit.re.kr/" target="_blank">KEIT 홈페이지</a> |
-  <a href="https://itech.keit.re.kr/" target="_blank">ITECH(산업부 R&D 사업 공고)</a> |
-  <a href="https://srome.keit.re.kr/" target="_blank">SROME(KEIT R&D 과제 관리)</a>
-</div>
-  </div>
-
-  <div class="actions">
-    <a class="open" href="https://www.keit.re.kr/" rel="noopener noreferrer" target="_blank">열기 ↗</a>
-  </div>
-</div>
-
-<div class="row">
-  <div class="logo">
-    <img alt="" src="https://www.google.com/s2/favicons?domain=www.ketep.re.kr&amp;sz=128" width="24"/>
-  </div>
-
-  <div class="meta">
-    <div class="name">산업통상자원부 - 한국에너지기술평가원(KETEP)</div>
-    <div class="desc">산업통상자원부 에너지 R&amp;D 기획·평가·관리 전문기관으로 수소·재생에너지·전력·탄소중립 분야 기술개발 지원
-<b>수소에너지 기술개발사업</b>은 수소 생산·저장·운송·활용 분야 중소기업 참여 가능하며, 3~5년간 연 3~10억원 수준 지원 (실증과제는 규모 더 큼)
-<b>신재생에너지 기술개발사업</b>은 태양광·풍력·ESS·연료전지 등 재생에너지 핵심기술을 2~4년간 연 2~8억원 지원 (중소기업 단독·컨소시엄 가능)
-<b>에너지효율 향상 기술개발사업</b>은 산업공정 효율화·전력절감 기술 중심으로 2~3년간 연 2~6억원 지원 (제조 중소기업 적합)
-<b>전력·계통 안정화 기술개발사업</b>은 스마트그리드·전력계통 운영·ESS 안전기술 등을 3~4년간 연 3~8억원 지원
-<b>탄소중립 에너지전환 R&amp;D</b>는 CCUS·저탄소 공정·산업부문 감축기술을 3~5년간 연 3~10억원 지원 (정책 우선순위 높음)</div>
-
-    <div class="url">
-      <a href="https://www.ketep.re.kr/" target="_blank">KETEP 홈페이지</a> |
-      <a href="https://www.ketep.re.kr/brd/board/273/L/menu/255?brdType=R&amp;thisPage=1" target="_blank">에너지 R&amp;D 사업공고</a>
+      <!-- ✅ 포스트잇 -->
+      <div id="list" class="grid"></div>
     </div>
   </div>
 
-  <div class="actions">
-    <a class="open" href="https://www.ketep.re.kr/" rel="noopener noreferrer" target="_blank">열기 ↗</a>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="logo">
-    <img alt="" src="https://www.google.com/s2/favicons?domain=www.iris.go.kr&amp;sz=128" width="24"/>
+  <!-- 라이트박스 -->
+  <div class="lb" id="lb">
+    <button class="lb-close" id="lbClose" aria-label="닫기">×</button>
+    <img src="" id="lbImg" alt="첨부 이미지" />
   </div>
 
-  <div class="meta">
-    <div class="name">과학기술정보통신부 - (IRIS/NIPA/KDATA) 중소기업 지원 과제·바우처</div>
-
-    <div class="desc">중소기업이 ‘바로 지원/활용’하기 쉬운 과제·바우처 중심으로 정리
-<b>정보통신·방송 기술개발사업(R&amp;D)</b> : (공고별 상이) 중소기업 주관/참여 트랙이 자주 포함됨. 보통 2~4년, 과제당 수억원~수십억원 규모까지 폭이 큼(세부는 공고문 기준)
-<b>AI 바우처 지원사업(NIPA)</b> : 중소기업이 AI 솔루션/서비스를 도입할 때 바우처로 지원(대체로 1년 단위 사업). 공고 기준 최대 수억원(세부는 연도 공고 확인)
-<b>데이터바우처 지원사업(KDATA)</b> : 데이터 구매/수집/가공/분석 등 데이터 활용 전 단계 지원(대체로 1년). 기업당 수천만원 단위(세부는 공고 확인)</div>
-
-    <div class="url">
-      <a href="https://www.msit.go.kr/" target="_blank">과기정통부(MSIT)</a> |
-      <a href="https://www.iris.go.kr/" target="_blank">IRIS(국가R&amp;D 통합 공고/접수)</a> |
-      <a href="https://www.nipa.kr/" target="_blank">NIPA(AI 바우처 등)</a> |
-      <a href="https://www.kdata.or.kr/" target="_blank">KDATA(데이터바우처 수행기관)</a>
-    </div>
-  </div>
-
-  <div class="actions">
-    <a class="open" href="https://www.iris.go.kr/" rel="noopener noreferrer" target="_blank">열기 ↗</a>
-  </div>
-</div>
-
-<div class="row">
-  <div class="logo">
-    <img alt="" src="https://www.google.com/s2/favicons?domain=www.khidi.or.kr&amp;sz=128" width="24"/>
-  </div>
-
-  <div class="meta">
-    <div class="name">보건복지부 - (KHIDI) 대학·중소기업 보건의료 R&D</div>
-    <div class="desc">대학·병원·중소기업이 공동으로 참여 가능한 보건의료·바이오·디지털헬스 중심 국가 R&amp;D
-<b>보건의료기술연구개발사업</b> : 신약·의료기기·재생의료·감염병 등 분야 지원. 2~5년, 연 1~5억원 수준(대형과제는 연 10억원 이상 가능)
-<b>디지털헬스·AI 의료 R&amp;D</b> : 의료 AI, 의료데이터 활용, 디지털 치료기기 등. 2~4년, 연 2~6억원 내외(대학병원·스타트업 참여 활발)
-<b>바이오·의료기기 사업화 연계 R&amp;D</b> : 기술이전 후 임상·사업화 단계 지원. 3~5년, 연 3~10억원 내외
-<b>감염병·공공보건 대응 R&amp;D</b> : 백신·진단·치료기술 개발. 2~4년, 연 2~8억원 수준</div>
-
-    <div class="url">
-      <a href="https://www.mohw.go.kr/" target="_blank">보건복지부(MOHW)</a> |
-      <a href="https://www.khidi.or.kr/" target="_blank">KHIDI(보건산업진흥원)</a> |
-      <a href="https://www.htdream.kr/" target="_blank">HTDream(보건의료 R&amp;D 공고/관리)</a>
-    </div>
-  </div>
-
-  <div class="actions">
-    <a class="open" href="https://www.khidi.or.kr/" rel="noopener noreferrer" target="_blank">열기 ↗</a>
-  </div>
-</div>
-
-<div class="row">
-  <div class="logo">
-    <img alt="" src="https://www.google.com/s2/favicons?domain=www.keiti.re.kr&amp;sz=128" width="24"/>
-  </div>
-
-  <div class="meta">
-    <div class="name">환경부 - 한국환경산업기술원(KEITI) 환경·탄소중립 R&D</div>
-    <div class="desc">환경부 소관 환경기술·탄소중립·순환경제 분야 국가 R&amp;D를 기획·평가·관리하는 전문기관
-<b>환경기술개발사업</b> : 수질·대기·폐기물·토양 등 환경오염 저감 기술 지원. 2~4년, 연 2~6억원 수준(중소기업·대학 참여 가능)
-<b>기후변화 대응 기술개발사업</b> : 온실가스 감축·탄소저감·저탄소 공정기술 지원. 3~5년, 연 3~8억원 내외
-<b>자원순환·재활용 기술개발사업</b> : 폐자원 재활용·순환경제 기술 지원. 2~4년, 연 2~7억원 수준
-<b>환경보건·미세먼지 대응 R&amp;D</b> : 미세먼지 저감·환경유해인자 관리 기술 개발. 2~4년, 연 2~6억원</div>
-    <div class="url">
-      <a href="https://www.me.go.kr/" target="_blank">환경부(ME)</a> |
-      <a href="https://www.keiti.re.kr/" target="_blank">KEITI 홈페이지</a> |
-      <a href="https://www.eco-plus.kr/" target="_blank">환경 R&amp;D 통합관리시스템(에코플러스)</a>
-    </div>
-  </div>
-
-  <div class="actions">
-    <a class="open" href="https://www.keiti.re.kr/" rel="noopener noreferrer" target="_blank">열기 ↗</a>
-  </div>
-</div>
-
-<div class="row">
-<div class="logo"><img alt="" src="https://www.google.com/s2/favicons?domain=www.bizinfo.go.kr&amp;sz=128" width="24"/></div>
-<div class="meta">
-<div class="name">기업마당 - 중소·중견기업 정부지원사업 통합 공고</div>
-<div class="desc">지역별 기업 지원사업 공고 모음</div>
-<div class="url">https://www.bizinfo.go.kr/sii/siia/selectSIIA200View.do</div>
-</div>
-<div class="actions"><a class="open" href="https://www.bizinfo.go.kr/sii/siia/selectSIIA200View.do" rel="noopener noreferrer" target="_blank">열기 ↗</a></div>
-</div>
-
-<div class="row">
-  <div class="logo">
-    <img alt="" src="https://www.google.com/s2/favicons?domain=thevc.kr&amp;sz=128" width="24"/>
-  </div>
-
-  <div class="meta">
-    <div class="name">더브이씨(THEVC) - 지원사업 데이터베이스</div>
-    <div class="desc">한국 스타트업 투자 유치, 투자자(벤처캐피탈·액셀러레이터) 관련 지원사업</div>
-    <div class="url">https://thevc.kr/grants</div>
-  </div>
-
-  <div class="actions">
-    <a class="open" href="https://thevc.kr/grants" rel="noopener noreferrer" target="_blank">열기 ↗</a>
-  </div>
-</div>
-
-
-
-</section>
-<footer style="text-align:center; margin-top:40px; color: #94a3b8; font-size: 12px;">Last updated: 2026-02-24 16:55
-    </footer>
-</div>
 <script>
-    // ===== ✅ "수정 및 개선 요구" 모달 + 전송 =====
-    (function(){
-      const btn = document.getElementById('feedbackBtn');
-      const modal = document.getElementById('feedbackModal');
-      const closeBtn = document.getElementById('feedbackClose');
-      const cancelBtn = document.getElementById('feedbackCancel');
-      const form = document.getElementById('feedbackForm');
-      const sendBtn = document.getElementById('feedbackSend');
-      const toast = document.getElementById('feedbackToast');
+  // ===========================
+  // ✅ 샘플 6개 (첨부 포함)
+  // - 이미지: files/ 아래에 업로드 (예: files/sample_photo.jpg)
+  // - 문서:  files/ 아래에 업로드 (예: files/sample.pdf)
+  // ===========================
+  const POSTS = [
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:10",
+      msg: "배너는 files/cappucino.png를 그대로 써서 만들었어.\n(이 페이지는 작성란 없음 — 너만 코드로 추가)",
+      rot: -0.8,
+      attachments: []
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:11",
+      msg: "📎 첨부 샘플(문서)\nfiles 폴더에 PDF 올리고 링크만 연결하면 돼.",
+      rot: 1.2,
+      attachments: [
+        { name: "sample.pdf", type: "application/pdf", url: "files/sample.pdf" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:12",
+      msg: "🖼️ 첨부 샘플(이미지)\n이미지는 카드에 미리보기로 나오고 클릭하면 크게 보여줘.",
+      rot: -0.3,
+      attachments: [
+        { name: "sample_photo.jpg", type: "image/jpeg", url: "files/sample_photo.jpg" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:13",
+      msg: "📎 첨부 여러 개도 가능\n(PDF + 이미지 같이 넣기)",
+      rot: 0.6,
+      attachments: [
+        { name: "menu.pdf", type: "application/pdf", url: "files/menu.pdf" },
+        { name: "cafe.jpg", type: "image/jpeg", url: "files/cafe.jpg" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:14",
+      msg: "압축파일/한글/워드도 링크로 표시돼.\n(파일은 repo에 올려두기만 하면 됨)",
+      rot: -1.0,
+      attachments: [
+        { name: "자료.zip", type: "application/zip", url: "files/data.zip" }
+      ]
+    },
+    {
+      nick: "BITTERWOOD",
+      time: "2026.03.05 12:15",
+      msg: "마지막 샘플.\n색상은 로딩할 때마다 랜덤으로 배정돼.",
+      rot: 0.2,
+      attachments: []
+    }
+  ];
 
-      // ✅ 1) Formspree 사용(추천): 이메일 주소가 페이지에 노출되지 않음
-      //    - Formspree에서 "Form endpoint"를 받아 아래 값을 교체하세요.
-      const FORMSPREE_ENDPOINT = "https://formspree.io/f/xnjbranr";  // TODO: 교체
-      const useMailtoFallback = false; // true로 바꾸면 mailto로 전송(사용자 메일앱 열림)
+  // ✅ 랜덤 컬러 팔레트 (포스트잇 배경)
+  const COLORS = ["#fff8b5","#c9f7d6","#cfe7ff","#ffd7e1","#ffe9c7","#e9d5ff","#d9f99d","#fde68a"];
 
-      function open(){
-        if(!modal) return;
-        modal.classList.add('show');
-        modal.setAttribute('aria-hidden','false');
-        // 첫 입력칸 포커스
-        const first = modal.querySelector('input, textarea, button');
-        if(first) setTimeout(()=>first.focus(), 50);
-      }
-      function close(){
-        if(!modal) return;
-        modal.classList.remove('show');
-        modal.setAttribute('aria-hidden','true');
-        if(toast) toast.classList.remove('show');
-        if(form) form.reset();
-      }
+  const elList = document.getElementById("list");
+  const lb = document.getElementById("lb");
+  const lbImg = document.getElementById("lbImg");
+  const lbClose = document.getElementById("lbClose");
 
-      if(btn) btn.addEventListener('click', open);
-      if(closeBtn) closeBtn.addEventListener('click', close);
-      if(cancelBtn) cancelBtn.addEventListener('click', close);
-      if(modal) modal.addEventListener('click', (e)=>{ if(e.target === modal) close(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') close(); });
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+    }[m]));
+  }
+  function isImage(type){ return /^image\//.test(type || ""); }
+  function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-      function mailtoSend(payload){
-        // ⚠️ mailto 방식은 사용자의 메일앱이 열리며, 이메일 주소가 링크 생성에 포함됩니다(소스에 노출 가능).
-        const to = "feedback" + "@" + "example.com"; // TODO: 사용 시 교체(간단 난독화)
-        const subject = encodeURIComponent(payload.subject || "수정 및 개선 요구");
-        const body = encodeURIComponent(
-          (payload.message || "") +
-          "\n\n---\n회신 이메일: " + (payload.reply_to || "(없음)") +
-          "\n페이지: " + (location.href || "")
-        );
-        location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-      }
+  function render(){
+    elList.innerHTML = "";
 
-      async function formspreeSend(payload){
-        if(FORMSPREE_ENDPOINT.includes("XXXXXXXX")){
-          alert("Formspree 엔드포인트가 설정되지 않았습니다.\nFORMSPREE_ENDPOINT를 본인 값으로 교체해주세요.");
-          return;
-        }
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: "POST",
-          headers: { "Accept": "application/json", "Content-Type": "application/json" },
-          body: JSON.stringify({
-            reply_to: payload.reply_to || "",
-            subject: payload.subject || "",
-            message: payload.message || "",
-            page: location.href || ""
-          })
-        });
-        if(!res.ok){
-          const t = await res.text().catch(()=> "");
-          throw new Error("send_failed:" + t);
-        }
-      }
+    POSTS.forEach((p, idx)=>{
+      const card = document.createElement("div");
+      card.className = "note";
+      card.style.setProperty("--r", (p.rot ?? 0) + "deg");
+      card.style.background = p.bg || pick(COLORS);
 
-      if(form){
-        form.addEventListener('submit', async (e)=>{
-          e.preventDefault();
-          const fd = new FormData(form);
-          const payload = {
-            reply_to: (fd.get('reply_to')||"").toString().trim(),
-            subject: "수정 및 개선 요구",
-            message: (fd.get('message')||"").toString().trim(),
-          };
-
-          sendBtn && (sendBtn.disabled = true);
-
-          try{
-            if(useMailtoFallback){
-              mailtoSend(payload);
-              // mailto는 앱이 열리므로 토스트 대신 닫기
-              close();
-              return;
-            }else{
-              await formspreeSend(payload);
-              if(toast) toast.classList.add('show');
-              // 1.2초 후 닫기
-              setTimeout(()=>close(), 1200);
-            }
-          }catch(err){
-            console.error(err);
-            alert("전송에 실패했어요. 잠시 후 다시 시도해 주세요.\n(설정: FORMSPREE_ENDPOINT 확인)");
-          }finally{
-            sendBtn && (sendBtn.disabled = false);
+      const atts = Array.isArray(p.attachments) ? p.attachments : [];
+      let attHtml = "";
+      if(atts.length){
+        attHtml = '<div class="note-attachments">';
+        atts.forEach((att, aidx)=>{
+          if(isImage(att.type)){
+            attHtml += `<img class="note-img" src="${att.url}"
+              alt="${escapeHtml(att.name || "image")}"
+              data-post="${idx}" data-att="${aidx}"
+              title="클릭하면 크게 보기" />`;
+          } else {
+            attHtml += `<a class="note-file" href="${att.url}" download
+              title="클릭하면 다운로드">📄 ${escapeHtml(att.name || "file")}</a>`;
           }
         });
-      }
-    })();
-  </script>
-<script>
-    (function () {
-      const input = document.getElementById('q');
-      const clearBtn = document.getElementById('clearBtn');
-      if (!input) return;
-
-      function norm(s) { return (s || '').toString().toLowerCase().trim(); }
-      function show(el) { if (el) el.style.display = ''; }
-      function hide(el) { if (el) el.style.display = 'none'; }
-
-      function filter() {
-        const q = norm(input.value);
-
-        document.querySelectorAll('.section').forEach(sec => {
-          const sectionTitle = norm(sec.querySelector('.section-head')?.textContent);
-          const hitSectionTitle = (!!q && sectionTitle.includes(q));
-
-          // 1) 사이트 row(목록) 필터
-          const rows = sec.querySelectorAll('.row');
-          let anyRowVisible = false;
-
-          rows.forEach(row => {
-            if (!q || hitSectionTitle) {
-              show(row);
-              anyRowVisible = true;
-              return;
-            }
-            const name = norm(row.querySelector('.name')?.textContent);
-            const summary = norm(row.querySelector('.summary')?.textContent);
-            const desc = norm(row.querySelector('.desc')?.textContent);
-            const url = norm(row.querySelector('.url')?.textContent);
-            const hit = name.includes(q) || summary.includes(q) || desc.includes(q) || url.includes(q);
-            if (hit) { show(row); anyRowVisible = true; }
-            else hide(row);
-          });
-
-          // 2) 직무 카드 필터 (취업 전문 사이트 섹션의 job-card)
-          const jobWrap = sec.querySelector('.jobs-bar-wrap');
-          const jobCards = sec.querySelectorAll('.job-card');
-          let anyJobVisible = false;
-
-          if (jobCards.length) {
-            jobCards.forEach(card => {
-              if (!q || hitSectionTitle) {
-                show(card);
-                anyJobVisible = true;
-                return;
-              }
-              const label = norm(card.querySelector('.job-text')?.textContent);
-              const hit = label.includes(q);
-              if (hit) { show(card); anyJobVisible = true; }
-              else hide(card);
-            });
-
-            // 직무 카드가 하나도 안 보이면 직무 블록 자체 숨김(섹션명 매칭이면 예외)
-            if (jobWrap) {
-              if (!q || hitSectionTitle || anyJobVisible) show(jobWrap);
-              else hide(jobWrap);
-            }
-          }
-
-          // 3) R&D 표도 검색 대상 (표 텍스트 전체)
-          const rdWrap = sec.querySelector('.rd-table-wrap');
-          let hitRd = false;
-          if (rdWrap) {
-            if (!q || hitSectionTitle) {
-              show(rdWrap);
-              hitRd = true;
-            } else {
-              const rdText = norm(rdWrap.textContent);
-              hitRd = rdText.includes(q);
-              if (hitRd) show(rdWrap);
-              else hide(rdWrap);
-            }
-          }
-
-          // 4) 섹션 표시 여부
-          const sectionShouldShow = (!q) || hitSectionTitle || anyRowVisible || anyJobVisible || hitRd;
-          if (sectionShouldShow) show(sec);
-          else hide(sec);
-        });
+        attHtml += '</div>';
       }
 
-      function clear() {
-        input.value = '';
-        input.focus();
-        filter();
-      }
+      card.innerHTML = `
+        <div class="tape" aria-hidden="true"></div>
+        <div class="meta">
+          <div class="nick"><span class="dot"></span><span>${escapeHtml(p.nick || "익명")}</span></div>
+          <div>${escapeHtml(p.time || "")}</div>
+        </div>
+        <div class="content">${escapeHtml(p.msg || "")}</div>
+        ${attHtml}
+      `;
+      elList.appendChild(card);
+    });
+  }
 
-      input.addEventListener('input', filter);
-      clearBtn.addEventListener('click', clear);
-      input.addEventListener('keydown', (e) => { if (e.key === 'Escape') clear(); });
+  render();
 
-      filter();
-    })();
-  </script>
-
-  <script>
-    // ===== 전체 방문자 수 (전 세계 공용 카운트) =====
-    (function(){
-      const el = document.getElementById('visitCount');
-      if(!el) return;
-
-      // ⚠️ 네임스페이스가 없어서 "키"를 아주 유니크하게!
-      // 예: 도메인 + 페이지명 조합 추천
-      const key = "bitterwood4-afk-github-io_iprnd_portal_total_visits";
-
-      fetch(`https://countapi.mileshilliard.com/api/v1/hit/${encodeURIComponent(key)}`, { cache: "no-store" })
-        .then(r => {
-          if(!r.ok) throw new Error("network");
-          return r.json();
-        })
-        .then(data => {
-          el.textContent = data.value ?? "0";
-        })
-        .catch(err => {
-          console.error("visit counter error:", err);
-          el.textContent = "0";
-        });
-    })();
-  </script>
+  // 라이트박스 (이미지 클릭)
+  elList.addEventListener("click", (e)=>{
+    const img = e.target.closest("img.note-img");
+    if(!img) return;
+    lbImg.src = img.src;
+    lb.classList.add("show");
+  });
+  lbClose.addEventListener("click", ()=> lb.classList.remove("show"));
+  lb.addEventListener("click", e=>{ if(e.target===lb) lb.classList.remove("show"); });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape") lb.classList.remove("show"); });
+</script>
 </body>
 </html>
-
