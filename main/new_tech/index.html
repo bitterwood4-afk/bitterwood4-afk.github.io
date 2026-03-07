@@ -620,6 +620,191 @@
                                 padding:8px 10px;
                         }
                 }
+        
+
+                .feedback-btn{
+                        display:inline-flex;
+                        align-items:center;
+                        justify-content:center;
+                        gap:8px;
+                        padding:8px 14px;
+                        border-radius:999px;
+                        border:1px solid rgba(2,6,23,0.15);
+                        background:#ffffff;
+                        color:#0f172a;
+                        font-weight:900;
+                        font-size:12px;
+                        text-decoration:none;
+                        line-height:1;
+                        box-shadow:0 4px 12px rgba(2, 6, 23, 0.06);
+                        cursor:pointer;
+                        font-family:inherit;
+                }
+
+                .feedback-btn:hover{
+                        border-color:rgba(37,99,235,0.32);
+                        box-shadow:0 8px 18px rgba(2,6,23,0.10);
+                        transform:translateY(-1px);
+                }
+
+                .feedback-btn:active{
+                        transform:translateY(0);
+                }
+
+                .feedback-btn:focus-visible{
+                        outline:none;
+                        box-shadow:0 0 0 4px rgba(37,99,235,0.12), 0 8px 18px rgba(2,6,23,0.10);
+                        border-color:rgba(37,99,235,0.45);
+                }
+
+                .modal-backdrop{
+                        position:fixed;
+                        inset:0;
+                        background:rgba(2,6,23,0.55);
+                        display:none;
+                        align-items:center;
+                        justify-content:center;
+                        padding:18px;
+                        z-index:10000;
+                }
+
+                .modal-backdrop.show{
+                        display:flex;
+                }
+
+                .modal{
+                        width:min(720px, 100%);
+                        background:rgba(255,255,255,0.97);
+                        border:1px solid rgba(2,6,23,0.14);
+                        border-radius:18px;
+                        box-shadow:0 18px 60px rgba(2,6,23,0.25);
+                        overflow:hidden;
+                }
+
+                .modal-head{
+                        padding:14px 16px;
+                        background:#f8fafc;
+                        border-bottom:1px solid rgba(2,6,23,0.10);
+                        display:flex;
+                        align-items:center;
+                        justify-content:space-between;
+                        gap:10px;
+                }
+
+                .modal-title{
+                        margin:0;
+                        font-weight:950;
+                        font-size:14px;
+                        letter-spacing:-0.2px;
+                }
+
+                .modal-close{
+                        border:none;
+                        background:transparent;
+                        font-size:20px;
+                        line-height:1;
+                        cursor:pointer;
+                        padding:6px 8px;
+                        border-radius:10px;
+                        color:#0f172a;
+                        font-family:inherit;
+                }
+
+                .modal-close:hover{
+                        background:rgba(2,6,23,0.06);
+                }
+
+                .modal-body{
+                        padding:14px 16px 16px;
+                        display:grid;
+                        gap:10px;
+                }
+
+                .modal-hint{
+                        color:var(--subtle);
+                        font-size:12px;
+                        font-weight:800;
+                        line-height:1.45;
+                }
+
+                .field{
+                        display:grid;
+                        gap:6px;
+                }
+
+                .label{
+                        font-size:12px;
+                        font-weight:900;
+                        color:#0f172a;
+                }
+
+                .input,
+                .textarea{
+                        width:100%;
+                        border-radius:14px;
+                        border:1px solid rgba(2,6,23,0.12);
+                        background:#fff;
+                        padding:12px 12px;
+                        font-size:14px;
+                        outline:none;
+                        font-family:inherit;
+                }
+
+                .textarea{
+                        min-height:140px;
+                        resize:vertical;
+                }
+
+                .input:focus,
+                .textarea:focus{
+                        border-color:rgba(37,99,235,0.45);
+                        box-shadow:0 0 0 4px rgba(37,99,235,0.12);
+                }
+
+                .modal-actions{
+                        display:flex;
+                        justify-content:flex-end;
+                        gap:10px;
+                        margin-top:6px;
+                }
+
+                .modal-btn{
+                        padding:10px 14px;
+                        border-radius:14px;
+                        border:1px solid rgba(2,6,23,0.12);
+                        background:#fff;
+                        font-weight:900;
+                        cursor:pointer;
+                        font-family:inherit;
+                }
+
+                .modal-btn-primary{
+                        background:var(--blue-600);
+                        color:#fff;
+                        border-color:rgba(37,99,235,0.45);
+                }
+
+                .modal-btn:disabled{
+                        opacity:0.6;
+                        cursor:not-allowed;
+                }
+
+                .toast{
+                        display:none;
+                        margin-top:6px;
+                        padding:10px 12px;
+                        border-radius:14px;
+                        background:rgba(22,163,74,0.10);
+                        border:1px solid rgba(22,163,74,0.25);
+                        color:#065f46;
+                        font-weight:900;
+                        font-size:12px;
+                }
+
+                .toast.show{
+                        display:block;
+                }
+
         </style>
 </head>
 <body>
@@ -631,6 +816,8 @@
                                                 <h1>신기술 산책 (중학생용)</h1>
 
                                                 <div class="header-actions">
+                                                        <button class="feedback-btn" id="feedbackBtn" type="button">✉️ 수정 및 개선 요구</button>
+
                                                         <a
                                                                 class="more-btn"
                                                                 href="https://bitterwood4-afk.github.io/main/index.html"
@@ -709,6 +896,52 @@
                         </iframe>
                 </div>
         </div>
+
+
+        <div class="modal-backdrop" id="feedbackModal" aria-hidden="true">
+                <div class="modal" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle">
+                        <div class="modal-head">
+                                <h3 class="modal-title" id="feedbackTitle">수정 및 개선 요구</h3>
+                                <button class="modal-close" id="feedbackClose" type="button" aria-label="닫기">×</button>
+                        </div>
+
+                        <div class="modal-body">
+                                <div class="modal-hint">
+                                        아래에 내용을 적어 보내주시면, 운영자 메일로 전달됩니다.<br />
+                                        (※ 이 페이지에는 운영자 이메일 주소가 표시되지 않습니다.)
+                                </div>
+
+                                <form id="feedbackForm">
+                                        <div class="field">
+                                                <div class="label">연락 가능한 이메일 (선택)</div>
+                                                <input
+                                                        class="input"
+                                                        type="email"
+                                                        name="reply_to"
+                                                        autocomplete="email"
+                                                        placeholder="답변이 필요하면 이메일을 남겨주세요 (선택)" />
+                                        </div>
+
+                                        <div class="field">
+                                                <div class="label">내용</div>
+                                                <textarea
+                                                        class="textarea"
+                                                        name="message"
+                                                        placeholder="어떤 점을 수정/추가하면 좋을지 구체적으로 적어주세요."
+                                                        required></textarea>
+                                        </div>
+
+                                        <div class="modal-actions">
+                                                <button class="modal-btn" id="feedbackCancel" type="button">취소</button>
+                                                <button class="modal-btn modal-btn-primary" id="feedbackSend" type="submit">보내기</button>
+                                        </div>
+
+                                        <div class="toast" id="feedbackToast">✅ 전송 완료! 감사합니다.</div>
+                                </form>
+                        </div>
+                </div>
+        </div>
+
 
         <script>
                 function makeImageThumb(imageId){
@@ -881,5 +1114,121 @@
 
                 renderPosts();
         </script>
+
+        <script>
+                (function(){
+                        const btn = document.getElementById('feedbackBtn');
+                        const modal = document.getElementById('feedbackModal');
+                        const closeBtn = document.getElementById('feedbackClose');
+                        const cancelBtn = document.getElementById('feedbackCancel');
+                        const form = document.getElementById('feedbackForm');
+                        const sendBtn = document.getElementById('feedbackSend');
+                        const toast = document.getElementById('feedbackToast');
+
+                        const FORMSPREE_ENDPOINT = "https://formspree.io/f/xnjbranr";
+
+                        function openFeedback(){
+                                if(!modal) return;
+                                modal.classList.add('show');
+                                modal.setAttribute('aria-hidden', 'false');
+                                const first = modal.querySelector('input, textarea, button');
+                                if(first){
+                                        setTimeout(() => first.focus(), 50);
+                                }
+                        }
+
+                        function closeFeedback(){
+                                if(!modal) return;
+                                modal.classList.remove('show');
+                                modal.setAttribute('aria-hidden', 'true');
+                                if(toast){
+                                        toast.classList.remove('show');
+                                }
+                                if(form){
+                                        form.reset();
+                                }
+                        }
+
+                        if(btn){
+                                btn.addEventListener('click', openFeedback);
+                        }
+
+                        if(closeBtn){
+                                closeBtn.addEventListener('click', closeFeedback);
+                        }
+
+                        if(cancelBtn){
+                                cancelBtn.addEventListener('click', closeFeedback);
+                        }
+
+                        if(modal){
+                                modal.addEventListener('click', (e) => {
+                                        if(e.target === modal){
+                                                closeFeedback();
+                                        }
+                                });
+                        }
+
+                        document.addEventListener('keydown', (e) => {
+                                if(e.key === 'Escape' && modal && modal.classList.contains('show')){
+                                        closeFeedback();
+                                }
+                        });
+
+                        async function formspreeSend(payload){
+                                const res = await fetch(FORMSPREE_ENDPOINT, {
+                                        method: 'POST',
+                                        headers: {
+                                                'Accept': 'application/json',
+                                                'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                                reply_to: payload.reply_to || '',
+                                                subject: payload.subject || '',
+                                                message: payload.message || '',
+                                                page: location.href || ''
+                                        })
+                                });
+
+                                if(!res.ok){
+                                        const t = await res.text().catch(() => '');
+                                        throw new Error('send_failed:' + t);
+                                }
+                        }
+
+                        if(form){
+                                form.addEventListener('submit', async (e) => {
+                                        e.preventDefault();
+
+                                        const fd = new FormData(form);
+                                        const payload = {
+                                                reply_to: (fd.get('reply_to') || '').toString().trim(),
+                                                subject: '수정 및 개선 요구',
+                                                message: (fd.get('message') || '').toString().trim()
+                                        };
+
+                                        if(sendBtn){
+                                                sendBtn.disabled = true;
+                                        }
+
+                                        try{
+                                                await formspreeSend(payload);
+                                                if(toast){
+                                                        toast.classList.add('show');
+                                                }
+                                                setTimeout(() => closeFeedback(), 1200);
+                                        }catch(err){
+                                                console.error(err);
+                                                alert('전송에 실패했어요. 잠시 후 다시 시도해 주세요.');
+                                        }finally{
+                                                if(sendBtn){
+                                                        sendBtn.disabled = false;
+                                                }
+                                        }
+                                });
+                        }
+                })();
+        </script>
+
 </body>
 </html>
