@@ -66,11 +66,11 @@
                 .wrap{
                         max-width:1320px;
                         margin:0 auto;
-                        padding:34px 18px 64px;
+                        padding:24px 16px 40px;
                 }
 
                 .header{
-                        margin-bottom:24px;
+                        margin-bottom:14px;
                 }
 
                 .header-top{
@@ -157,15 +157,16 @@
 
                 .hero-note{
                         margin:10px 0 0;
-                        font-size:13px;
+                        font-size:14px;
                         color:var(--desc-ink);
                         font-weight:800;
-                        line-height:1.55;
+                        line-height:1.7;
                         word-break:keep-all;
+                        white-space:pre-line;
                 }
 
                 .section{
-                        margin-top:20px;
+                        margin-top:12px;
                         border:1px solid var(--line);
                         border-radius:var(--radius);
                         box-shadow:var(--shadow);
@@ -189,7 +190,7 @@
                         font-size:13px;
                         color:var(--desc-ink);
                         font-weight:800;
-                        line-height:1.5;
+                        line-height:1.65;
                         word-break:keep-all;
                 }
 
@@ -301,8 +302,9 @@
                 .meta{
                         color:var(--desc-ink);
                         font-size:14px;
-                        line-height:1.7;
+                        line-height:1.8;
                         word-break:keep-all;
+                        white-space:pre-line;
                 }
 
                 .thumb-link{
@@ -473,12 +475,21 @@
                 }
 
                 @media (max-width:720px){
+                        .wrap{
+                                padding:14px 10px 20px;
+                        }
+
+                        .header{
+                                margin-bottom:8px;
+                        }
+
                         h1{
-                                font-size:34px;
+                                font-size:30px;
                         }
 
                         .title-bar{
                                 align-items:flex-start;
+                                gap:10px;
                         }
 
                         .header-actions{
@@ -486,12 +497,175 @@
                                 justify-content:flex-start;
                                 margin-left:0;
                         }
+
+                        .keywords{
+                                margin-top:8px;
+                                font-size:11px;
+                        }
+
+                        .hero-note{
+                                margin-top:8px;
+                                font-size:13px;
+                                line-height:1.6;
+                        }
+
+                        .section{
+                                margin-top:10px;
+                        }
+
+                        .section-head{
+                                padding:12px 12px;
+                        }
+
+                        .section-desc{
+                                font-size:12px;
+                                line-height:1.6;
+                        }
+
+                        .board-wrap{
+                                padding:12px;
+                        }
+
+                        .board-title{
+                                font-size:14px;
+                        }
+
+                        .board-hint{
+                                margin-bottom:10px;
+                                font-size:11px;
+                        }
+
+                        .table-scroll{
+                                overflow:visible;
+                                border:none;
+                                background:transparent;
+                        }
+
+                        .board-table{
+                                min-width:0;
+                                width:100%;
+                        }
+
+                        .board-table,
+                        .board-table thead,
+                        .board-table tbody,
+                        .board-table th,
+                        .board-table td,
+                        .board-table tr{
+                                display:block;
+                                width:100%;
+                        }
+
+                        .board-table thead{
+                                display:none;
+                        }
+
+                        .board-table tbody{
+                                display:grid;
+                                gap:12px;
+                        }
+
+                        .board-table tr{
+                                background:var(--panel-paper);
+                                border-radius:14px;
+                                padding:14px 12px;
+                                border:1px solid rgba(0,0,0,0.08);
+                                box-shadow:0 8px 18px rgba(2,6,23,0.06);
+                        }
+
+                        .board-table td{
+                                border:none;
+                                padding:0;
+                                background:transparent;
+                        }
+
+                        .board-table tbody tr:hover td{
+                                background:transparent;
+                        }
+
+                        .col-no,
+                        .col-date,
+                        .col-open{
+                                text-align:left;
+                                width:auto;
+                        }
+
+                        .col-no{
+                                margin-bottom:6px;
+                        }
+
+                        .col-date{
+                                font-size:14px;
+                                margin-bottom:8px;
+                        }
+
+                        .num{
+                                font-size:16px;
+                        }
+
+                        .title{
+                                font-size:20px;
+                                margin-bottom:6px;
+                        }
+
+                        .meta{
+                                font-size:13px;
+                                line-height:1.7;
+                                margin-bottom:10px;
+                        }
+
+                        .thumb-link{
+                                display:block;
+                                margin-top:6px;
+                        }
+
+                        .thumb{
+                                width:100%;
+                                aspect-ratio:1.55 / 1;
+                                border-radius:14px;
+                                margin-top:0;
+                        }
+
+                        .col-open{
+                                margin-top:12px;
+                        }
+
+                        .action{
+                                width:100%;
+                                min-width:0;
+                                padding:10px 14px;
+                                font-size:13px;
+                        }
+
+                        .notice{
+                                margin-top:12px;
+                                padding:12px;
+                                font-size:13px;
+                                line-height:1.65;
+                        }
                 }
 
                 @media (max-width:520px){
                         .header-top{
                                 align-items:flex-start;
                                 flex-direction:column;
+                        }
+
+                        h1{
+                                font-size:27px;
+                        }
+
+                        .more-btn{
+                                width:100%;
+                                justify-content:center;
+                        }
+
+                        .title{
+                                font-size:18px;
+                        }
+
+                        .thumb{
+                                aspect-ratio:1.45 / 1;
                         }
                 }
         </style>
@@ -516,11 +690,8 @@
                                         </div>
 
                                         <p class="keywords">#신기술 #첨단기술 #중학생 #1페이지미리보기 #PDF열람</p>
-                                        <p class="hero-note">
-                                                요즘 뜨는 신기술을 중학생에 맞춰 알기쉽게 정리한 자료입니다. 중학생이 알면 도움이 되는 지식들도 포함하였습니다. <br>
-                                                자료들은 AI를 이용하여 PPT 형식으로 제작하였으며, PDF로 업로드하였습니다. <br>
-                                                여기 올리는 자료들은 누구나 다운로드 가능합니다^^  
-                                        </p>
+                                        <p class="hero-note">요즘 뜨는 신기술을 중학생에 맞춰 알기쉽게 정리한 자료입니다. 중학생이 알면 도움이 되는 지식들도 포함하였습니다.
+자료들은 AI를 이용하여 PPT 형식으로 제작하였으며, PDF로 업로드하였습니다. 여기 올리는 자료들은 누구나 다운로드 가능합니다^^</p>
                                 </div>
                         </div>
                 </div>
@@ -528,9 +699,8 @@
                 <section class="section">
                         <div class="section-head">
                                 <h2>※ 신기술 자료 이용법</h2>
-                                <p class="section-desc">"미리보기 이미지"를 클릭하면, 이미지 이미지를 크게 보실 수 있습니다. 창을 닫으셔야 원래 페이지로 돌아옵니다<br>
-                                        "자료열기"를 클릭하면, PDF 뷰어로 연결됩니다. 창을 확대한 후 왼쪽 상단의 썸네일 표시를 누르시면, 화살표 조작으로 쉽게 페이지를 이동할 수 있습니다. 
-                                </p>
+                                <p class="section-desc">"미리보기 이미지"를 클릭하면, 이미지를 크게 보실 수 있습니다. 창을 닫으셔야 원래 페이지로 돌아옵니다.<br>
+"자료 열기"를 클릭하면, PDF 뷰어로 연결됩니다. 창을 확대한 후 왼쪽 상단의 썸네일 표시를 누르시면, 화살표 조작으로 쉽게 페이지를 이동할 수 있습니다.</p>
                         </div>
 
                         <div class="board-wrap">
@@ -566,7 +736,7 @@
         no: 2,
         date: "2026.01.03",
         title: "자료 제목",
-        desc: "자료 설명",
+        desc: "자료 설명\n둘째 줄 설명",
         thumb: "이미지링크",
         thumbOpen: "이미지 크게 보기 링크",
         pdfView: "PDF preview 링크",
@@ -607,7 +777,7 @@
                                 no: 1,
                                 date: "2025.12.16",
                                 title: "크리스퍼 기술",
-                                desc: "유전자 가위(CRISPR;크리스퍼) 기술을 쉽게 설명한 자료\크리스퍼가 무엇인지, 향후 어떤 방향으로 개발될지에 대한 개인적은 고찰을 담았습니다.",
+                                desc: "유전자 가위(CRISPR;크리스퍼) 기술을 쉽게 설명한 자료\n크리스퍼가 무엇인지, 향후 어떤 방향으로 개발될지에 대한 개인적인 고찰을 담았습니다.",
                                 thumb: "https://drive.google.com/thumbnail?id=1IJkhrDV4wDqKL6YLbx9VEoJSOPwFhQX2&sz=w1600",
                                 thumbOpen: "https://drive.google.com/uc?export=view&id=1IJkhrDV4wDqKL6YLbx9VEoJSOPwFhQX2",
                                 pdfView: "https://drive.google.com/file/d/11GUU_Z3KWpC1lnQwdsWTAv1b2pxua2en/preview",
@@ -628,7 +798,7 @@
 
                 function renderPosts(){
                         postTableBody.innerHTML = POSTS.map((post) => {
-                                const desc = escapeHtml(post.desc).replaceAll('\n', '<br />');
+                                const desc = escapeHtml(post.desc).replaceAll('\\n', '<br />');
 
                                 return `
                                                         <tr>
@@ -731,4 +901,3 @@
         </script>
 </body>
 </html>
-
