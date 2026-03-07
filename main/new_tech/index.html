@@ -1,1 +1,734 @@
+<!doctype html>
+<html lang="ko">
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>NEW TECH | 기술 자료 보관함</title>
+
+        <style>
+                @font-face{
+                        font-family:'NanumSquare';
+                        src:url('../files/NANUMSQUARENEOOTF-RG.OTF') format('opentype');
+                        font-weight:400;
+                }
+                @font-face{
+                        font-family:'NanumSquare';
+                        src:url('../files/NANUMSQUARENEOOTF-BD.OTF') format('opentype');
+                        font-weight:700;
+                }
+                @font-face{
+                        font-family:'NanumSquare';
+                        src:url('../files/NANUMSQUARENEOOTF-EB.OTF') format('opentype');
+                        font-weight:800;
+                }
+
+                :root{
+                        --bg:#ffffff;
+                        --paper:rgba(255,255,255,0.92);
+                        --paper-strong:#ffffff;
+                        --ink:#0f172a;
+                        --desc-ink:#25383C;
+                        --subtle:#64748b;
+                        --blue-600:#2563eb;
+                        --line:rgba(2,6,23,0.10);
+                        --shadow:0 14px 40px rgba(2,6,23,0.10);
+                        --radius:18px;
+
+                        --panel-bg:#F5DEB3;
+                        --panel-paper:#FFFFF0;
+                }
+
+                *{
+                        box-sizing:border-box;
+                }
+
+                body{
+                        margin:0;
+                        min-height:100vh;
+
+                        font-family:'NanumSquare', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                        'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+                        color:var(--ink);
+
+                        background-image:
+                                linear-gradient(
+                                        rgba(255,255,255,0.85),
+                                        rgba(255,255,255,0.85)
+                                ),
+                                url("https://raw.githubusercontent.com/bitterwood4-afk/bitterwood4-afk.github.io/main/main/files/universe_mother_son.png");
+                        background-size:cover;
+                        background-position:center;
+                        background-repeat:no-repeat;
+                        background-attachment:fixed;
+                }
+
+                .wrap{
+                        max-width:1320px;
+                        margin:0 auto;
+                        padding:34px 18px 64px;
+                }
+
+                .header{
+                        margin-bottom:24px;
+                }
+
+                .header-top{
+                        display:flex;
+                        align-items:flex-start;
+                        justify-content:space-between;
+                        gap:16px;
+                        flex-wrap:wrap;
+                }
+
+                .title-wrap{
+                        min-width:0;
+                        flex:1 1 760px;
+                }
+
+                .title-bar{
+                        display:flex;
+                        align-items:center;
+                        justify-content:space-between;
+                        gap:16px;
+                        flex-wrap:wrap;
+                }
+
+                h1{
+                        margin:0;
+                        font-size:42px;
+                        font-weight:900;
+                        letter-spacing:-0.5px;
+                        color:#0f172a;
+                        line-height:1.15;
+                }
+
+                .header-actions{
+                        display:flex;
+                        align-items:center;
+                        gap:10px;
+                        flex-wrap:wrap;
+                        justify-content:flex-end;
+                        margin-left:auto;
+                }
+
+                .more-btn{
+                        display:inline-flex;
+                        align-items:center;
+                        gap:8px;
+                        padding:10px 14px;
+                        border-radius:999px;
+                        border:1px solid rgba(2,6,23,0.15);
+                        background:#F5DEB3;
+                        color:#000000;
+                        font-weight:900;
+                        font-size:12px;
+                        cursor:pointer;
+                        box-shadow:0 6px 16px rgba(2, 6, 23, 0.08);
+                        user-select:none;
+                        white-space:nowrap;
+                        text-decoration:none;
+                        line-height:1;
+                }
+
+                .more-btn:hover{
+                        background:#EED9A0;
+                        border-color:rgba(0,0,0,0.25);
+                        transform:translateY(-1px);
+                }
+
+                .more-btn:active{
+                        transform:translateY(0);
+                }
+
+                .more-btn:focus-visible{
+                        outline:none;
+                        box-shadow:0 0 0 4px rgba(37,99,235,0.12), 0 10px 28px rgba(2,6,23,0.08);
+                        border-color:rgba(37,99,235,0.45);
+                }
+
+                .keywords{
+                        margin:10px 0 0;
+                        font-size:12px;
+                        color:var(--subtle);
+                        font-weight:700;
+                        letter-spacing:0.2px;
+                }
+
+                .hero-note{
+                        margin:10px 0 0;
+                        font-size:13px;
+                        color:var(--desc-ink);
+                        font-weight:800;
+                        line-height:1.55;
+                        word-break:keep-all;
+                }
+
+                .section{
+                        margin-top:20px;
+                        border:1px solid var(--line);
+                        border-radius:var(--radius);
+                        box-shadow:var(--shadow);
+                        overflow:hidden;
+                        background:var(--paper-strong);
+                }
+
+                .section-head{
+                        padding:14px 16px;
+                        background:#f8fafc;
+                        border-bottom:1px solid var(--line);
+                }
+
+                .section-head h2{
+                        margin:0;
+                        font-size:16px;
+                }
+
+                .section-desc{
+                        margin:8px 0 0;
+                        font-size:13px;
+                        color:var(--desc-ink);
+                        font-weight:800;
+                        line-height:1.5;
+                        word-break:keep-all;
+                }
+
+                .section-tags{
+                        margin:8px 0 0;
+                        font-size:12px;
+                        color:var(--subtle);
+                        font-weight:800;
+                        letter-spacing:0.2px;
+                }
+
+                .board-wrap{
+                        padding:16px;
+                        background:var(--panel-bg);
+                        border-bottom:1px solid var(--line);
+                }
+
+                .board-title{
+                        font-weight:900;
+                        font-size:15px;
+                        margin:0 0 6px 0;
+                        letter-spacing:-0.2px;
+                }
+
+                .board-hint{
+                        color:var(--subtle);
+                        font-size:12px;
+                        margin-bottom:12px;
+                        font-weight:800;
+                }
+
+                .table-scroll{
+                        overflow-x:auto;
+                        border:1px solid rgba(2, 6, 23, 0.10);
+                        border-radius:14px;
+                        background:var(--panel-paper);
+                }
+
+                .board-table{
+                        width:100%;
+                        border-collapse:separate;
+                        border-spacing:0;
+                        min-width:1120px;
+                }
+
+                .board-table thead th{
+                        background:#f8fafc;
+                        font-size:13px;
+                        font-weight:700;
+                        color:#5b5045;
+                        text-align:left;
+                        padding:18px 16px;
+                        border-bottom:1px solid var(--line);
+                        white-space:nowrap;
+                }
+
+                .board-table tbody td{
+                        padding:24px 16px;
+                        border-bottom:1px solid rgba(2,6,23,0.06);
+                        vertical-align:middle;
+                        background:var(--panel-paper);
+                }
+
+                .board-table tbody tr:last-child td{
+                        border-bottom:0;
+                }
+
+                .board-table tbody tr:hover td{
+                        background:rgba(37,99,235,0.04);
+                }
+
+                .col-no{
+                        width:80px;
+                        text-align:center;
+                }
+
+                .col-date{
+                        width:130px;
+                        text-align:center;
+                        color:#6b7280;
+                        font-weight:800;
+                        font-size:16px;
+                }
+
+                .col-open{
+                        width:120px;
+                        text-align:center;
+                }
+
+                .num{
+                        font-weight:800;
+                        font-size:18px;
+                        color:#7a6b58;
+                }
+
+                .titlebox{
+                        min-width:0;
+                }
+
+                .title{
+                        font-weight:800;
+                        font-size:22px;
+                        margin:0 0 8px;
+                        letter-spacing:-.02em;
+                        color:var(--ink);
+                        line-height:1.3;
+                }
+
+                .meta{
+                        color:var(--desc-ink);
+                        font-size:14px;
+                        line-height:1.7;
+                        word-break:keep-all;
+                }
+
+                .thumb-link{
+                        display:inline-block;
+                        text-decoration:none;
+                }
+
+                .thumb{
+                        width:300px;
+                        max-width:100%;
+                        aspect-ratio:1.6 / 1;
+                        border-radius:18px;
+                        overflow:hidden;
+                        border:1px solid rgba(2, 6, 23, 0.10);
+                        background:#ede4d7;
+                        box-shadow:0 8px 18px rgba(66,55,31,.10);
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                }
+
+                .thumb img{
+                        width:100%;
+                        height:100%;
+                        object-fit:cover;
+                        display:block;
+                }
+
+                .thumb-pdf{
+                        padding:12px;
+                        text-align:center;
+                        color:#5b5045;
+                        font-size:13px;
+                        font-weight:800;
+                        line-height:1.5;
+                }
+
+                .action{
+                        display:inline-flex;
+                        align-items:center;
+                        justify-content:center;
+                        min-width:94px;
+                        padding:8px 16px;
+                        border-radius:999px;
+                        background:var(--blue-600);
+                        color:white;
+                        text-decoration:none;
+                        font-size:12px;
+                        font-weight:700;
+                        box-shadow:0 8px 16px rgba(37,99,235,0.14);
+                }
+
+                .notice{
+                        margin-top:20px;
+                        padding:16px;
+                        border:1px solid var(--line);
+                        border-radius:var(--radius);
+                        box-shadow:var(--shadow);
+                        background:#ffffff;
+                        color:var(--desc-ink);
+                        line-height:1.75;
+                        font-size:14px;
+                }
+
+                .notice strong{
+                        color:var(--ink);
+                }
+
+                .notice code{
+                        display:inline-block;
+                        margin-top:6px;
+                        font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                        font-size:12px;
+                        color:#334155;
+                        background:rgba(2,6,23,0.05);
+                        padding:8px 10px;
+                        border-radius:12px;
+                        white-space:pre-wrap;
+                }
+
+                .viewer{
+                        position:fixed;
+                        inset:0;
+                        display:none;
+                        align-items:center;
+                        justify-content:center;
+                        padding:24px;
+                        background:rgba(2,6,23,0.55);
+                        z-index:9999;
+                }
+
+                .viewer.open{
+                        display:flex;
+                }
+
+                .viewer-panel{
+                        width:min(1100px, 100%);
+                        height:min(88vh, 900px);
+                        background:#fff;
+                        border-radius:24px;
+                        overflow:hidden;
+                        box-shadow:0 24px 60px rgba(0,0,0,.24);
+                        display:flex;
+                        flex-direction:column;
+                }
+
+                .viewer-top{
+                        display:flex;
+                        align-items:center;
+                        justify-content:space-between;
+                        gap:12px;
+                        padding:14px 18px;
+                        border-bottom:1px solid #ece5da;
+                        background:#faf7f1;
+                }
+
+                .viewer-title{
+                        font-weight:800;
+                        font-size:16px;
+                }
+
+                .viewer-actions{
+                        display:flex;
+                        gap:10px;
+                        align-items:center;
+                        flex-wrap:wrap;
+                }
+
+                .btn{
+                        appearance:none;
+                        border:0;
+                        border-radius:999px;
+                        padding:10px 14px;
+                        font-weight:700;
+                        cursor:pointer;
+                        text-decoration:none;
+                        font-size:14px;
+                        font-family:inherit;
+                }
+
+                .btn-open{
+                        background:#354a24;
+                        color:#fff;
+                }
+
+                .btn-close{
+                        background:#ece5da;
+                        color:#453a2e;
+                }
+
+                iframe{
+                        border:0;
+                        width:100%;
+                        height:100%;
+                        flex:1;
+                        background:#f4f0e8;
+                }
+
+                @media (max-width:900px){
+                        .viewer{
+                                padding:12px;
+                        }
+
+                        .viewer-panel{
+                                height:min(86vh, 920px);
+                                border-radius:20px;
+                        }
+                }
+
+                @media (max-width:720px){
+                        h1{
+                                font-size:34px;
+                        }
+
+                        .title-bar{
+                                align-items:flex-start;
+                        }
+
+                        .header-actions{
+                                width:100%;
+                                justify-content:flex-start;
+                                margin-left:0;
+                        }
+                }
+
+                @media (max-width:520px){
+                        .header-top{
+                                align-items:flex-start;
+                                flex-direction:column;
+                        }
+                }
+        </style>
+</head>
+<body>
+        <div class="wrap">
+                <div class="header">
+                        <div class="header-top">
+                                <div class="title-wrap">
+                                        <div class="title-bar">
+                                                <h1>신기술 산책 (중학생용)</h1>
+
+                                                <div class="header-actions">
+                                                        <a
+                                                                class="more-btn"
+                                                                href="https://bitterwood4-afk.github.io/main/index.html"
+                                                                target="_blank"
+                                                                rel="noopener noreferrer">
+                                                                ℹ️ 더 많은 정보 보기
+                                                        </a>
+                                                </div>
+                                        </div>
+
+                                        <p class="keywords">#신기술 #첨단기술 #중학생 #1페이지미리보기 #PDF열람</p>
+                                        <p class="hero-note">
+                                                요즘 뜨는 신기술을 중학생에 맞춰 알기쉽게 정리한 자료입니다. 중학생이 알면 도움이 되는 지식들도 포함하였습니다. <br>
+                                                자료들은 AI를 이용하여 PPT 형식으로 제작하였으며, PDF로 업로드하였습니다. <br>
+                                                여기 올리는 자료들은 누구나 다운로드 가능합니다^^  
+                                        </p>
+                                </div>
+                        </div>
+                </div>
+
+                <section class="section">
+                        <div class="section-head">
+                                <h2>※ 신기술 자료 이용법</h2>
+                                <p class="section-desc">"미리보기 이미지"를 클릭하면, 이미지 이미지를 크게 보실 수 있습니다. 창을 닫으셔야 원래 페이지로 돌아옵니다<br>
+                                        "자료열기"를 클릭하면, PDF 뷰어로 연결됩니다. 창을 확대한 후 왼쪽 상단의 썸네일 표시를 누르시면, 화살표 조작으로 쉽게 페이지를 이동할 수 있습니다. 
+                                </p>
+                        </div>
+
+                        <div class="board-wrap">
+                                <div class="board-title">신기술 자료 목록</div>
+                                <div class="board-hint">연번 / 작성한 날짜 / 제목·설명 / 미리보기 이미지 / 열기 버튼</div>
+
+                                <div class="table-scroll">
+                                        <table class="board-table" aria-label="기술 자료 목록">
+                                                <thead>
+                                                        <tr>
+                                                                <th class="col-no">연번</th>
+                                                                <th class="col-date">날짜</th>
+                                                                <th>제목 / 설명</th>
+                                                                <th style="width:220px;">미리보기 이미지</th>
+                                                                <th class="col-open">열기</th>
+                                                        </tr>
+                                                </thead>
+
+                                                <tbody id="postTableBody">
+                                                </tbody>
+                                        </table>
+                                </div>
+                        </div>
+                </section>
+
+                <div class="notice">
+                        <strong>게시글 추가 방법</strong><br />
+                        맨 아래 <code>POSTS</code> 배열에 한 줄씩 추가하면 자동으로 표가 늘어납니다.<br />
+                        PDF 열기 링크는 <code>pdfOpen</code>, 팝업 미리보기 링크는 <code>pdfView</code>, 썸네일 이미지는 <code>thumb</code>에 넣으세요.<br />
+                        이미지를 클릭하면 원본 이미지가 열리도록 유지했습니다.<br /><br />
+
+                        <code>{
+        no: 2,
+        date: "2026.01.03",
+        title: "자료 제목",
+        desc: "자료 설명",
+        thumb: "이미지링크",
+        thumbOpen: "이미지 크게 보기 링크",
+        pdfView: "PDF preview 링크",
+        pdfOpen: "PDF view 링크"
+}</code>
+                </div>
+        </div>
+
+        <div class="viewer" id="viewer" aria-hidden="true">
+                <div class="viewer-panel" role="dialog" aria-modal="true" aria-labelledby="viewerTitle">
+                        <div class="viewer-top">
+                                <div class="viewer-title" id="viewerTitle">자료 보기</div>
+
+                                <div class="viewer-actions">
+                                        <a
+                                                class="btn btn-open"
+                                                href="#"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                id="viewerOpenLink">
+                                                새 창에서 열기
+                                        </a>
+                                        <button class="btn btn-close" type="button" id="closeViewer">닫기</button>
+                                </div>
+                        </div>
+
+                        <iframe
+                                src=""
+                                title="PDF 보기"
+                                id="viewerFrame">
+                        </iframe>
+                </div>
+        </div>
+
+        <script>
+                const POSTS = [
+                        {
+                                no: 1,
+                                date: "2025.12.16",
+                                title: "크리스퍼 기술",
+                                desc: "유전자 가위(CRISPR;크리스퍼) 기술을 쉽게 설명한 자료\크리스퍼가 무엇인지, 향후 어떤 방향으로 개발될지에 대한 개인적은 고찰을 담았습니다.",
+                                thumb: "https://drive.google.com/thumbnail?id=1IJkhrDV4wDqKL6YLbx9VEoJSOPwFhQX2&sz=w1600",
+                                thumbOpen: "https://drive.google.com/uc?export=view&id=1IJkhrDV4wDqKL6YLbx9VEoJSOPwFhQX2",
+                                pdfView: "https://drive.google.com/file/d/11GUU_Z3KWpC1lnQwdsWTAv1b2pxua2en/preview",
+                                pdfOpen: "https://drive.google.com/file/d/11GUU_Z3KWpC1lnQwdsWTAv1b2pxua2en/view?usp=sharing"
+                        }
+                ];
+
+                const postTableBody = document.getElementById('postTableBody');
+
+                function escapeHtml(text){
+                        return String(text)
+                                .replaceAll('&', '&amp;')
+                                .replaceAll('<', '&lt;')
+                                .replaceAll('>', '&gt;')
+                                .replaceAll('"', '&quot;')
+                                .replaceAll("'", '&#39;');
+                }
+
+                function renderPosts(){
+                        postTableBody.innerHTML = POSTS.map((post) => {
+                                const desc = escapeHtml(post.desc).replaceAll('\n', '<br />');
+
+                                return `
+                                                        <tr>
+                                                                <td class="col-no">
+                                                                        <div class="num">${escapeHtml(post.no)}</div>
+                                                                </td>
+
+                                                                <td class="col-date">${escapeHtml(post.date)}</td>
+
+                                                                <td>
+                                                                        <div class="titlebox">
+                                                                                <div class="title">${escapeHtml(post.title)}</div>
+                                                                                <div class="meta">${desc}</div>
+                                                                        </div>
+                                                                </td>
+
+                                                                <td>
+                                                                        <a
+                                                                                class="thumb-link"
+                                                                                href="${escapeHtml(post.thumbOpen)}"
+                                                                                target="_blank"
+                                                                                rel="noopener noreferrer"
+                                                                                aria-label="${escapeHtml(post.title)} 미리보기 열기">
+                                                                                <div class="thumb">
+                                                                                        <img
+                                                                                                src="${escapeHtml(post.thumb)}"
+                                                                                                alt="${escapeHtml(post.title)} 미리보기" />
+                                                                                </div>
+                                                                        </a>
+                                                                </td>
+
+                                                                <td class="col-open">
+                                                                        <a
+                                                                                class="action open-viewer"
+                                                                                href="#"
+                                                                                data-title="${escapeHtml(post.title)}"
+                                                                                data-pdf-view="${escapeHtml(post.pdfView)}"
+                                                                                data-pdf-open="${escapeHtml(post.pdfOpen)}">
+                                                                                자료 열기
+                                                                        </a>
+                                                                </td>
+                                                        </tr>
+                                                `;
+                        }).join('');
+
+                        bindViewerButtons();
+                }
+
+                const viewer = document.getElementById('viewer');
+                const closeBtn = document.getElementById('closeViewer');
+                const viewerTitle = document.getElementById('viewerTitle');
+                const viewerFrame = document.getElementById('viewerFrame');
+                const viewerOpenLink = document.getElementById('viewerOpenLink');
+
+                function openViewer(e){
+                        e.preventDefault();
+
+                        const btn = e.currentTarget;
+                        const title = btn.dataset.title || '자료 보기';
+                        const pdfView = btn.dataset.pdfView || '';
+                        const pdfOpen = btn.dataset.pdfOpen || '#';
+
+                        viewerTitle.textContent = title;
+                        viewerFrame.src = pdfView;
+                        viewerOpenLink.href = pdfOpen;
+
+                        viewer.classList.add('open');
+                        viewer.setAttribute('aria-hidden', 'false');
+                        document.body.style.overflow = 'hidden';
+                }
+
+                function closeViewer(){
+                        viewer.classList.remove('open');
+                        viewer.setAttribute('aria-hidden', 'true');
+                        document.body.style.overflow = '';
+                        viewerFrame.src = '';
+                }
+
+                function bindViewerButtons(){
+                        document.querySelectorAll('.open-viewer').forEach((el) => {
+                                el.addEventListener('click', openViewer);
+                        });
+                }
+
+                closeBtn.addEventListener('click', closeViewer);
+
+                viewer.addEventListener('click', (e) => {
+                        if(e.target === viewer){
+                                closeViewer();
+                        }
+                });
+
+                window.addEventListener('keydown', (e) => {
+                        if(e.key === 'Escape' && viewer.classList.contains('open')){
+                                closeViewer();
+                        }
+                });
+
+                renderPosts();
+        </script>
+</body>
+</html>
 
